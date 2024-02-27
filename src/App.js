@@ -5,8 +5,8 @@ import { atom, useAtom } from 'jotai';
 import Homepage from './component/Homepage/Homepage';
 import Login from './component/User/Login';
 import Navbar from './component/Navbar/Navbar';
-import Restaurant from './Restaurant';
 import Register from './component/User/Register';
+import AllRestaurants from './component/Restaurant/allRestaurant';
 
 export const currentUser = atom();
 
@@ -22,7 +22,7 @@ function App()
           <Routes>
             <Route index element={<Homepage />}></Route>
             <Route path='login' element={<Login />}> </Route>
-            <Route path='restaurant' element={<Restaurant />}> </Route>
+            <Route path='restaurant' element={<AllRestaurants />}> </Route>
             <Route path='register' element={<Register />}> </Route>
           </Routes>
       </BrowserRouter>

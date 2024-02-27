@@ -2,18 +2,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 
-export default function AllRestaurants() {
+export default function AllRestaurants() 
+{
   const [restaurants, setRestaurants] = useState([]);
-  const [filter, setFilter] = useState({ foodType: "", maxDistance: 16 });
+  const [filter, setFilter] = useState({ foodType: "", maxDistance: 1414 });
 
-  const isShowable = (restaurant, filter) => {
+  const isShowable = (restaurant, filter) => 
+  {
     const { foodType, maxDistance } = filter;
 
     if (
       (foodType &&
-        !restaurant.foodTypes.toLowerCase().includes(foodType.toLowerCase())) ||
-        restaurant.distance > maxDistance
-    ) {
+        !restaurant.map(r => r.foodTypes.toLowerCase().includes(foodType.toLowerCase()) &&
+        r.distance > maxDistance)
+    )) 
+    {
       return false;
     }
 
@@ -24,12 +27,13 @@ export default function AllRestaurants() {
     () => 
     {
         Data();
-  }, 
-    [filter]
+    }, 
+    []
   );
 
-  const Data = () => {
-    axios.get("/restaurants", { params: filter })
+  const Data = () => 
+  {
+    axios.get("/restaurants")
       .then((response) => {
         setRestaurants(response.data);
       })
@@ -38,7 +42,8 @@ export default function AllRestaurants() {
       });
   };
 
-  const foodTypeInputChange = (e) => {
+  const foodTypeInputChange = (e) => 
+  {
     setFilter({
       ...filter,
       foodType: e.target.value
@@ -88,9 +93,9 @@ export default function AllRestaurants() {
         </div>
         <div className="col-9">
           <div className="row gy-5">
-            {restaurants.map((restaurant) => (
+            {/* {restaurants.map((restaurant) => (
               <RestaurantCard key={restaurant.id} {...restaurant} />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
