@@ -17,7 +17,7 @@ export default function Register()
 
     function registerUser()
     {
-        axios.post("URL",newUser).then(
+        axios.post("/users",newUser).then(
             (response)=>
             {
                 setNewUser({

@@ -22,7 +22,7 @@ function App()
           <Routes>
             <Route index element={<Homepage />}></Route>
             <Route path='login' element={<Login />}> </Route>
-            <Route path='restaurant' element={<AllRestaurants />}> </Route>
+            {/* <Route path='restaurant' element={<AllRestaurants />}> </Route> */}
             <Route path='register' element={<Register />}> </Route>
           </Routes>
       </BrowserRouter>
