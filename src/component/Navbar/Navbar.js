@@ -12,7 +12,7 @@ export default function navbar()
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <Link class="nav-link active disabled" aria-current="page" to="/login">Login</Link>
+                        <Link class="nav-link active" aria-current="page" to="/login">Login</Link>
                         <Link class="nav-link active" aria-current="page" to="/restaurant">Restaurant</Link>
                         <Link class="nav-link active" aria-current="page" to="/register">Register</Link>
                         <a class="nav-link" href="#">Pricing</a>

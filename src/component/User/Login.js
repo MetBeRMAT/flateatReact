@@ -5,6 +5,8 @@ import axios from "axios";
 
 export default function Login()
 {
+    const [logg, setLog] = useState(false);
+    const [show, setShow] = useState(true);
     const [user, setUser] = useAtom(currentUser);
     const [users, setUsers] = useState([]);
     
@@ -33,9 +35,11 @@ export default function Login()
             if(users[i].email == keyEmail && users[i].password == keyPw)
             {
                 setUser(users[i]);
+                setLog(true);
                 return;
             }
             else
+                setShow(false);
                 alert("Utente non trovato, psw o email errate");
         }
     }   
@@ -57,6 +61,11 @@ export default function Login()
                     <button class="btn btn-primary" onclick={log}> Login </button>
                     <br></br>
                 </div>
+                {
+                    logg ? <div>login avvenuta con successo</div> : 
+                    show ? <p></p> :
+                    <div>login errata</div>
+        }
                 </div>
             </div>
         </>

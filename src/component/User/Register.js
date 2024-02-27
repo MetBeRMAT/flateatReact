@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
@@ -12,7 +13,7 @@ export default function Register()
         password:"",
         phone:"",
         positionX:"",
-        postiionY:""
+        positionY:""
     });
 
     const inEmail = useRef(null);
@@ -23,15 +24,21 @@ export default function Register()
 
     function registerUser()
     {
-        axios.post("URL",newUser).then(
+        newUser.mail = inEmail.current.value;
+        newUser.password = inPw.current.value;
+        newUser.phone = inNum.current.value;
+        newUser.positionX = inX.current.value;
+        newUser.positionY = inY.current.value;
+
+        axios.post("/users",newUser).then(
             (response)=>
             {
                 setNewUser({
                     mail:"",
-                    password:""
-                    // phone:"",
-                    // positionX:"",
-                    // postiionY:""
+                    password:"",
+                    phone:"",
+                    positionX:"",
+                    positionY:""
                 })
             }
         )
@@ -44,12 +51,21 @@ export default function Register()
         let email = inEmail.current.value;
         let pw = inPw.current.value;
 
-        if(email.includes("@") && (email.includes("libero.it") || email.includes("gmail.com")) && !email.includes(" ") && regex.test(pw))
+        let emailRegex = /^(?:[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@gmail\.com|[a-zA-Z0-9]+\.[a-zA-Z0-9]+@libero\.it)$/;
+
+        if(
+            emailRegex.test(email) && 
+            (
+                !email.includes(" ") && regex.test(pw)
+            ) 
+            && 
+            (
+                inX.current.value >= 0 && inX.current.value <=1000 && inY.current.value >= 0 && inY.current.value <= 1000
+            )
+            )
         {   
             setLog(true); //Da commentare queste tre righe
-            inEmail.current.value = "";
-            inPw.current.value = "";
-            //registerUser();
+            registerUser();
         }
         else
             setShow(false);
