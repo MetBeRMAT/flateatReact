@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 
 
 export default function Register()
@@ -63,5 +64,5 @@ export default function Register()
                 </div>
             </div>
         </>
-    )
+    );
 }
