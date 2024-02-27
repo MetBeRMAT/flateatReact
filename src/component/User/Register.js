@@ -1,19 +1,25 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-
+import { Navigate } from "react-router-dom";
 
 export default function Register()
 {
+    const [log, setLog] = useState(false);
+    const [show, setShow] = useState(true);
+
     const [newUser, setNewUser] = useState({
         mail:"",
-        password:""
-        // phone:"",
-        // positionX:"",
-        // postiionY:""
+        password:"",
+        phone:"",
+        positionX:"",
+        postiionY:""
     });
 
     const inEmail = useRef(null);
     const inPw = useRef(null);
+    const inX = useRef(null);
+    const inY = useRef(null);
+    const inNum = useRef(null);
 
     function registerUser()
     {
@@ -34,15 +40,27 @@ export default function Register()
     function checkRegister()
     {
         let regex =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{8,}$/;
-        let accettable = false;
+        
         let email = inEmail.current.value;
         let pw = inPw.current.value;
 
-        if(email.includes("@") && email.includes(".it") || email.includes(".com") && regex.test(pw))
-        {   accettable = true;
-            registerUser();
+        if(email.includes("@") && (email.includes("libero.it") || email.includes("gmail.com")) && !email.includes(" ") && regex.test(pw))
+        {   
+            setLog(true); //Da commentare queste tre righe
+            inEmail.current.value = "";
+            inPw.current.value = "";
+            //registerUser();
         }
+        else
+            setShow(false);
     }
+
+    function f()
+    {
+        setLog(false);
+        setShow(true);
+    }
+    
 
     return(
         <>
@@ -56,13 +74,31 @@ export default function Register()
                     </div>
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" ref={inPw} class="form-control" id="password" name="password" required placeholder="Requires 8char, 1BIGCHAR, 1number"/>
+                        <input type="text" ref={inPw} class="form-control"/>
                     </div>
-                    <button class="btn btn-primary" onclick={checkRegister}> Register </button>
+                    <div class="form-group">
+                        <label for="number">Position X:</label>
+                        <input type="text" ref={inX} class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Position Y:</label>
+                        <input type="text" ref={inY} class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Phone Number:</label>
+                        <input type="text" ref={inNum} class="form-control"/>
+                    </div>
+                    <button class="btn btn-primary" onClick={checkRegister}> Register </button>
                     <br></br>
+                    <button class="btn btn-primary" onClick={f}>Click me c:</button>
                 </div>
                 </div>
-            </div>
+        </div>
+        {
+            log ? <div>Registrazione avvenuta con successo</div> : 
+            show ? <p></p> :
+            <div>Registrazione errata</div>
+        }
         </>
     );
 }
