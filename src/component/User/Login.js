@@ -35,6 +35,8 @@ export default function Login()
                 setUser(users[i]);
                 return;
             }
+            else
+                alert("Utente non trovato, psw o email errate");
         }
     }   
 
