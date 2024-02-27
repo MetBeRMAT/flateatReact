@@ -1,5 +1,7 @@
 import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
+import { currentUser } from "../../App";
+import axios from "axios";
 
 export default function Login()
 {
@@ -26,7 +28,7 @@ export default function Login()
     {
         let keyEmail = inEmail.current.value;
         let keyPw = inPw.current.value;
-        for(let i = 0; i < guilds.length; i++)
+        for(let i = 0; i < users.length; i++)
         {
             if(users[i].email == keyEmail && users[i].password == keyPw)
             {
