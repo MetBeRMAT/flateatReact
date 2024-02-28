@@ -1,60 +1,8 @@
-
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-// import RestaurantCard from "./RestaurantCard";
-
-// export default function AllRestaurants() 
-// {
-//   const [restaurants, setRestaurants] = useState([]);
-//   const [filter, setFilter] = useState({ foodType: "", maxDistance: 1414 });
-
-//   const isShowable = (restaurant, filter) => 
-//   {
-//     const { foodType, maxDistance } = filter;
-
-//     if (
-//       (foodType &&
-//         !restaurant.map(r => r.foodTypes.toLowerCase().includes(foodType.toLowerCase()) &&
-//         r.distance > maxDistance)
-//     )) 
-//     {
-//       return false;
-//     }
-
-//     return true;
-//   };
-
-//   useEffect(
-//     () => 
-//     {
-//         Data();
-//     }, 
-//     []
-//   );
-
-//   const Data = () => 
-//   {
-//     axios.get("/restaurants")
-//       .then((response) => {
-//         setRestaurants(response.data);
-//       })
-//       .catch((error) => {
-//         console.error("Errore durante il recupero dei dati dei ristoranti:", error);
-//       });
-//   };
-
-//   const foodTypeInputChange = (e) => 
-//   {
-//     setFilter({
-//       ...filter,
-//       foodType: e.target.value
-//     });
-//   };
-
 import axios from "axios";
 import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { currentUser } from "../../App";
+import RestaurantCard from "./RestaurantCard";
 
 
 export default function AllRestaurants() 
@@ -63,7 +11,6 @@ export default function AllRestaurants()
 
   const [restaurants, setRestaurants] = useState([]);
   const [filtered, setTheFilter] = useState([]);
-  const [filter, setFilter] = useState({ foodType: "", maxDistance: 1414 });
 
   useEffect(
     () => 
@@ -75,7 +22,7 @@ export default function AllRestaurants()
 
   const Data = () => 
   {
-    axios.get("/restaurants")
+    axios.get("/restaurant")
       .then((response) => {
         setRestaurants(response.data);
         setTheFilter(response.data);
@@ -90,6 +37,9 @@ export default function AllRestaurants()
 
   function calcDist(restaurant, maxDistance)
   {
+    if(maxDistance == "")
+      return true;
+
     let userX = user.positionX;
     let userY = user.positionY;
     let ourX = Math.abs(userX - restaurant.positionX); 
@@ -105,90 +55,19 @@ export default function AllRestaurants()
       return false;
   }
 
-  const isShowable = (restaurant, filter) => 
-  {
-    const { foodType, maxDistance } = filter;
-
-    if (
-      (foodType &&
-        !restaurant.map(r => r.foodTypes.toLowerCase().includes(foodType.toLowerCase()) &&
-        calcDist(r, maxDistance))
-    )) 
-    {
-      return false;
-    }
-
-    return true;
-  };
-
-  const foodTypeInputChange = (e) => 
-  {
-    setFilter({
-      ...filter,
-      foodType: e.target.value
-    });
-  };
-
-
-//   const maxDistanceInputChange = (e) => {
-//     const inputValue = e.target.value;
-  
-//     //è un numero positivo?
-//     const isValidInput = /^\d+(\.\d+)?$/.test(inputValue);
-  
-//     //se l'input è valido aggiorna lo stato, altrimenti no
-//     setFilter({
-//       ...filter,
-//       maxDistance: isValidInput ? parseFloat(inputValue) : filter.maxDistance
-//     });
-//   };
-
-
-//   return (
-//     <>
-//       <div className="row gy-5">
-//         <div className="col-3 p-4">
-//           <div className="input-group mb-3">
-//             <span className="input-group-text" id="basic-addon2">
-//               Tipo Cibo:
-//             </span>
-//             <input
-//               type="text"
-//               className="form-control"
-//               onChange={foodTypeInputChange}
-//             />
-//           </div>
-//           <label htmlFor="customRange3" className="form-label">
-//             Distanza Massima (km): {filter.maxDistance} km
-//           </label>
-//           <input
-//             type="range"
-//             className="form-range"
-//             min={0}
-//             max={50} // Modifica il valore massimo in base alle tue esigenze
-//             value={filter.maxDistance}
-//             onChange={maxDistanceInputChange}
-//           />
-//           <br />
-//           <br />
-//         </div>
-//         <div className="col-9">
-//           <div className="row gy-5">
-//             {/* {restaurants.map((restaurant) => (
-//               <RestaurantCard key={restaurant.id} {...restaurant} />
-//             ))} */}
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
   function startSearch()
   {
     let keyFood = searchType.current.value;
     let maxDistance = searchDistance.current.value;
 
-    setTheFilter(restaurants.filter(r => r.foodTypes == keyFood && calcDist(r, maxDistance)))
+    setTheFilter(restaurants.filter(r => r.foodTypes.filter(f => f == keyFood) || calcDist(r, maxDistance)))
+  }
+
+  function searchDi()
+  {
+    let maxDistance = searchDistance.current.value;
+
+    setTheFilter(restaurants.filter(r => calcDist(r, maxDistance)))
   }
 
   return (
@@ -202,17 +81,20 @@ export default function AllRestaurants()
             <input name="type" ref={searchType} type="text"placeholder="Type"/>
           </div>
           <label htmlFor="customRange3" className="form-label">
-            Distanza Massima (km): {filter.maxDistance} km
+            Distanza Massima (km): 1414 ma Lorenzo non sa graficare la scritta vera
           </label>
-          <input type="range" ref={searchDistance} className="form-range" min={0} max={1414} value={filter.maxDistance}/>
+          {/* <input type="range" ref={searchDistance} className="form-range" min={0} max={1414}/> */}
+          <input type="number" ref={searchDistance} />  
           <br />
           <br />
-          <button class="btn btn-primary" onClick={startSearch}> Search </button>
+          {
+            user ? <button class="btn btn-primary" onClick={searchDi}> Search </button> :
+            <div> You have to be logged :c</div>
+          }
         </div>
         <div className="col-9">
           <div className="row gy-5">
-            {/* 
-              <RestaurantCard key={restaurant.id} {...filtered} /> */}
+             {filtered.map(f => <RestaurantCard {...f} />)}
           </div>
         </div>
       </div>
