@@ -44,10 +44,17 @@ export default function RestaurantCard(props)
 
     return(
         <>
-        <div> Ristorante# {props.id} </div>
-        <div> Nome: {props.name} <p>({props.positionX},{props.positionY})</p></div>
-        <button class="btn btn-info " type="button"><Link class="nav-link" to={"/RestaurantDetail/"+props.id}>Details</Link></button>
-        
+        <dl class="row text-bg-success m-3">
+            <dt class="col-sm-3"></dt>
+                <dd class="col-sm-9">
+                    <p></p>
+                    <p></p>
+                </dd>
+            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">Restaurant: {props.name}</dt>
+            <dt class="col-sm-3"></dt>
+            <dd style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">WeFlat are on: ({props.positionX} - {props.positionY})</dd>
+            <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/RestaurantDetail/"+props.id}>Details</Link></button></p>
+        </dl>
         </>
     );
 }
