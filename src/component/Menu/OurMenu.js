@@ -1,7 +1,9 @@
+import { useState } from "react";
 import DishCard from "../Dish/DishCard";
 
 export default function(props)
 {
+    const [dish,setNewDish] = useState([]);
     // let {id} = useParams();
     // const [menu, setMenu] = useState([]);
     // useEffect(
@@ -21,7 +23,7 @@ export default function(props)
     {
         <div className="row row-cols-2 g-4" style={{marginTop:"0%"}}>
             {
-                props.dish.map(d=><DishCard {...d} />)
+                dish.map(d=><DishCard {...d} />)
             }
         </div>
     }
