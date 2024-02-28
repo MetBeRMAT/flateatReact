@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
+import { useAtom } from "jotai";
 import { currentUser } from "../../App";
 import RestaurantCard from "./RestaurantCard";
 
@@ -26,6 +26,7 @@ export default function AllRestaurants()
       .then((response) => {
         setRestaurants(response.data);
         setTheFilter(response.data);
+        // setTheFilter(filtered.filter(r => r.isOpen)); remove comment when ready :D
       })
       .catch((error) => {
         console.error("Errore durante il recupero dei dati dei ristoranti:", error);
@@ -93,7 +94,7 @@ export default function AllRestaurants()
           }
         </div>
         <div className="col-9">
-          <div className="row gy-5">
+          <div className="row row-cols-2 g-4" style={{marginTop:"0%"}}>
              {filtered.map(f => <RestaurantCard {...f} />)}
           </div>
         </div>
