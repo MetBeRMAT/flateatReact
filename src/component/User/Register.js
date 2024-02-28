@@ -30,7 +30,7 @@ export default function Register()
         newUser.positionX = inX.current.value;
         newUser.positionY = inY.current.value;
 
-        axios.post("/users",newUser).then(
+        axios.post("/users/register",newUser).then(
             (response)=>
             {
                 setNewUser({

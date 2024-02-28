@@ -22,7 +22,7 @@ export default function AllRestaurants()
 
   const Data = () => 
   {
-    axios.get("/restaurant")
+    axios.get("/restaurants")
       .then((response) => {
         setRestaurants(response.data);
         setTheFilter(response.data);
