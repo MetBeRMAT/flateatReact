@@ -33,7 +33,7 @@ export default function RestaurantCard(props)
           </dl>
         </div>
         { user? 
-        <Link to={`/order/${props.id}`} className="btn btn-danger">
+        <Link to={`/order/${id}`} className="btn btn-danger">
           Ordina ora
         </Link> : <></>
         }

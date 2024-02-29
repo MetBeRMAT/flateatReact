@@ -28,7 +28,12 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
       <div className="container-fluid">
         <div className="d-flex align-items-center">
-          <Link className="navbar-brand btn btn-success me-3" to="/">
+
+
+            {/* btn-success cambia colore */}
+
+            
+          <Link className="navbar-brand btn btn-succes me-3" to="/">
             <img src={homeIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
           </Link>
           {user ? (
