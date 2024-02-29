@@ -1,7 +1,8 @@
+import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import { atom, useAtom } from 'jotai';
+import { atom } from 'jotai'; // Rimuovo l'import di useAtom perché non è più utilizzato
 import Homepage from './component/Homepage/Homepage';
 import Login from './component/User/Login';
 import Navbar from './component/Navbar/Navbar';
@@ -25,8 +26,16 @@ function App()
   return (
     <>
       <BrowserRouter>
-      <Cart/>
         <Navbar />
+        <Routes>
+          <Route index element={<Homepage />} />
+          <Route path='login' element={<Login />} />
+          <Route path='restaurant' element={<AllRestaurants />} />
+          <Route path='restaurantlogged' element={<LoggedRestaurant />} />
+          <Route path='register' element={<Register />} />
+          <Route path='restaurantdetail/:id' element={<RestaurantDetail />} />
+          <Route path='cart' element={<Cart />} /> {/* Aggiungo la rotta per il carrello */}
+        </Routes>
         
           <Routes>
             <Route index element={<Homepage />}></Route>
