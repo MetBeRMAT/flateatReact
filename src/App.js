@@ -11,10 +11,18 @@ import AllRestaurants from './component/Restaurant/allRestaurant';
 import RestaurantDetail from './component/Restaurant/RestaurantDetail';
 import Cart from './component/Cart/Cart';
 import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
+import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
+
+
 
 export const currentUser = atom();
 
-function App() {
+
+function App() 
+{
+
+  //const [user,setUser] = useAtom(currentUser);
+
   return (
     <>
       <BrowserRouter>
@@ -28,6 +36,17 @@ function App() {
           <Route path='restaurantdetail/:id' element={<RestaurantDetail />} />
           <Route path='cart' element={<Cart />} /> {/* Aggiungo la rotta per il carrello */}
         </Routes>
+        
+          <Routes>
+            <Route index element={<Homepage />}></Route>
+            <Route path='login' element={<Login />}> </Route>
+            <Route path='restaurant' element={<AllRestaurants />}> </Route>
+            <Route index element={<Cart />}></Route>
+            <Route path='restaurantlogged' element={<LoggedRestaurant/>}> </Route>
+            <Route path='register' element={<Register />}> </Route>
+            <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
+            <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
+          </Routes>
       </BrowserRouter>
     </>
   );

@@ -10,7 +10,7 @@ export default function RestaurantCard(props)
 {
     const [user, setUser] = useAtom(currentUser);
 
-  function Card({ foodTypes, open, name, phone, x, y, distance, addToCart , id}) {
+  function Card({ foodTypes, open, name, distance, addToCart,id}) {
     return (
       <div className="card text-center text-bg-success">
         <div className="card-body text-bg-success">
@@ -34,8 +34,12 @@ export default function RestaurantCard(props)
         </div>
         <Link to={`/order/${props.id}`} className="btn btn-danger">
           Ordina ora
-        </Link>
-        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button>
+        </Link> : <></>
+        }
+        { user ?
+        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button> :
+        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id}>Details</Link></button>
+        }
       </div>
     );
   }

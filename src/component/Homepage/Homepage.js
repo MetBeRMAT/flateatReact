@@ -18,8 +18,8 @@ export default function Homepage()
 
                 <section class="jumbotron text-center">
                     <div class="container">
-                    <h1 class="jumbotron-heading">QUALCOSA</h1>
-                    <p class="lead text-muted">Booooooooooooooooooooooooho.</p>
+                    <h1 class="jumbotron-heading">HO RISOLTO LOREEEEEE</h1>
+                    <p class="lead text-muted">INTANTO VADO IN BAGNO</p>
                     <p>
                         <a href="#" class="btn btn-primary my-2">diteme voi</a>
                         <a href="#" class="btn btn-secondary my-2">te posso canta na canzone</a>
