@@ -1,35 +1,31 @@
 import { Link } from "react-router-dom";
+import FoodCard from "./FoodCard";
 
 export default function RestaurantCard(props)
 {
-    function Card({ foodTypes,isOpen ,name, phone, x, y}) 
+
+    function Card({ foodTypes,isOpen ,name, phone, x, y, distance}) 
     {
+
         return (
             // la visualizzo in colonne da tre ed ho impostato lo stato isOpen e tutti i tipi di cibi associati
             // Solo che bisogna dare una controllata a isOpen dato che mi da sempre Closed 
 
-                <div class="card">
-                    <div class="card-img-overlay">
+                <div class="card text-bg-success">
                         <h3 style={{fontFamily:"Lucida Handwriting,cursive"}} class="card-title">Restaurant {name}</h3>
                         <dl class="row">
                             <dt class="col-sm-3"></dt>
-                                <dd class="col-sm-9">
-                                    <p></p>
-                                    <p></p>
-                                </dd>
-
-                            <dt style={{fontFamily:"Times New Roman,Serif"}}>Type of food: {foodTypes}</dt>
+                            <dt style={{fontFamily:"Times New Roman,Serif"}}>Type of food: {foodTypes.map(f => <FoodCard name={f} />)}</dt>
                             <dt class="col-sm-3"></dt>
                             <dd class="col-sm-9">
                                 <p></p>
                                 <p></p>
                             </dd>
 
-                            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">{isOpen ? "Open" : "Closed"}</dt>
-
+                            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-4">{isOpen ? "Open" : "Closed"}</dt>
+                            {distance!=null ? <div> {distance} </div> : <></>}
                         </dl>
                         {/* <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+title}>Details</Link></button> */}
-                    </div>
                 
             </div>
         );
@@ -40,7 +36,7 @@ export default function RestaurantCard(props)
         return (
 
             <div className="row row-cols-2 g-4">
-                <Card foodTypes={props.foodTypes} isOpen={props.isOpen} name={props.name} />
+                <Card distance={props.distance} foodTypes={props.foodTypes} isOpen={props.isOpen} name={props.name} />
             </div>
         );
     }
