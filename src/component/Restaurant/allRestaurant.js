@@ -34,7 +34,6 @@ export default function AllRestaurants()
   };
 
 
-
   const searchType = useRef(null);
 
   function startSearch()
@@ -74,9 +73,7 @@ export default function AllRestaurants()
           </div>
           <label htmlFor="customRange3" className="form-label fw-bold text-muted">
             Distanza Massima (km): 1414 
-          </label>
-          {/* <input type="range" ref={searchDistance} className="form-range" min={0} max={1414}/> */}
-          <input type="number" ref={searchDistance} />  
+          </label> 
           <br />
         <button class="btn btn-primary" onClick={startSearch}> Search </button>
         </div>

@@ -126,7 +126,7 @@ export default function LoggedRestaurant()
                     <button class="btn btn-primary" onClick={startSearch}> Search </button>
                 </div>
                 <div className="row row-cols-2 g-4" style={{marginTop:"0%"}}>
-                    {filtered.map(f => <RestaurantCard {...f} distance={f.distance}/>)}
+                    {filtered.map(f => <RestaurantCard {...f} open={f.isOpen} distance={f.distance}/>)}
                 </div>
             </div>
             </>

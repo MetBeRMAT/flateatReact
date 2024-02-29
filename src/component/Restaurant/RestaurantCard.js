@@ -4,7 +4,7 @@ import FoodCard from "./FoodCard";
 export default function RestaurantCard(props)
 {
 
-    function Card({ foodTypes,isOpen ,name, phone, x, y, distance}) 
+    function Card({ foodTypes,open ,name, phone, x, y, distance}) 
     {
 
         return (
@@ -22,7 +22,7 @@ export default function RestaurantCard(props)
                                 <p></p>
                             </dd>
 
-                            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-4">{isOpen ? "Open" : "Closed"}</dt>
+                            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-4">{open ? "Open" : "Closed"}</dt>
                             {distance!=null ? <div> {distance} </div> : <></>}
                         </dl>
                         {/* <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+title}>Details</Link></button> */}
@@ -36,7 +36,7 @@ export default function RestaurantCard(props)
         return (
 
             <div className="row row-cols-2 g-4">
-                <Card distance={props.distance} foodTypes={props.foodTypes} isOpen={props.isOpen} name={props.name} />
+                <Card distance={props.distance} foodTypes={props.foodTypes} open={props.isOpen} name={props.name} />
             </div>
         );
     }

@@ -12,8 +12,10 @@ export default function Navbar() {
             <div className="container-fluid">
                 <div className="d-flex align-items-center"> {/* Wrapper div per contenere i link "Home" e "Ristorante" */}
                     <Link className="navbar-brand btn btn-success me-3" to="/" style={{ backgroundColor: "#ffff00", borderColor: "#ffff00", backgroundImage: `url(${homeIcon})`, backgroundSize: "cover", width: "50px", height: "50px" }}></Link> {/* Link "Home" */}
-                    <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurant" style={{ backgroundColor: "#ffff00", borderColor: "#ffff00", backgroundSize: "cover", width: "100px", height: "50x" }}>RESTAURANT</Link> {/* Link "Ristorante" con la classe me-auto per spostarlo a sinistra */}
-                </div>
+                    { user ? <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurantlogged" style={{ backgroundColor: "#ffff00", borderColor: "#ffff00", backgroundSize: "cover", width: "100px", height: "50x" }}>RESTAURANT</Link> :
+                    <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurant" style={{ backgroundColor: "#ffff00", borderColor: "#ffff00", backgroundSize: "cover", width: "100px", height: "50x" }}>RESTAURANT</Link> 
+                    }    
+                    </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
