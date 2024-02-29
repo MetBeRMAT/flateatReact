@@ -36,6 +36,7 @@ export default function RestaurantCard(props)
         <Link to={`/order/${props.id}`} className="btn btn-danger">
           Ordina ora
         </Link> : <></>
+        }
         
         { user ?
         <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button> :
