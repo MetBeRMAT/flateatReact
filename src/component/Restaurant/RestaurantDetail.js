@@ -40,23 +40,29 @@ export default function RestaurantDetail()
         },
         []
     )
-
-    let dishes = [];
-    dishes = menu.dishes; 
+    
+    function setCategories()
+    {
+        let categories = menu.dishes.map(c => c.category);
+        let category = []; let counter = 0;
+        category.push(categories[0]);
+        for(let i = 0; i < categories.size; i++)
+        {
+            if(categories[i] == category[counter])
+                counter++;
+        }
+    }
 
     return(
         <>
-        <dl class="row text-bg-warning m-3">
+        <dl class="row text-bg-warning m-3" style={{width:"50%"}}>
             <dt class="col-sm-3"></dt>
-                <dd class="col-sm-9">
-                    <p></p>
-                    <p></p>
-                </dd>
-            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">Restaurant: {restaurant.name}</dt>
-            <dt class="col-sm-3"></dt>
+            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">{restaurant.name}'s Restaurant</dt>
+            <dt class="col-sm-2"></dt>
             <dd> Opening at: {restaurant.openingH} - Closing at: {restaurant.closingH}</dd>
             <dd> {restaurant.open ? "OPEN" : "CLOSED"} </dd>
-            <dd class="row"> Our Menu:  </dd> <div> {menu.dishes && menu.dishes.map(m => <DishCard {...m}/>)} </div>
+            <p class=""> Our Menu:  </p> {menu.dishes && menu.dishes.map(c => <div> Category - {c.category} </div>)}
+            <div className="row cols-4 g-4 p-2"> {menu.dishes && menu.dishes.map(m => <DishCard {...m}/>)} </div>
             <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurantlogged"}>Back</Link></button></p>
         </dl>
         </>
