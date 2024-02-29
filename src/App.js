@@ -30,7 +30,7 @@ function App()
             <Route index element={<Cart />}></Route>
             <Route path='restaurantlogged' element={<LoggedRestaurant/>}> </Route>
             <Route path='register' element={<Register />}> </Route>
-            <Route path='restaurantdetail/:id' element={<RestaurantDetail />}> </Route>
+            <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
           </Routes>
       </BrowserRouter>
     </>

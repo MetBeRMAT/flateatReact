@@ -1,69 +1,53 @@
 import { Link } from "react-router-dom";
 import FoodCard from "./FoodCard";
+import userEvent from "@testing-library/user-event";
+import { useAtom } from "jotai";
+import { currentUser } from "../../App";
 
-export default function RestaurantCard(props)
+
+export default function RestaurantCard(props) 
 {
+    const [user, setUser] = useAtom(currentUser);
 
-    function Card({ foodTypes,isOpen ,name, phone, x, y, distance}) 
-    {
-
-        return (
-            // la visualizzo in colonne da tre ed ho impostato lo stato isOpen e tutti i tipi di cibi associati
-            // Solo che bisogna dare una controllata a isOpen dato che mi da sempre Closed 
-
-                <div class="card text-bg-success">
-                        <h3 style={{fontFamily:"Lucida Handwriting,cursive"}} class="card-title">Restaurant {name}</h3>
-                        <dl class="row">
-                            <dt class="col-sm-3"></dt>
-                            <dt style={{fontFamily:"Times New Roman,Serif"}}>Type of food: {foodTypes.map(f => <FoodCard name={f} />)}</dt>
-                            <dt class="col-sm-3"></dt>
-                            <dd class="col-sm-9">
-                                <p></p>
-                                <p></p>
-                            </dd>
-
-                            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-4">{isOpen ? "Open" : "Closed"}</dt>
-                            {distance!=null ? <div> {distance} </div> : <></>}
-                        </dl>
-                        {/* <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+title}>Details</Link></button> */}
-                
-            </div>
-        );
-    }
+  function Card({ foodTypes, open, name, phone, x, y, distance , id}) {
+    return (
+      <div className="card text-center text-bg-success">
+        <Link to={`/restaurant/${props.id}`} className="text-decoration-none">
+          <div className="card-body text-bg-success">
+            <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title">Restaurant {name}</h5>
+            <dl className="row">
+              <dt className="col-sm-3 text-center"></dt>
+              <dt className="col-sm-9 text-center" style={{ fontFamily: "Times New Roman,Serif" }}>
+                Type of food: {foodTypes.map(f => <FoodCard key={f} name={f} />)}
+              </dt>
+              <dt className="col-sm-4 mt-2">{open ? "Open" : "Closed"}</dt>
+              {distance != null ? <div className="col-sm-12 mt-2"> {distance} </div> : <></>}
+            </dl>
+          </div>
+        </Link>
+        <Link to={`/order/${props.id}`} className="btn btn-danger">
+          Ordina ora
+        </Link>
+        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button>
+      </div>
+    );
+  }
 
     function CardGrid() 
     {
         return (
 
-            <div className="row row-cols-2 g-4">
-                <Card distance={props.distance} foodTypes={props.foodTypes} isOpen={props.isOpen} name={props.name} />
+            <div className="row justify-content-center mt-4">
+        <div className="col-12 col-sm-6">
+                  <Card id={props.id} distance={props.distance} foodTypes={props.foodTypes} open={props.isOpen} name={props.name} />
+        </div>
             </div>
         );
     }
 
-    return(
-        <>
-            {/* ho richiamato la CardGrid di sopra ho solo richiamato la funzione senza che visualizzi una nuova card dentro il return */}
-
-
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <CardGrid/>
-                        </div>
-                    </div>
-                </div>
-        {/* <dl class="row text-bg-success m-3">
-            <dt class="col-sm-3"></dt>
-                <dd class="col-sm-9">
-                    <p></p>
-                    <p></p>
-                </dd>
-            <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">Restaurant: {props.name}</dt>
-            <dt class="col-sm-3"></dt>
-            <dd style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">WeFlat are on: ({props.positionX} - {props.positionY})</dd>
-            <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurantdetail/"+props.id}>Details</Link></button></p>
-        </dl> */}
-        </>
-    );
+  return (
+    <div className="container">
+      <CardGrid />
+    </div>
+  );
 }
