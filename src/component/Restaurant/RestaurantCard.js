@@ -32,6 +32,7 @@ export default function RestaurantCard(props)
             {distance != null ? <div className="col-sm-12 mt-2"> {distance} </div> : <></>}
           </dl>
         </div>
+        { user? 
         <Link to={`/order/${props.id}`} className="btn btn-danger">
           Ordina ora
         </Link> : <></>
