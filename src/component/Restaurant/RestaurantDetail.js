@@ -3,15 +3,22 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import OurMenu from "../Menu/OurMenu";
+import { useAtom } from "jotai";
+import { currentUser } from "../../App";
+import DishCard from "../Dish/DishCard";
 
 export default function RestaurantDetail()
 {
-    let {id} = useParams();
+    let {restaurantId} = useParams();
+
+    const [user, setUser] = useAtom(currentUser);
     const [restaurant, setRestaurant] = useState([]);
+    const [menu, setMenu] = useState([]);
+
     useEffect(
         ()=>
         {
-            axios.get("/restaurants/"+id).then(
+            axios.get("/restaurant/"+restaurantId+"/"+user.id).then(
                 (response)=>
                 {
                     setRestaurant(response.data);
@@ -20,6 +27,22 @@ export default function RestaurantDetail()
         },
         []
     )
+
+    useEffect(
+        () =>
+        {
+            axios.get("/menu/"+restaurantId).then(
+                (response)=>
+                {
+                    setMenu(response.data);
+                }
+            );
+        },
+        []
+    )
+
+    let dishes = [];
+    dishes = menu.dishes; 
 
     return(
         <>
@@ -31,10 +54,10 @@ export default function RestaurantDetail()
                 </dd>
             <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">Restaurant: {restaurant.name}</dt>
             <dt class="col-sm-3"></dt>
-            <dd style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-3">WeFlat are on: ({restaurant.positionX} - {restaurant.positionY})</dd>
-            <dd> Opening at: {restaurant.openingHour} - Closing at: {restaurant.closingHour}</dd>
-            <dd class="row"> Our Menu: {restaurant.map(m => <OurMenu {...m}/>)} </dd>
-            <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurant"}>Back</Link></button></p>
+            <dd> Opening at: {restaurant.openingH} - Closing at: {restaurant.closingH}</dd>
+            <dd> {restaurant.open ? "OPEN" : "CLOSED"} </dd>
+            <dd class="row"> Our Menu:  </dd> <div> {menu.dishes && menu.dishes.map(m => <DishCard {...m}/>)} </div>
+            <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurantlogged"}>Back</Link></button></p>
         </dl>
         </>
     );

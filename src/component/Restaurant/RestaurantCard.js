@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import FoodCard from "./FoodCard";
+import userEvent from "@testing-library/user-event";
+import { useAtom } from "jotai";
+import { currentUser } from "../../App";
 
 export default function RestaurantCard(props)
 {
+    const [user, setUser] = useAtom(currentUser);
 
-    function Card({ foodTypes,open ,name, phone, x, y, distance}) 
+    function Card({id, foodTypes,open ,name, phone, x, y, distance}) 
     {
 
         return (
@@ -25,7 +29,7 @@ export default function RestaurantCard(props)
                             <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-4">{open ? "Open" : "Closed"}</dt>
                             {distance!=null ? <div> {distance} </div> : <></>}
                         </dl>
-                        {/* <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+title}>Details</Link></button> */}
+                        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button>
                 
             </div>
         );
@@ -36,7 +40,7 @@ export default function RestaurantCard(props)
         return (
 
             <div className="row row-cols-2 g-4">
-                <Card distance={props.distance} foodTypes={props.foodTypes} open={props.isOpen} name={props.name} />
+                <Card id={props.id} distance={props.distance} foodTypes={props.foodTypes} open={props.isOpen} name={props.name} />
             </div>
         );
     }
