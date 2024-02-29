@@ -14,26 +14,26 @@ export default function RestaurantCard(props)
     return (
       <div className="card text-center text-bg-success">
         <div className="card-body text-bg-success">
-          <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title">Restaurant {name}</h5>
+          <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title text-bg-info"> {name} <br/>Restaurant</h5>
           <dl className="row">
-            <dt className="col-sm-3 text-center"></dt>
-            <dt className="col-sm-9 text-center" style={{ fontFamily: "Times New Roman,Serif" }}>
+            <dt className="col-sm-9 text-start" style={{ fontFamily: "Times New Roman,Serif" }}>
               Type of food:
               {foodTypes.map((f, index) => (
                 <div key={index} className="mb-2">
                   <FoodCard name={f} />
-                  <button className="btn btn-success btn-sm" onClick={() => addToCart(f)}>
+                  {/* <button className="btn btn-success btn-sm" onClick={() => addToCart(f)}>
                     Aggiungi
-                  </button>
+                  </button> */}
                 </div>
               ))}
             </dt>
-            <dt className="col-sm-4 mt-2">{open ? "Open" : "Closed"}</dt>
-            {distance != null ? <div className="col-sm-12 mt-2"> {distance} </div> : <></>}
+            <dt className="col-sm-3 mt-2"> We are {open ? "Open :D" : "Closed :c"}
+            {distance != null ? <div className=" bg-warning p-2"> We are {distance}flattometri away </div> : <></>}
+            </dt>
           </dl>
         </div>
         { user? 
-        <Link to={`/order/${id}`} className="btn btn-danger">
+        <Link to={`/order/${id}`} className="btn btn-info position-absolute bottom-0 start-0 btn-danger">
           Ordina ora
         </Link> : <></>
         }
@@ -50,8 +50,8 @@ export default function RestaurantCard(props)
     {
         return (
 
-            <div className="row justify-content-center mt-4">
-        <div className="col-12 col-sm-6">
+        <div className="row justify-content-center mt-4">
+        <div className="col-3 col-sm-6">
                   <Card
             id={props.id} distance={props.distance}
             foodTypes={props.foodTypes}

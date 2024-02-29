@@ -107,8 +107,8 @@ export default function LoggedRestaurant()
 
       return(
             <>
-            <div className="row gy-5">
-                <div className="col-3 p-4">
+            <div className="row gy-5 p-1">
+                <div className="col-3 p-4 bg-secondary">
                 <div className="input-group mb-3">
                     <div> Gentilmente, inserire i cibi con Lettera maiuscola e separati da uno spazio, grazie</div>
                     <span className="input-group-text" id="basic-addon2">
@@ -125,7 +125,7 @@ export default function LoggedRestaurant()
                 <br />
                     <button class="btn btn-primary" onClick={startSearch}> Search </button>
                 </div>
-                <div className="row row-cols-2 g-4" style={{marginTop:"0%"}}>
+                <div className="col cols-2 g-4" style={{marginTop:"1.2%"}}>
                     {filtered.map(f => <RestaurantCard {...f} open={f.isOpen} distance={f.distance}/>)}
                 </div>
             </div>
