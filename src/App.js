@@ -19,15 +19,16 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route index element={<Homepage />} />
-          <Route path='login' element={<Login />} />
-          <Route path='restaurant' element={<AllRestaurants />} />
-          <Route path='restaurantlogged' element={<LoggedRestaurant />} />
-          <Route path='register' element={<Register />} />
-          <Route path='restaurantdetail/:id' element={<RestaurantDetail />} />
-          <Route path='cart' element={<Cart />} /> {/* Aggiungo la rotta per il carrello */}
-        </Routes>
+        
+          <Routes>
+            <Route index element={<Homepage />}></Route>
+            <Route path='login' element={<Login />}> </Route>
+            <Route path='restaurant' element={<AllRestaurants />}> </Route>
+            <Route index element={<Cart />}></Route>
+            <Route path='restaurantlogged' element={<LoggedRestaurant/>}> </Route>
+            <Route path='register' element={<Register />}> </Route>
+            <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
+          </Routes>
       </BrowserRouter>
     </>
   );
