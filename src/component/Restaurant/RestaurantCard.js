@@ -1,25 +1,20 @@
 import { Link } from "react-router-dom";
 import FoodCard from "./FoodCard";
 
-
 export default function RestaurantCard(props) {
-
-  function Card({ foodTypes, open, name, phone, x, y, distance }) {
+  function Card({ foodTypes, open, name, distance }) {
     return (
-      <div className="card text-bg-success">
+      <div className="card text-center text-bg-success">
         <Link to={`/restaurant/${props.id}`} className="text-decoration-none">
-          <div className="card text-bg-success">
-            <h3 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title">Restaurant {name}</h3>
+          <div className="card-body text-bg-success">
+            <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title  ">Restaurant {name}</h5>
             <dl className="row">
-              <dt className="col-sm-3"></dt>
-              <dt style={{ fontFamily: "Times New Roman,Serif" }}>Type of food: {foodTypes.map(f => <FoodCard key={f} name={f} />)}</dt>
-              <dt className="col-sm-3"></dt>
-              <dd className="col-sm-9">
-                <p></p>
-                <p></p>
-              </dd>
-              <dt style={{ fontFamily: "Times New Roman,Serif" }} className="col-sm-4">{open ? "Open" : "Closed"}</dt>
-              {distance != null ? <div> {distance} </div> : <></>}
+              <dt className="col-sm-3 "></dt>
+              <dt className="col-sm-9 text-center" style={{ fontFamily: "Times New Roman,Serif" }}>
+                Type of food: {foodTypes.map(f => <FoodCard key={f} name={f} />)}
+              </dt>
+              <dt className="col-sm-4 mt-2">{open ? "Open" : "Closed"}</dt>
+              {distance != null ? <div className="col-sm-12 mt-2"> {distance} </div> : <></>}
             </dl>
           </div>
         </Link>
@@ -32,21 +27,17 @@ export default function RestaurantCard(props) {
 
   function CardGrid() {
     return (
-      <div className="row row-cols-2 g-4">
-        <Card distance={props.distance} foodTypes={props.foodTypes} open={props.isOpen} name={props.name} />
+      <div className="row justify-content-center mt-4">
+        <div className="col-12 col-sm-6">
+          <Card distance={props.distance} foodTypes={props.foodTypes} open={props.isOpen} name={props.name} />
+        </div>
       </div>
     );
   }
 
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <CardGrid />
-          </div>
-        </div>
-      </div>
-    </>
+    <div className="container">
+      <CardGrid />
+    </div>
   );
 }
