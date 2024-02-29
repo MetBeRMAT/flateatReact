@@ -3,9 +3,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [newItem, setNewItem] = useState('');
 
-  const addToCart = (dish) => {
-    setCartItems([...cartItems, dish]);
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+
+  const handleChange = (e) => {
+    setNewItem(e.target.value);
+  };
+
+  const handleAddToCart = () => {
+    if (newItem.trim() !== '') {
+      addToCart(newItem);
+      setNewItem('');
+    }
   };
 
   const removeFromCart = (index) => {
@@ -18,24 +30,21 @@ const Cart = () => {
     <div className="container mt-4">
       <h2>Carrello</h2>
       <ul className="list-group">
-        {cartItems.map((dish, index) => (
+        {cartItems.map((item, index) => (
           <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-            {dish}
+            {item}
             <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
-              <span aria-hidden="true">&times;</span>
+              Rimuovi
             </button>
           </li>
         ))}
       </ul>
-
-      <h2 className="mt-4">Menu Ristorante</h2>
-      <button className="btn btn-primary mb-2 mr-2" onClick={() => addToCart('Pasta Carbonara')}>
-        Aggiungi Pasta Carbonara
-      </button>
-      <button className="btn btn-primary mb-2 mr-2" onClick={() => addToCart('Pizza Margherita')}>
-        Aggiungi Pizza Margherita
-      </button>
-      {/* Aggiungi altri piatti con bottoni simili */}
+      <div className="mt-4">
+        <input type="text" value={newItem} onChange={handleChange} />
+        <button className="btn btn-primary ms-2" onClick={handleAddToCart}>
+          Aggiungi
+        </button>
+      </div>
     </div>
   );
 };
