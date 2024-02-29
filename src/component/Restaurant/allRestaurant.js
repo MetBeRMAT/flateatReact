@@ -73,23 +73,24 @@ export default function AllRestaurants()
 
   return (
     <>
-      <div className="row gy-5">
-        <div className="col-3 p-4">
+      <div className="row gy-5 ms-3 mt-3 p-4">
+        <div className="col-3 p-4 border ">
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon2">
               Tipo Cibo:
             </span>
             <input name="type" ref={searchType} type="text"placeholder="Type"/>
           </div>
-          <label htmlFor="customRange3" className="form-label">
-            Distanza Massima (km): 1414 ma Lorenzo non sa graficare la scritta vera
+          <label htmlFor="customRange3" className="form-label fw-bold text-muted">
+            Distanza Massima (km): 1414 
           </label>
           {/* <input type="range" ref={searchDistance} className="form-range" min={0} max={1414}/> */}
           <input type="number" ref={searchDistance} />  
           <br />
           <br />
           {
-            user ? <button class="btn btn-primary" onClick={searchDi}> Search </button> :
+
+            user ? <button  type="button" class="btn btn-primary btn-lg" onClick={searchDi}> Search </button> :
             <div> You have to be logged :c</div>
           }
         </div>
