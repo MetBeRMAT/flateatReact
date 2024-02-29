@@ -8,6 +8,7 @@ import Navbar from './component/Navbar/Navbar';
 import Register from './component/User/Register';
 import AllRestaurants from './component/Restaurant/allRestaurant';
 import RestaurantDetail from './component/Restaurant/RestaurantDetail';
+import Cart from './component/Cart/Cart';
 
 export const currentUser = atom();
 
@@ -19,11 +20,14 @@ function App()
   return (
     <>
       <BrowserRouter>
+      <Cart/>
         <Navbar />
+        
           <Routes>
             <Route index element={<Homepage />}></Route>
             <Route path='login' element={<Login />}> </Route>
             <Route path='restaurant' element={<AllRestaurants />}> </Route>
+            <Route index element={<Cart />}></Route>
             <Route path='register' element={<Register />}> </Route>
             <Route path='restaurantdetail/:id' element={<RestaurantDetail />}> </Route>
           </Routes>
