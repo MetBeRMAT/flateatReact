@@ -1,10 +1,15 @@
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { currentUser } from "../../App"
+import { useAtom } from "jotai";;
 
 export default function Register()
 {
+    const navigate = useNavigate();
+
+    const [user, setUser] = useAtom(currentUser);
     const [log, setLog] = useState(false);
     const [show, setShow] = useState(true);
 
@@ -29,10 +34,13 @@ export default function Register()
         newUser.phone = inNum.current.value;
         newUser.positionX = inX.current.value;
         newUser.positionY = inY.current.value;
+        
+
 
         axios.post("/users/register",newUser).then(
             (response)=>
             {
+                setUser(response.data);
                 setNewUser({
                     mail:"",
                     password:"",
@@ -41,7 +49,7 @@ export default function Register()
                     positionY:""
                 })
             }
-        )
+        ).then(navigate("/restaurantlogged"))
     }
 
     function checkRegister()
@@ -65,7 +73,9 @@ export default function Register()
             )
         {   
             setLog(true); //Da commentare queste tre righe
+            
             registerUser();
+            
         }
         else
             setShow(false);

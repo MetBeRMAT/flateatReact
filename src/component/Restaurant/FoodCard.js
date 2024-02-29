@@ -2,7 +2,7 @@ export default function FoodCard(props)
     {
         return(
 
-                <div class="col"> {props.f} </div>
+                <div class="col"> {props.name} </div>
 
         );
     }

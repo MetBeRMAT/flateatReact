@@ -16,7 +16,11 @@ export default function Navbar()
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <Link class="nav-link active btn btn-warning" aria-current="page" to="/restaurant">Restaurant</Link>
+                        {   
+                            user ?  
+                            <Link class="nav-link active btn btn-warning" aria-current="page" to="/restaurantlogged">Restaurant</Link> :
+                            <Link class="nav-link active btn btn-warning" aria-current="page" to="/restaurant">Restaurant</Link>
+                        }
                         {
                             user ? <Link class="btn btn-warning" area-current="page" onClick={() => setUser(null)}> Logout </Link>
                             : <Link class="nav-link active btn btn-warning" aria-current="page" to="/login">Login</Link>

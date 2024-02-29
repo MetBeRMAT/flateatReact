@@ -4,7 +4,7 @@ import FoodCard from "./FoodCard";
 export default function RestaurantCard(props)
 {
 
-    function Card({ foodTypes,isOpen ,name, phone, x, y}) 
+    function Card({ foodTypes,isOpen ,name, phone, x, y, distance}) 
     {
 
         return (
@@ -15,7 +15,7 @@ export default function RestaurantCard(props)
                         <h3 style={{fontFamily:"Lucida Handwriting,cursive"}} class="card-title">Restaurant {name}</h3>
                         <dl class="row">
                             <dt class="col-sm-3"></dt>
-                            <dt style={{fontFamily:"Times New Roman,Serif"}}>Type of food: {foodTypes.map(f => <FoodCard {...f}/>)} {foodTypes}</dt>
+                            <dt style={{fontFamily:"Times New Roman,Serif"}}>Type of food: {foodTypes.map(f => <FoodCard name={f} />)}</dt>
                             <dt class="col-sm-3"></dt>
                             <dd class="col-sm-9">
                                 <p></p>
@@ -23,7 +23,7 @@ export default function RestaurantCard(props)
                             </dd>
 
                             <dt style={{fontFamily:"Times New Roman,Serif"}} class="col-sm-4">{isOpen ? "Open" : "Closed"}</dt>
-
+                            {distance!=null ? <div> {distance} </div> : <></>}
                         </dl>
                         {/* <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+title}>Details</Link></button> */}
                 
@@ -36,7 +36,7 @@ export default function RestaurantCard(props)
         return (
 
             <div className="row row-cols-2 g-4">
-                <Card foodTypes={props.foodTypes} isOpen={props.isOpen} name={props.name} />
+                <Card distance={props.distance} foodTypes={props.foodTypes} isOpen={props.isOpen} name={props.name} />
             </div>
         );
     }

@@ -2,9 +2,13 @@ import { useAtom } from "jotai";
 import { useEffect, useRef, useState } from "react";
 import { currentUser } from "../../App";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+ 
 
 export default function Login()
 {
+    let navigate = useNavigate();
+
     const [logg, setLog] = useState(false);
     const [show, setShow] = useState(true);
     const [user, setUser] = useAtom(currentUser);
