@@ -29,12 +29,7 @@ const Cart = () => {
       </ul>
 
       <h2 className="mt-4">Menu Ristorante</h2>
-      <button className="btn btn-primary mb-2 mr-2" onClick={() => addToCart('Pasta Carbonara')}>
-        Aggiungi Pasta Carbonara
-      </button>
-      <button className="btn btn-primary mb-2 mr-2" onClick={() => addToCart('Pizza Margherita')}>
-        Aggiungi Pizza Margherita
-      </button>
+     
       {/* Aggiungi altri piatti con bottoni simili */}
     </div>
   );
