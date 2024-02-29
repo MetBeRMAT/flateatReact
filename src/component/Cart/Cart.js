@@ -14,7 +14,7 @@ const Cart = () => {
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
   };
-
+//hahahah
   return (
     <div className="container mt-4">
       <div className="card">
