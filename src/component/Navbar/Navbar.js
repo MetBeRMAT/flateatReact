@@ -36,7 +36,7 @@ export default function Navbar() {
               className="nav-link active btn btn-warning me-auto"
               aria-current="page"
               to="/restaurantlogged"
-            >
+            >     
               RESTAURANT
             </Link>
           ) : (
