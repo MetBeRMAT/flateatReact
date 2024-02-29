@@ -7,7 +7,7 @@ export default function RestaurantCard(props) {
   function Card({ foodTypes, open, name, phone, x, y, distance }) {
     return (
       <div className="card text-bg-success">
-        <Link to={`/restaurant/${props.id}`} className="text-decoration-none">
+        <Link to={`/restaurants/${props.id}`} className="text-decoration-none">
           <div className="card text-bg-success">
             <h3 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title">Restaurant {name}</h3>
             <dl className="row">
