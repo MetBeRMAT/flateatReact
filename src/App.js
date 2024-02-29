@@ -10,7 +10,12 @@ import AllRestaurants from './component/Restaurant/allRestaurant';
 import RestaurantDetail from './component/Restaurant/RestaurantDetail';
 import Cart from './component/Cart/Cart';
 import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
+import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
+
+
+
 export const currentUser = atom();
+
 
 function App() 
 {
@@ -31,6 +36,7 @@ function App()
             <Route path='restaurantlogged' element={<LoggedRestaurant/>}> </Route>
             <Route path='register' element={<Register />}> </Route>
             <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
+            <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
           </Routes>
       </BrowserRouter>
     </>

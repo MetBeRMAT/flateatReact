@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FoodCard from "./FoodCard";
 import userEvent from "@testing-library/user-event";
 import { useAtom } from "jotai";
@@ -9,10 +9,10 @@ export default function RestaurantCard(props)
 {
     const [user, setUser] = useAtom(currentUser);
 
-  function Card({ foodTypes, open, name, phone, x, y, distance , id}) {
+  function Card({ foodTypes, open, name, distance,id}) {
     return (
       <div className="card text-center text-bg-success">
-        <Link to={`/restaurant/${props.id}`} className="text-decoration-none">
+        <Link to={"/restaurant/"+id} className="text-decoration-none" />
           <div className="card-body text-bg-success">
             <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title">Restaurant {name}</h5>
             <dl className="row">
@@ -24,11 +24,15 @@ export default function RestaurantCard(props)
               {distance != null ? <div className="col-sm-12 mt-2"> {distance} </div> : <></>}
             </dl>
           </div>
-        </Link>
-        <Link to={`/order/${props.id}`} className="btn btn-danger">
+        { user ? 
+        <Link to={"/order/"+id} className="btn btn-danger">
           Ordina ora
-        </Link>
-        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button>
+        </Link> : <></>
+        }
+        { user ?
+        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button> :
+        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id}>Details</Link></button>
+        }
       </div>
     );
   }
