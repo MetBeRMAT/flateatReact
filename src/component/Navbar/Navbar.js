@@ -3,22 +3,21 @@ import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import { currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
+import { currentCart } from "../../App";
 
 export default function Navbar() {
   const [user, setUser] = useAtom(currentUser);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useAtom(currentCart);
 
-  const handleCartClick = () => {
+  const handleCartClick = () => 
+  {
     setIsCartOpen(!isCartOpen);
   };
 
-  const addToCart = (product) => {
-    setCartItems([...cartItems, product]);
-  };
-
-  const removeFromCart = (index) => {
+  const removeFromCart = (index) => 
+  {
     const updatedCart = [...cartItems];
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
@@ -96,7 +95,8 @@ export default function Navbar() {
         >
           <h3>Carrello</h3>
           <ul>
-            {cartItems.map((item, index) => (
+            {cartItems && cartItems.map((item, index) => 
+            (
               <li key={index}>
                 {item}
                 <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
@@ -105,13 +105,7 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <h4>Aggiungi al carrello:</h4>
-          <button className="btn btn-primary" onClick={() => addToCart("Pasta Carbonara")}>
-            Aggiungi Pasta Carbonara
-          </button>
-          <button className="btn btn-primary" onClick={() => addToCart("Pizza Margherita")}>
-            Aggiungi Pizza Margherita
-          </button>
+          
         </div>
       )}
     </nav>
