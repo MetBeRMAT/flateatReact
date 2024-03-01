@@ -31,20 +31,20 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
       <div className="container-fluid">
         <div className="d-flex align-items-center">
-          <Link className="navbar-brand btn btn-success me-3" to="/">
+          <Link className="navbar-brand btn btn-success me-3 " to="/">
             <img src={homeIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
           </Link>
           {user ? (
             <>
-              <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurantlogged">
+              <Link  className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurantlogged">
                 RESTAURANT
               </Link>
-              <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/deliverypage">
-                Delivery
+              <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/deliverypage">
+                Delivery 
               </Link>
             </>
           ) : (
-            <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurant">
+            <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurant">
               RESTAURANT
             </Link>
           )}
