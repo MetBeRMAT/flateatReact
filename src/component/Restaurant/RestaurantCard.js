@@ -12,14 +12,14 @@ export default function RestaurantCard(props)
 
   function Card({ foodTypes, open, name, distance, addToCart,id}) {
     return (
-      <div className="card text-center text-bg-success">
+      <div className="card text-center text-bg-success  ">
         <div className="card-body text-bg-success">
           <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title text-bg-info"> {name} <br/>Restaurant</h5>
           <dl className="row">
-            <dt className="col-sm-9 text-start" style={{ fontFamily: "Times New Roman,Serif" }}>
+            <dt className="col-sm-9 text-start " style={{ fontFamily: "Times New Roman,Serif" }}>
               Type of food:
               {foodTypes.map((f, index) => (
-                <div key={index} className="mb-2">
+                <div key={index} className="mb-2 pl-0">
                   <FoodCard name={f} />
                   {/* <button className="btn btn-success btn-sm" onClick={() => addToCart(f)}>
                     Aggiungi

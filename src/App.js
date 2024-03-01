@@ -12,6 +12,7 @@ import RestaurantDetail from './component/Restaurant/RestaurantDetail';
 import Cart from './component/Cart/Cart';
 import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
 import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
+import OrderForm from './component/Restaurant/OrderForm';
 
 
 
@@ -25,9 +26,13 @@ function App()
 
   return (
     <>
-        <BrowserRouter>  
-          <Navbar />      
+        <BrowserRouter> 
+         
+          <Navbar />     
+         <OrderForm />
           <Routes>
+         
+
             <Route index element={<Homepage />}></Route>
             <Route path='login' element={<Login />}> </Route>
             <Route path='restaurant' element={<AllRestaurants />}> </Route>
@@ -37,6 +42,8 @@ function App()
             <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
             <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
             <Route path='cart' element={<Cart />} /> {/* Aggiungo la rotta per il carrello */}
+       
+
           </Routes>
       </BrowserRouter>
     </>
