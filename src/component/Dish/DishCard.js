@@ -47,7 +47,9 @@ export default function DishCard(props)
                         <div className="col-12"> 
                             <label for="quest" className="form-label">{props.name}</label>
                             <p> Category: {props.category}</p>
+                            <p> prezzo piatto: {props.price}</p>
                             <p> restaurant price: {props.restaurantprice}</p>
+                            <p> prezzo distanza: {props.distancetot*props.restaurantprice}</p>
                             <button className="btn btn-primary" ref={refItem} onClick={addToCart}>+</button>
                         </div>
             </div>
