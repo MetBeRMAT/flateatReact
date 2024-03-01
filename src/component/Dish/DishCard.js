@@ -44,18 +44,18 @@ export default function DishCard(props)
             <img src={dishImage} className="card-img-top" alt="Dish" />
             <div className="card-body">
               <div className="col-12">
-                <label htmlFor="quest" className="form-label">
+                <label htmlFor="quest" className="form-label h6 text-dark">
                   Our sexy Dish# {props.id}
                 </label>
               </div>
               <div className="col-12">
-                <label htmlFor="quest" className="form-label">
+                <label htmlFor="quest" className="form-label l h6 text-dark">
                   {props.name}
                 </label>
                 <p> Category: {props.category}</p>
-                <p> prezzo piatto: {props.price}</p>
-                <p> restaurant price: {props.restaurantprice}</p>
-                <p> prezzo distanza: {props.distancetot * props.restaurantprice}</p>
+                <p> prezzo piatto: &euro;{props.price}</p>
+                <p> restaurant price: &euro;{props.restaurantprice}</p>
+                <p> prezzo distanza: &euro;{props.distancetot * props.restaurantprice}</p>
                 <button className="btn btn-primary " ref={refItem} onClick={addToCart} style={{marginLeft:"75%"}}>
                   +
                 </button>

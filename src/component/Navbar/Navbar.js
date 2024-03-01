@@ -127,8 +127,7 @@ export default function Navbar()
               ))}
           </ul>
           <div style={{ textAlign: "right", marginTop: "10px" }}>
-            <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>TOT: {totalPrice(cartItems).toFixed(2)}</p>
-                    <p>Consegna: {totalDelivery(cartItems).toFixed(2)}</p>
+            <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>TOT: &euro;{totalPrice(cartItems)}</p>
           </div>
           <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage" onClick={handleNavigation}>
             BUY
