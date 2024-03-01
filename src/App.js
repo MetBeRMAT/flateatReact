@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import { atom } from 'jotai'; // Rimuovo l'import di useAtom perché non è più utilizzato
+import { atom, useAtom } from 'jotai'; // Rimuovo l'import di useAtom perché non è più utilizzato
 import Homepage from './component/Homepage/Homepage';
 import Login from './component/User/Login';
 import Navbar from './component/Navbar/Navbar';
@@ -18,6 +18,7 @@ import DeliveryPage from './component/Buy/DeliveryPage';
 
 export const currentUser = atom();
 export const currentCart = atom([]);
+export const currentRestaurant = atom();
 
 
 function App() 

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import OurMenu from "../Menu/OurMenu";
 import { useAtom } from "jotai";
-import { currentUser } from "../../App";
+import { currentRestaurant, currentUser } from "../../App";
 import DishCard from "../Dish/DishCard";
 
 export default function RestaurantDetail()
@@ -15,6 +15,7 @@ export default function RestaurantDetail()
     const [restaurant, setRestaurant] = useState([]);
     const [menu, setMenu] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [ristoranteAttuale, setRistoranteAttuale] = useAtom(currentRestaurant);
 
     useEffect(
         ()=>
@@ -23,6 +24,7 @@ export default function RestaurantDetail()
                 (response)=>
                 {
                     setRestaurant(response.data);
+                    setRistoranteAttuale(response.data)
                 }
             );
         },
@@ -68,7 +70,7 @@ export default function RestaurantDetail()
 
             </div>
             <p class=""> Our Menu:  </p> {categories && categories.map(c => <div> Category - {c} </div>)}
-            <div className="row cols-4 g-4 p-2"> {menu.dishes && menu.dishes.map(m => <DishCard restaurantprice ={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m}/>)} </div>
+            <div className="row cols-4 g-4 p-2"> {menu.dishes && menu.dishes.map(m => <DishCard delivery={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m}/>)} </div>
             
             <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurantlogged"}>Back</Link></button></p>
         </dl>

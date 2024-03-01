@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
-import { currentUser } from "../../App";
+import { currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
 
-export default function Navbar() {
+export default function Navbar() 
+{
+  
   const [user, setUser] = useAtom(currentUser);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [sum,setSum] = useState()
-  const [tot,setTot] = useState(0)
 
   const [cartItems, setCartItems] = useAtom(currentCart);
+  const [restaurant,setRestaurant] = useAtom(currentRestaurant);
 
+  
   const handleCartClick = () => 
   {
     setIsCartOpen(!isCartOpen);
+  };
+
+  const handleNavigation = () => 
+  {
+    setIsCartOpen(false);
   };
 
   const addToCart = (product) => 
@@ -41,7 +48,13 @@ export default function Navbar() {
     return tot;
   }
 
+  function totalDelivery(cartItems)
+  {
+    if(totalPrice(cartItems)==0)
+      return 0
 
+    return totalPrice(cartItems)+restaurant.deliveryPricePerUnit;
+  }
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
@@ -59,7 +72,7 @@ export default function Navbar() {
             <><Link
               className="nav-link active btn btn-warning me-auto"
               aria-current="page"
-              to="/restaurantlogged"
+              to="/restaurantlogged" onClick={handleNavigation}
             >
               RESTAURANT
             </Link>
@@ -131,8 +144,9 @@ export default function Navbar() {
                     {item.name} - {item.price}
                     <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
                     X</button></li>))}
-                    <p>TOT: {totalPrice(cartItems)}</p>
-                    <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage">
+                    <p>TOT: {totalPrice(cartItems).toFixed(2)}</p>
+                    <p>Consegna: {totalDelivery(cartItems).toFixed(2)}</p>
+                    <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage" onClick={handleNavigation}>
                     BUY
                     </Link>
                 </ul>
