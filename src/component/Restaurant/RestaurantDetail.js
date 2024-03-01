@@ -68,7 +68,7 @@ export default function RestaurantDetail()
 
             </div>
             <p class=""> Our Menu:  </p> {categories && categories.map(c => <div> Category - {c} </div>)}
-            <div className="row cols-4 g-4 p-2"> {menu.dishes && menu.dishes.map(m => <DishCard {...m}/>)} </div>
+            <div className="row cols-4 g-4 p-2"> {menu.dishes && menu.dishes.map(m => <DishCard restaurantprice ={restaurant.deliveryPricePerUnit} {...m}/>)} </div>
             
             <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurantlogged"}>Back</Link></button></p>
         </dl>

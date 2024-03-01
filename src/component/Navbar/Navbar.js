@@ -132,7 +132,7 @@ export default function Navbar() {
                     <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
                     X</button></li>))}
                     <p>TOT: {totalPrice(cartItems)}</p>
-                    <Link className="nav-link active btn btn-warning" aria-current="page" to="">
+                    <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage">
                     BUY
                     </Link>
                 </ul>

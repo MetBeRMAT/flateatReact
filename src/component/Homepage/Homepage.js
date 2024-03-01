@@ -5,9 +5,7 @@ export default function Homepage()
 {
     const [user, setUser] = useAtom(currentUser);
     return(
-        <>
-            {user ? <p> Utente loggato {user.mail}</p> : <p>Utente non loggato</p>}
-            
+        <>  
             <html lang="en">
             <head>
             </head>
@@ -16,7 +14,7 @@ export default function Homepage()
 
                 <main role="main">
 
-                <section class="jumbotron text-center">
+                {/* <section class="jumbotron text-center">
                     <div class="container">
                     <h1 class="jumbotron-heading">HO RISOLTO LOREEEEEE</h1>
                     <p class="lead text-muted">INTANTO VADO IN BAGNO</p>
@@ -25,7 +23,7 @@ export default function Homepage()
                         <a href="#" class="btn btn-secondary my-2">te posso canta na canzone</a>
                     </p>
                     </div>
-                </section>
+                </section> */}
 
                 <div class="album py-5 bg-danger">
                     <div class="container">
