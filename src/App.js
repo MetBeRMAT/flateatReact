@@ -16,7 +16,7 @@ import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLo
 
 
 export const currentUser = atom();
-export const currentCart = atom();
+export const currentCart = atom([]);
 
 
 function App() 

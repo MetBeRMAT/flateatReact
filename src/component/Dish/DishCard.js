@@ -1,17 +1,39 @@
 import { Link } from "react-router-dom";
 import { currentCart } from "../../App";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function DishCard(props)
 {
     const [cartItems, setCartItems] = useAtom(currentCart);
 
-    const addToCart = (product) => 
+    // function addToCart()
+    // {
+    //     let clone = [cartItems];
+    //     clone.push(refItem.current.value);
+    //     setCartItems(clone);
+    // }
+    const addToCart = () =>
     {
-        setCartItems([...cartItems, product]);
-    };
+        const newItem = 
+        {
+            id : props.id,
+            name: props.name,
+            category: props.category,
+            price: props.price
+        };
+        setCartItems([...cartItems,newItem])
+    }
+
+    const refItem = useRef(null);
+
+    // const addToCart = (product) => 
+    // {
+    //     setCartItems([...cartItems, product]);
+    // };
+
+    console.log(cartItems);
 
 
     return(
@@ -23,8 +45,8 @@ export default function DishCard(props)
                         </div>
                         <div className="col-12"> 
                             <label for="quest" className="form-label">{props.name}</label>
-                            <p> Category: {props.category}</p>
-                            <button className="btn btn-primary" onClick={() => addToCart()}>+</button>
+                            <p> Category: {props.category}</p>      
+                            <button className="btn btn-primary" ref={refItem} onClick={addToCart}>+</button>
                         </div>
             </div>
         </div>
