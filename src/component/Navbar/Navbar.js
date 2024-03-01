@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
-import { currentUser } from "../../App";
+import { currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar() 
+{
+  
   const [user, setUser] = useAtom(currentUser);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useAtom(currentCart);
 
+  const [cartItems, setCartItems] = useAtom(currentCart);
+  const [restaurant,setRestaurant] = useAtom(currentRestaurant);
+
+  
   const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
+  };
+
+  const handleNavigation = () => 
+  {
+    setIsCartOpen(false);
   };
 
   const removeFromCart = (index) => {
@@ -27,6 +37,14 @@ export default function Navbar() {
     return tot;
   }
 
+  function totalDelivery(cartItems)
+  {
+    if(totalPrice(cartItems)==0)
+      return 0
+
+    return totalPrice(cartItems)+restaurant.deliveryPricePerUnit;
+  }
+
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
       <div className="container-fluid">
@@ -36,7 +54,7 @@ export default function Navbar() {
           </Link>
           {user ? (
             <>
-              <Link  className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurantlogged">
+              <Link  className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurantlogged" onClick={handleNavigation}>
                 RESTAURANT
               </Link>
               <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/deliverypage">
@@ -109,9 +127,10 @@ export default function Navbar() {
               ))}
           </ul>
           <div style={{ textAlign: "right", marginTop: "10px" }}>
-            <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>TOT: &euro;{totalPrice(cartItems)}</p>
+            <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>TOT: &euro;{totalPrice(cartItems).toFixed(2)}</p>
+            <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>CONSEGNA: &euro;{totalDelivery(cartItems).toFixed(2)}</p>
           </div>
-          <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage">
+          <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage" onClick={handleNavigation}>
             BUY
           </Link>
         </div>

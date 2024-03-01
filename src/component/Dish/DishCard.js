@@ -3,12 +3,13 @@ import { currentCart } from "../../App";
 import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import foto from  "./poke.png"
 
+import foto from  "./poke.png"
 
 export default function DishCard(props)
 {
     const [cartItems, setCartItems] = useAtom(currentCart);
+    const [restaurant,setRestaurant] = useAtom(currentRestaurant)
 
     // function addToCart()
     // {
@@ -23,8 +24,7 @@ export default function DishCard(props)
             id : props.id,
             name: props.name,
             category: props.category,
-            price: props.price
-            
+            price: props.price,
         };
         setCartItems([...cartItems,newItem])
     }
@@ -35,8 +35,6 @@ export default function DishCard(props)
     // {
     //     setCartItems([...cartItems, product]);
     // };
-
-    console.log(cartItems);
 
 
     return (
