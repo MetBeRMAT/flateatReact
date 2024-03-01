@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import { currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [user, setUser] = useAtom(currentUser);
