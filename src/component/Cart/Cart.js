@@ -44,13 +44,15 @@ const Cart = () => {
                   {item.name} <span className="badge bg-primary">{item.quantity}</span>
                 </div>
                 <div>
-                  <button className="btn btn-success btn-sm" onClick={() => incrementQuantity(index)}>
+                  <button className="btn btn-success btn-sm me-1" onClick={() => incrementQuantity(index)}>
                     +
                   </button>
-                  <button className="btn btn-warning btn-sm" onClick={() => decrementQuantity(index)}>
+                  <button className="btn btn-warning btn-sm me-1" onClick={() => decrementQuantity(index)}>
                     -
                   </button>
-                  <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(index)}>
+                  
+                  <button className="btn btn-danger btn-sm custom-btn me-1" onClick={() => removeFromCart(index)}>
+               
                     Rimuovi
                   </button>
                 </div>
@@ -60,7 +62,13 @@ const Cart = () => {
         </div>
         <div className="card-footer">
           <div className="input-group">
-       
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Aggiungi articolo"
+              value={newItem}
+              onChange={(e) => setNewItem(e.target.value)}
+            />
             <button className="btn btn-primary" onClick={() => addToCart(newItem)}>
               Aggiungi
             </button>

@@ -15,8 +15,7 @@ export default function Navbar()
   const [restaurant,setRestaurant] = useAtom(currentRestaurant);
 
   
-  const handleCartClick = () => 
-  {
+  const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
   };
 
@@ -25,26 +24,16 @@ export default function Navbar()
     setIsCartOpen(false);
   };
 
-  const addToCart = (product) => 
-  {
-      setCartItems([...cartItems, product]);
-  };
-
-
-  const removeFromCart = (index) => 
-  {
+  const removeFromCart = (index) => {
     const updatedCart = [...cartItems];
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
   }; 
-  
-  function totalPrice(cartItems)
-  {
-    let tot=0;
 
-    for(let i=0;i<cartItems.length;i++)
+  function totalPrice(cartItems) {
+    let tot = 0;
+    for (let i = 0; i < cartItems.length; i++)
       tot += cartItems[i].price;
-
     return tot;
   }
 
@@ -60,32 +49,20 @@ export default function Navbar()
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
       <div className="container-fluid">
         <div className="d-flex align-items-center">
-
-
-            {/* btn-success cambia colore */}
-
-            
-          <Link className="navbar-brand btn btn-succes me-3" to="/">
+          <Link className="navbar-brand btn btn-success me-3 " to="/">
             <img src={homeIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
           </Link>
           {user ? (
-            <><Link
-              className="nav-link active btn btn-warning me-auto"
-              aria-current="page"
-              to="/restaurantlogged" onClick={handleNavigation}
-            >
-              RESTAURANT
-            </Link>
-            <Link
-              className="nav-link active btn btn-warning me-auto"
-              aria-current="page"
-              to="/deliverypage"
-            >
-              Delivery
-            </Link></>
-            
+            <>
+              <Link  className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurantlogged" onClick={handleNavigation}>
+                RESTAURANT
+              </Link>
+              <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/deliverypage">
+                Delivery 
+              </Link>
+            </>
           ) : (
-            <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurant">
+            <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurant">
               RESTAURANT
             </Link>
           )}
@@ -118,9 +95,10 @@ export default function Navbar()
               </>
             )}
             { user ?
-            <button className="btn btn-primary" onClick={handleCartClick}>
-              Carrello
-            </button> : <></>}
+              <button className="btn btn-primary" onClick={handleCartClick}>
+                Carrello
+              </button> : <></>
+            }
           </div>
         </div>
       </div>
@@ -129,29 +107,32 @@ export default function Navbar()
           style={{
             position: "fixed",
             top: "50px",
-            right: "10px",
-            backgroundColor: "white",
-            padding: "10px",
-            border: "1px solid black",
+            right: "10px", // Mantieni il carrello alla destra dello schermo
+            backgroundColor: "#ffffcc", // Cambia lo sfondo del carrello in giallo chiaro
+            padding: "40px",
+            width: "fit-content", // Imposta la larghezza in base al contenuto
+            border: "1px solid orange", // Cambia il colore del bordo in arancione
+            borderRadius: "5px", // Aggiungi bordi arrotondati
           }}
         >
-          
-            <h3>Carrello</h3>
-              <ul>
-                {cartItems && cartItems.map(({...item}, index) => 
-                (
-                  <li key={index}>
-                    {item.name} - {item.price}
-                    <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
-                    X</button></li>))}
-                    <p>TOT: {totalPrice(cartItems).toFixed(2)}</p>
+          <ul style={{ listStyleType: "none", padding: 0 }}>
+            {cartItems && cartItems.map(({...item}, index) => 
+              (
+                <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px", padding:"10px" }}>
+                  <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
+                    X
+                  </button>
+                  <span style={{ fontSize: "12px" }}>{item.name}</span> {/* Riduci la dimensione del testo dei pasti */}
+                </li>
+              ))}
+          </ul>
+          <div style={{ textAlign: "right", marginTop: "10px" }}>
+            <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>TOT: {totalPrice(cartItems).toFixed(2)}</p>
                     <p>Consegna: {totalDelivery(cartItems).toFixed(2)}</p>
-                    <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage" onClick={handleNavigation}>
-                    BUY
-                    </Link>
-                </ul>
-          
-                
+          </div>
+          <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage" onClick={handleNavigation}>
+            BUY
+          </Link>
         </div>
       )}
     </nav>
