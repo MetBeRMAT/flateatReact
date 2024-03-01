@@ -12,6 +12,7 @@ import RestaurantDetail from './component/Restaurant/RestaurantDetail';
 import Cart from './component/Cart/Cart';
 import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
 import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
+import DeliveryPage from './component/Buy/DeliveryPage';
 
 
 
@@ -32,6 +33,8 @@ function App()
             <Route path='login' element={<Login />}> </Route>
             <Route path='restaurant' element={<AllRestaurants />}> </Route>
             {/* <Route index element={<Cart />}></Route> */}
+            <Route path='deliverypage' element={<DeliveryPage/>}> </Route>
+            
             <Route path='restaurantlogged' element={<LoggedRestaurant/>}> </Route>
             <Route path='register' element={<Register />}> </Route>
             <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
