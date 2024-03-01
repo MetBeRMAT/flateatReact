@@ -30,7 +30,7 @@ function App()
         <BrowserRouter> 
          
           <Navbar />     
-         <OrderForm />
+         
           <Routes>
          
 
