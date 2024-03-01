@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import { Form, Button, Card } from 'react-bootstrap';
 import Cart from '../Cart/Cart';
+import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import CheckoutOrder from './CheckoutOrder';
 
 const calculateAvailableTimes = () => {
   // Orario attuale
@@ -33,24 +35,18 @@ const calculateAvailableTimes = () => {
   return availableTimes;
 };
 
-const DeliveryPage = () => {
+const DeliveryPage = () => 
+{
   const [deliveryTime, setDeliveryTime] = useState('');
   const [notes, setNotes] = useState('');
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const availableTimes = calculateAvailableTimes();
 
-  // Gestore della conferma dell'ordine
-  const handleConfirmDelivery = () => {
-    // Implementa la logica per confermare l'orario di consegna e passare alla pagina successiva
-    console.log('Confermato orario di consegna:', deliveryTime);
-    console.log('Note:', notes);
+  let jsonParam = {
+    notes: notes,
+    shippingTime: deliveryTime
+  }
 
-    // Esempio di aggiunta di un ordine al carrello quando viene confermato l'ordine
-    // addToCart({ deliveryTime, notes });
-
-    // Segna l'ordine come confermato
-    setOrderConfirmed(true);
-  };
 
   return (
     <div className="container mt-5">
@@ -62,7 +58,7 @@ const DeliveryPage = () => {
             <option value="">Seleziona un orario</option>
             {availableTimes.map((time) => (
               <option key={time} value={time}>
-                {time}
+                {time} {console.log(deliveryTime)}
               </option>
             ))}
           </Form.Control>
@@ -71,20 +67,10 @@ const DeliveryPage = () => {
           <Form.Label>Note</Form.Label>
           <Form.Control as="textarea" rows={3} onChange={(e) => setNotes(e.target.value)} value={notes} />
         </Form.Group>
-        <Button variant="primary" onClick={handleConfirmDelivery}>
-          PAGA ORA
-        </Button>
+        <Link className="btn btn-secondary" to={"/checkout?notes="+notes+"&"+"deliveryTime="+deliveryTime}>
+          Checkout 
+        </Link> 
       </Form>
-      
-      {/* Visualizza il riepilogo dell'ordine solo se è stato confermato */}
-      {orderConfirmed && (
-        <Card className="mt-4">
-          <Card.Header>Riepilogo Ordine</Card.Header>
-          <Card.Body>
-            <Cart />
-          </Card.Body>
-        </Card>
-      )}
     </div>
   );
 };
