@@ -91,7 +91,7 @@ export default function Navbar() {
             top: "50px",
             right: "10px", // Mantieni il carrello alla destra dello schermo
             backgroundColor: "#ffffcc", // Cambia lo sfondo del carrello in giallo chiaro
-            padding: "10px",
+            padding: "40px",
             width: "fit-content", // Imposta la larghezza in base al contenuto
             border: "1px solid orange", // Cambia il colore del bordo in arancione
             borderRadius: "5px", // Aggiungi bordi arrotondati
@@ -100,7 +100,7 @@ export default function Navbar() {
           <ul style={{ listStyleType: "none", padding: 0 }}>
             {cartItems && cartItems.map(({...item}, index) => 
               (
-                <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+                <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px", padding:"10px" }}>
                   <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
                     X
                   </button>
