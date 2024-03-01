@@ -14,6 +14,7 @@ export default function RestaurantDetail()
     const [user, setUser] = useAtom(currentUser);
     const [restaurant, setRestaurant] = useState([]);
     const [menu, setMenu] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(
         ()=>
@@ -31,26 +32,27 @@ export default function RestaurantDetail()
     useEffect(
         () =>
         {
+            
             axios.get("/menu/"+restaurantId).then(
                 (response)=>
                 {
                     setMenu(response.data);
+                    uniqueCategories(response.data);
                 }
             );
+            
         },
         []
     )
     
-    function setCategories()
+    function uniqueCategories(menuPar)
     {
-        let categories = menu.dishes.map(c => c.category);
-        let category = []; let counter = 0;
-        category.push(categories[0]);
-        for(let i = 0; i < categories.size; i++)
-        {
-            if(categories[i] == category[counter])
-                counter++;
-        }
+        let categories = menuPar.dishes.map(c => c.category);
+        let categoriesSet = new Set(categories);
+        
+        let uniqueCategory = [...categoriesSet]; 
+
+        setCategories(uniqueCategory);
     }
 
     return(
@@ -61,8 +63,13 @@ export default function RestaurantDetail()
             <dt class="col-sm-2"></dt>
             <dd> Opening at: {restaurant.openingH} - Closing at: {restaurant.closingH}</dd>
             <dd> {restaurant.open ? "OPEN" : "CLOSED"} </dd>
-            <p class=""> Our Menu:  </p> {menu.dishes && menu.dishes.map(c => <div> Category - {c.category} </div>)}
+
+            <div className="col"> 
+
+            </div>
+            <p class=""> Our Menu:  </p> {categories && categories.map(c => <div> Category - {c} </div>)}
             <div className="row cols-4 g-4 p-2"> {menu.dishes && menu.dishes.map(m => <DishCard {...m}/>)} </div>
+            
             <p><button class="btn btn-info " type="button"><Link class="nav-link" to={"/restaurantlogged"}>Back</Link></button></p>
         </dl>
         </>
