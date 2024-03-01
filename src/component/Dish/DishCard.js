@@ -22,6 +22,7 @@ export default function DishCard(props)
             name: props.name,
             category: props.category,
             price: props.price
+            
         };
         setCartItems([...cartItems,newItem])
     }
@@ -45,7 +46,8 @@ export default function DishCard(props)
                         </div>
                         <div className="col-12"> 
                             <label for="quest" className="form-label">{props.name}</label>
-                            <p> Category: {props.category}</p>      
+                            <p> Category: {props.category}</p>
+                            <p> restaurant price: {props.restaurantprice}</p>
                             <button className="btn btn-primary" ref={refItem} onClick={addToCart}>+</button>
                         </div>
             </div>
