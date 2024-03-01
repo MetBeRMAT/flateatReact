@@ -45,8 +45,8 @@ export default function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
-      <div className="container-fluid">
-        <div className="d-flex align-items-center">
+      <div className="container-fluid ">
+        <div className="d-flex align-items-center ">
 
 
             {/* btn-success cambia colore */}
@@ -89,7 +89,7 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav ms-auto">
+          <div className="navbar-nav ms-auto ">
             {user ? (
               <button className="btn btn-warning me-2" onClick={() => setUser(null)}>
                 LOG OUT
@@ -105,7 +105,7 @@ export default function Navbar() {
               </>
             )}
             { user ?
-            <button className="btn btn-primary" onClick={handleCartClick}>
+            <button className="btn btn-primary me-2 " onClick={handleCartClick}>
               Carrello
             </button> : <></>}
           </div>
@@ -114,7 +114,7 @@ export default function Navbar() {
       {isCartOpen && (
         <div
           style={{
-            position: "fixed",
+            position: "absolute",
             top: "50px",
             right: "10px",
             backgroundColor: "white",
@@ -129,10 +129,10 @@ export default function Navbar() {
                 (
                   <li key={index}>
                     {item.name} - {item.price}
-                    <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
-                    X</button></li>))}
+                    <button className="btn btn-sm btn-danger me-2 md-2  ml-4" onClick={() => removeFromCart(index)} style={{ fontSize: '0.65rem', padding: '0.2rem 0.5rem', marginLeft:'0.5rem' }}>
+                      X</button></li>))}
                     <p>TOT: {totalPrice(cartItems)}</p>
-                    <Link className="nav-link active btn btn-warning" aria-current="page" to="/deliverypage">
+                    <Link className="nav-link active btn btn-warning mt-2 " aria-current="page" to="/deliverypage">
                     BUY
                     </Link>
                 </ul>
