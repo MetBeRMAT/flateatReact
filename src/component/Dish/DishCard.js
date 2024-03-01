@@ -3,9 +3,8 @@ import { currentCart } from "../../App";
 import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import dishImage from "./cibo.jpg"; // Sostituisci con il percorso corretto dell'immagine
-// Sostituisci con il percorso corretto dell'immagine
-import { currentRestaurant } from "../../App";
+
+import foto from  "./poke.png"
 
 export default function DishCard(props)
 {
@@ -39,29 +38,45 @@ export default function DishCard(props)
 
 
     return (
-        <div className="col-md-3" style={{ marginLeft: "5%" }}>
-          <div className="card text-center mb-3" style={{ width: "17rem", marginLeft: "-15%", marginTop: "5%" }}>
-            <img src={dishImage} className="card-img-top" alt="Dish" />
-            <div className="card-body">
-              <div className="col-12">
-                <label htmlFor="quest" className="form-label h6 text-dark">
-                  Our sexy Dish# {props.id}
-                </label>
-              </div>
-              <div className="col-12">
-                <label htmlFor="quest" className="form-label l h6 text-dark">
-                  {props.name}
-                </label>
-                <p> Category: {props.category}</p>
-                <p> prezzo piatto: &euro;{props.price}</p>
-                <p> restaurant price: &euro;{props.restaurantprice}</p>
-                <p> prezzo distanza: &euro;{props.distancetot * props.restaurantprice}</p>
-                <button className="btn btn-primary " ref={refItem} onClick={addToCart} style={{marginLeft:"75%"}}>
-                  +
-                </button>
-              </div>
-            </div>
+        <body>
+
+          <main role="main">
+
+      {/* <section class="jumbotron text-center">
+          <div class="container">
+          <h1 class="jumbotron-heading">HO RISOLTO LOREEEEEE</h1>
+          <p class="lead text-muted">INTANTO VADO IN BAGNO</p>
+          <p>
+              <a href="#" class="btn btn-primary my-2">diteme voi</a>
+              <a href="#" class="btn btn-secondary my-2">te posso canta na canzone</a>
+          </p>
           </div>
-        </div>
+      </section> */}
+
+<div className="card card-container">
+    <img className="card-img-top" src={foto} alt="Card image cap" />
+      <div className="card-body bg-warning">
+        <h3 className="card-title">{props.name} 
+          <button type="button" className="btn btn-info" ref={refItem} onClick={addToCart}>
+            DETTAGLI
+          </button>
+        </h3>
+          <p className="card-text">Restaurant price: &euro;{props.restaurantprice}</p>
+          <p className="card-text">Prezzo distanza: </p>
+      <div className="d-flex justify-content-between align-items-center">
+          <button type="button" className="btn btn-danger" ref={refItem} onClick={addToCart}>
+            ORDINA ORA
+          </button>
+          <button type="button" className="btn btn-sm">
+            CONSEGNA: &euro;{props.distancetot * props.restaurantprice}
+          </button>
+          <button type="button" className="btn btn-success">
+            PREZZO: &euro;{props.price}
+          </button>
+      </div>
+      </div>
+</div>
+            </main>
+        </body>
       );
     };

@@ -1,5 +1,4 @@
 import { currentUser } from "../../App";
-
 import { useAtom } from "jotai";
 export default function Homepage()
 {
