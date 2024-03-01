@@ -36,13 +36,21 @@ export default function Navbar() {
             <img src={homeIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
           </Link>
           {user ? (
-            <Link
+            <><Link
               className="nav-link active btn btn-warning me-auto"
               aria-current="page"
               to="/restaurantlogged"
-            >     
+            >
               RESTAURANT
             </Link>
+            <Link
+              className="nav-link active btn btn-warning me-auto"
+              aria-current="page"
+              to="/deliverypage"
+            >
+              Delivery
+            </Link></>
+            
           ) : (
             <Link className="nav-link active btn btn-warning me-auto" aria-current="page" to="/restaurant">
               RESTAURANT
