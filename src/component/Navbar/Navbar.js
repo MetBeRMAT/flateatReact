@@ -8,6 +8,8 @@ import { currentCart } from "../../App";
 export default function Navbar() {
   const [user, setUser] = useAtom(currentUser);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [sum,setSum] = useState()
+  const [tot,setTot] = useState(0)
 
   const [cartItems, setCartItems] = useAtom(currentCart);
 
@@ -16,12 +18,30 @@ export default function Navbar() {
     setIsCartOpen(!isCartOpen);
   };
 
+  const addToCart = (product) => 
+  {
+      setCartItems([...cartItems, product]);
+  };
+
+
   const removeFromCart = (index) => 
   {
     const updatedCart = [...cartItems];
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
-  };       
+  }; 
+  
+  function totalPrice(cartItems)
+  {
+    let tot=0;
+
+    for(let i=0;i<cartItems.length;i++)
+      tot += cartItems[i].price;
+
+    return tot;
+  }
+
+
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
@@ -84,9 +104,10 @@ export default function Navbar() {
                 </Link>
               </>
             )}
+            { user ?
             <button className="btn btn-primary" onClick={handleCartClick}>
               Carrello
-            </button>
+            </button> : <></>}
           </div>
         </div>
       </div>
@@ -101,19 +122,22 @@ export default function Navbar() {
             border: "1px solid black",
           }}
         >
-          <h3>Carrello</h3>
-          <ul>
-            {cartItems && cartItems.map((item, index) => 
-            (
-              <li key={index}>
-                {item}
-                <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
-                  Rimuovi
-                </button>
-              </li>
-            ))}
-          </ul>
           
+            <h3>Carrello</h3>
+              <ul>
+                {cartItems && cartItems.map(({...item}, index) => 
+                (
+                  <li key={index}>
+                    {item.name} - {item.price}
+                    <button className="btn btn-danger" onClick={() => removeFromCart(index)}>
+                    X</button></li>))}
+                    <p>TOT: {totalPrice(cartItems)}</p>
+                    <Link className="nav-link active btn btn-warning" aria-current="page" to="">
+                    BUY
+                    </Link>
+                </ul>
+          
+                
         </div>
       )}
     </nav>

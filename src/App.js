@@ -17,7 +17,7 @@ import DeliveryPage from './component/Buy/DeliveryPage';
 
 
 export const currentUser = atom();
-export const currentCart = atom();
+export const currentCart = atom([]);
 
 
 function App() 
