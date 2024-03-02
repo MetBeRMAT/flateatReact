@@ -4,6 +4,8 @@ import { currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
 import { Link } from "react-router-dom";
+import loginIcon from "./login-icon.png";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export default function Navbar() 
 {
@@ -46,6 +48,47 @@ export default function Navbar()
   }
 
   return (
+//     <nav class="navbar navbar-expand-lg bg-body-tertiary">
+//   <div class="container-fluid">
+//     <a class="navbar-brand" href="#">Navbar</a>
+//     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+//       <span class="navbar-toggler-icon"></span>
+//     </button>
+//     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+//       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+//         <li class="nav-item">
+//           <a class="nav-link active" aria-current="page" href="#">Home</a>
+//         </li>
+//         <li class="nav-item">
+//           <a class="nav-link" href="#">Link</a>
+//         </li>
+//         <li className="nav-item dropdown">
+//           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#navbarDropdown" aria-expanded="false">
+//             <img src={loginIcon} alt="login" style={{ width: "30px", height: "30px" }}/>
+//           </a>
+//           <ul className="dropdown-menu" id="navbarDropdown">
+//             <li><a className="dropdown-item" href="#">Action</a></li>
+//             <li><a className="dropdown-item" href="#">Another action</a></li>
+//             <li><hr className="dropdown-divider" /></li>
+//             <li><a className="dropdown-item" href="#" onClick={() => setUser(null)}>Something else here</a></li>
+//           </ul>
+//         </li>
+//         <li class="nav-item">
+//           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+//         </li>
+//       </ul>
+//       <form class="d-flex" role="search">
+//         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+//         <button class="btn btn-outline-success" type="submit">Search</button>
+//       </form>
+//     </div>
+//   </div>
+// </nav>
+
+
+
+
+
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
       <div className="container-fluid">
         <div className="d-flex align-items-center">
@@ -80,20 +123,28 @@ export default function Navbar()
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ms-auto">
-            {user ? (
-              <button className="btn btn-warning me-2" onClick={() => setUser(null)}>
-                LOG OUT
-              </button>
-            ) : (
-              <>
-                <Link className="nav-link active btn btn-warning me-2" aria-current="page" to="/login">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item dropdown">
+                      <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#navbarDropdown" aria-expanded="false">
+                      <img src={loginIcon} alt="login" style={{ width: "30px", height: "30px" }}/>
+                    </a>
+                      <ul className="dropdown-menu" id="navbarDropdown">
+                        { user ? 
+                          <li><Link className="dropdown-item" to="/" onClick={() => setUser(null)}>Logout</Link></li>
+                                :
+                          <><li><Link className="dropdown-item" to="/login">Login</Link></li><li><Link className="dropdown-item" to="/register">Register</Link></li></>
+                        }
+                        
+                        
+                      </ul>
+                </li>
+                {/* <Link className="nav-link active btn btn-warning me-2" aria-current="page" to="/login">
                   LOGIN
                 </Link>
                 <Link className="nav-link active btn btn-warning" aria-current="page" to="/register">
                   REGISTER
-                </Link>
-              </>
-            )}
+                </Link> */}
+              </ul>
             { user ?
               <button className="btn btn-primary" onClick={handleCartClick}>
                 Carrello
