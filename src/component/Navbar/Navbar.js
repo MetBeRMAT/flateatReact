@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import loginIcon from "./login-icon.png";
 import logoutIcon from "./logout-icon.jpg";
 import carrelloIcon from "./carrello-icon.png";
+import logo from "./logo.png"
 
 export default function Navbar() 
 {
@@ -50,25 +51,24 @@ export default function Navbar()
   }
 
   return (
-    <nav className="navbar navbar-expand-lg sticky-top" style={{ height: "300px", backgroundImage: `url('https://www.focus.it/site_stored/imgs/0006/036/tipi-di-cibo.630x360.jpg')`, backgroundSize: 'cover' }}
-    >
+    <nav className="navbar navbar-expand-lg sticky-top" style={{height:"100px",backgroundColor:"white"}}>
       <div className="container-fluid">
         <div className="d-flex align-items-center">
-          <Link className="navbar-brand btn me-3 " to="/">
-            <img src={homeIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
+          <Link className="navbar-brand me-3 " to="/">
+            <img src={logo} alt="Home" style={{ width: "90px", height: "90px" }} />
           </Link>
           {user ? (
             <>
-              <Link  className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurantlogged" onClick={handleNavigation}>
-                RESTAURANT
+              <Link  className="nav-link active btn me-2 px-3" aria-current="page" to="/restaurantlogged" onClick={handleNavigation}>
+                <button type="button" class="btn btn-outline-dark">Restaurant</button>
               </Link>
-              <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/deliverypage">
-                Delivery 
+              <Link className="nav-link active btn me-2 px-3" aria-current="page" to="/deliverypage">
+                <button type="button" class="btn btn-outline-dark">Delivery</button> 
               </Link>
             </>
           ) : (
-            <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurant">
-              RESTAURANT
+            <Link className="nav-link active btn me-2 px-3" aria-current="page" to="/restaurant">
+              <button type="button" class="btn btn-outline-dark">Restaurant</button>
             </Link>
           )}
         </div>
@@ -86,13 +86,13 @@ export default function Navbar()
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ms-auto">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown pe-3">
                       <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#navbarDropdown" aria-expanded="false">
                       <img src={loginIcon} alt="login" style={{ width: "30px", height: "30px" }}/>
                     </a>
-                      <ul className="dropdown-menu dropdown-menu-end" id="navbarDropdown">
+                      <ul className="dropdown-menu dropdown-menu-end " id="navbarDropdown">
                         { user ? 
-                          <li><Link className="dropdown-item" to="/" onClick={() => setUser(null)}><img src={logoutIcon} alt="login" style={{width: "30px", height: "30px" }}/>Logout</Link></li>
+                          <li><Link className="dropdown-item" to="/" onClick={() => setUser(null)}><img src={logoutIcon} alt="logout" style={{width: "30px", height: "30px" }}/>Logout</Link></li>
                                 :
                           <>
                           <li><Link className="dropdown-item" to="/login">Login</Link></li>
@@ -103,7 +103,7 @@ export default function Navbar()
                 </li>
               </ul>
             { user ?
-              <button className="btn btn-primary" onClick={handleCartClick}>
+              <button className="btn" onClick={handleCartClick}>
                 <img src={carrelloIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
               </button> : <></>
             }
@@ -114,7 +114,7 @@ export default function Navbar()
         <div
           style={{
             position: "fixed",
-            top: "50px",
+            top: "90px",
             right: "10px", // Mantieni il carrello alla destra dello schermo
             backgroundColor: "#ffffcc", // Cambia lo sfondo del carrello in giallo chiaro
             padding: "40px",
