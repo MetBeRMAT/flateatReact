@@ -1,7 +1,7 @@
-import userEvent from "@testing-library/user-event";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { currentUser } from "../../App"
 import { useAtom } from "jotai";;
 
@@ -12,6 +12,7 @@ export default function Register()
     const [user, setUser] = useAtom(currentUser);
     const [log, setLog] = useState(false);
     const [show, setShow] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
 
     const [newUser, setNewUser] = useState({
         mail:"",
@@ -81,50 +82,60 @@ export default function Register()
             setShow(false);
     }
 
-    function f()
+          
+    const togglePasswordVisibility = () => 
     {
-        setLog(false);
-        setShow(true);
-    }
-    
-
-    return(
-        <>
-        <div class="container">
-                <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <h2 class="text-center mb-4">Registrati su GiasTEat</h2>
-                    <div class="form-group">
-                        <label for="guildName">Email: </label>
-                        <input type="text" ref={inEmail} class="form-control" id="guildName" name="guildName" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="text" ref={inPw} class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="number">Position X:</label>
-                        <input type="text" ref={inX} class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="number">Position Y:</label>
-                        <input type="text" ref={inY} class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="number">Phone Number:</label>
-                        <input type="text" ref={inNum} class="form-control"/>
-                    </div>
-                    <button class="btn btn-primary" onClick={checkRegister}> Register </button>
-                    <br></br>
-                    <button class="btn btn-primary" onClick={f}>Click me c:</button>
+          setShowPassword(!showPassword);
+    };
+      
+    return (
+        <div style={{ backgroundColor: "#333333", minHeight: "calc(100vh - 50px)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "-20px" }}>
+        <div className="container" style={{ width: "400px", backgroundColor: "#f0f0f0", padding: "20px", borderRadius: "8px" }}>
+            <div className="row justify-content-center">
+            <div className="col-md-12">
+                <h2 className="text-center mb-4">Registrati su Javeat</h2>
+                <div className="form-group">
+                <label htmlFor="guildName">Email</label>
+                <input type="text" ref={inEmail} className="form-control" id="guildName" name="guildName" required />
+                </div>
+                <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <div className="input-group">
+                    <input 
+                    type={showPassword ? "text" : "password"} 
+                    ref={inPw} 
+                    className="form-control" 
+                    required 
+                    />
+                    <button 
+                    className="btn btn-outline-secondary" 
+                    type="button" 
+                    onClick={togglePasswordVisibility}
+                    >
+                    {showPassword ? "Hide" : "Show"}
+                    </button>
                 </div>
                 </div>
+                <div className="form-group">
+                <label htmlFor="number">Position X</label>
+                <input type="text" ref={inX} className="form-control" />
+                </div>
+                <div className="form-group">
+                <label htmlFor="number">Position Y</label>
+                <input type="text" ref={inY} className="form-control" />
+                </div>
+                <div className="form-group">
+                <label htmlFor="number">Phone Number</label>
+                <input type="text" ref={inNum} className="form-control" />
+                </div>
+                <div className="form-group mt-3 text-center">
+                <Link className="nav-link active" aria-current="page" to="/">
+                    <button className="btn btn-primary rounded-pill px-3" onClick={checkRegister}> Register </button>
+                </Link>
+                </div>
+            </div>
+            </div>
         </div>
-        {
-            log ? <div>Registrazione avvenuta con successo</div> : 
-            show ? <p></p> :
-            <div>Registrazione errata</div>
-        }
-        </>
+        </div>
     );
 }
