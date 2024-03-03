@@ -16,6 +16,8 @@ export default function RestaurantDetail()
     const [menu, setMenu] = useState([]);
     const [categories, setCategories] = useState([]);
     const [ristoranteAttuale, setRistoranteAttuale] = useAtom(currentRestaurant);
+    
+    // const [menuItems, setThisShit] = useState([]);
 
     useEffect(
         ()=>
@@ -57,6 +59,29 @@ export default function RestaurantDetail()
         setCategories(uniqueCategory);
     }
 
+    // function showColCategories()        //'sta funzione ne grafica uno perchè al return esce, se qualcuno trova un modo per farla graficare dieci volte abbiamo le colonne
+    // {
+    //     for(let i = 0; i < menu.dishes.length; i++)
+    //     {
+    //         for(let k = 0; k < categories.length; k++)
+    //         {
+    //             if(categories[k] == menu.dishes[i].category)
+    //             {
+                    
+    //                 {<div>{menu.dishes[i].name}</div>}
+                
+    //             }
+    //         }
+    //     }
+    // }
+
+    // function showCategoryName(name)       //Questa voleva aiutare la funzione sopra ma non so come
+    // {
+    //     return(
+    //         <div>{name}</div>
+    //     );
+    // }
+
     return(
         <>
             <section className="jumbotron text-center">
@@ -78,10 +103,11 @@ export default function RestaurantDetail()
                         <div className="mb-3">
                             <h5 className="text-uppercase">Categorie:</h5>
                                 {categories && categories.map((c, index) => (
-                                <div key={index} className="text-muted">{c}</div>
+                                <div key={index} className="cols-2  g-4">{c}</div>
                                 ))}
                                 </div>
                         </div>
+
 
                 <div className="col-sm-9 " style={{width:"100%"}}>
                     <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -96,6 +122,8 @@ export default function RestaurantDetail()
                     </div>
                 </div>
 
+    
+
                 <div className="mt-4">
                     <button className="btn btn-primary" type="button">
                     <Link className="text-white" to="/restaurantlogged">
@@ -104,6 +132,8 @@ export default function RestaurantDetail()
                     </button>
                 </div>
                </div>
+
+               {/* {categories && showColCategories()} */}
 
         </>
     );

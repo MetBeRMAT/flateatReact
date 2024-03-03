@@ -145,10 +145,9 @@ export default function Homepage()
                 </main>
 
                 <footer class="text-muted">
-                <div class="container">
-                    <p>PER ALTRE PAGINE COME QUESTA, CONTATTATE I JAVENGERS!!!</p>
-                    <p class="float-right">
-                    <a href="#">TORNA SU</a>
+                <div class="container position-relative">
+                    <p >
+                    <a href="#" className="position-absolute top-100 start-0 translate-middle"><button className="btn" style={{width:"800%", backgroundColor:"violet"}}>BACK TO THE KITCHEN</button></a>
                     </p>
                 </div>
                 </footer>

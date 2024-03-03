@@ -75,9 +75,7 @@ export default function LoggedRestaurant()
         
         for(let i = 0; i < r.foodTypes.length; i++)
         {
-            // let food = r.foodTypes[i];
-            // if(f == food)
-            //     return true;
+
 
             for(let k = 0; k < foodArray.length; k++)
             {
@@ -107,26 +105,24 @@ export default function LoggedRestaurant()
 
       return(
             <>
-            <div className="row gy-5 p-1">
-                <div className="col-3 p-4 bg-secondary">
-                <div className="input-group mb-3">
-                    <div> Gentilmente, inserire i cibi con Lettera maiuscola e separati da uno spazio, grazie</div>
-                    <span className="input-group-text" id="basic-addon2">
-                    Tipo Cibo:
-                    </span>
+            <div className="row gy-5 p-1" >
+                <div className="col-3 p-4" style={{backgroundColor:"violet", height:"50%"}}>
+                <div className="input-group mb-3" syle={{backgroundColor:"violet"}}>
+                    <div > Search Multiple Foods by Spacing Them
                     <input name="type" ref={searchType} type="text"placeholder="Type"/>
+                    </div>
                 </div>
-                <label htmlFor="customRange3" className="form-label">
-                    Distanza Massima (km): 1414 ma Lorenzo non sa graficare la scritta vera
-                </label>
-                {/* <input type="range" ref={searchDistance} className="form-range" min={0} max={1414}/> */}
+                <div htmlFor="customRange3" className="form-label">
+                    Distanza Massima (km): 1414 
+                </div>
                 <input type="number" ref={searchDistance} />  
+                {/* <input type="range" ref={searchDistance} className="form-range" min={0} max={1414}/> */}
                 <br />
                 <br />
                     <button class="btn btn-primary" onClick={startSearch}> Search </button>
                 </div>
                 <div className="col cols-2 g-4" style={{marginTop:"1.2%"}}>
-                    {filtered.map(f => <RestaurantCard {...f} open={f.isOpen} distance={f.distance}/>)}
+                    {filtered.map(f => <RestaurantCard {...f} open={f.open} distance={f.distance}/>)}
                 </div>
             </div>
             </>

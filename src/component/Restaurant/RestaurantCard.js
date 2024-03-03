@@ -14,10 +14,10 @@ export default function RestaurantCard(props)
     return (
       <div className="card text-center text-bg-success  ">
         <div className="card-body text-bg-success">
-          <h5 style={{ fontFamily: "Lucida Handwriting,cursive" }} className="card-title text-bg-info"> {name} <br/>Restaurant</h5>
+        <h1 className="jumbotron-heading">{name}'s Restaurant</h1>
           <dl className="row">
-            <dt className="col-sm-9 text-start " style={{ fontFamily: "Times New Roman,Serif" }}>
-              Type of food:
+            <dt className="col-sm-9 text-start" style={{marginTop:"1%"}}>
+              TU NON HAI FAME?
               {foodTypes.map((f, index) => (
                 <div key={index} className="mb-2 pl-0">
                   <FoodCard name={f} />
@@ -27,20 +27,15 @@ export default function RestaurantCard(props)
                 </div>
               ))}
             </dt>
-            <dt className="col-sm-3 mt-2"> We are {open ? "Open :D" : "Closed :c"}
+            <dt className="col-sm-3 mt-2" > We are {open ? "Open :D" : "Closed :c"}
             {distance != null ? <div className=" bg-warning p-2"> We are {distance}flattometri away </div> : <></>}
             </dt>
           </dl>
         </div>
-        { user? 
-        <Link to={`/order/${id}`} className="btn btn-info position-absolute bottom-0 start-0 btn-danger">
-          Ordina ora
-        </Link> : <></>
-        }
         
         { user ?
-        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>Details</Link></button> :
-        <button class="btn btn-info position-absolute bottom-0 end-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id}>Details</Link></button>
+        <button style={{marginLeft:"4%"}} class="btn btn-info position-absolute bottom-0 start-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>More details</Link></button> :
+        <button style={{marginLeft:"4%"}}class="btn btn-info position-absolute bottom-0 start-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id}>More details</Link></button>
         }
       </div>
     );
@@ -55,7 +50,7 @@ export default function RestaurantCard(props)
                   <Card
             id={props.id} distance={props.distance}
             foodTypes={props.foodTypes}
-            open={props.isOpen}
+            open={props.open}
             name={props.name}
             addToCart={props.addToCart}
           />
