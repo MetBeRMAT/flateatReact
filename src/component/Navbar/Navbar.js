@@ -8,7 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import loginIcon from "./login-icon.png";
 import logoutIcon from "./logout-icon.jpg";
 import carrelloIcon from "./carrello-icon.png";
-import logo from "./logo.png"
+import logo from "./logo.jpg"
 
 export default function Navbar() 
 {
@@ -55,7 +55,7 @@ export default function Navbar()
       <div className="container-fluid">
         <div className="d-flex align-items-center">
           <Link className="navbar-brand me-3 " to="/">
-            <img src={logo} alt="Home" style={{ width: "90px", height: "90px" }} />
+            <img src={logo} alt="Home" style={{ width: "250px", height: "70px" }} />
           </Link>
           {user ? (
             <>
