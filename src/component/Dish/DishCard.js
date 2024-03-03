@@ -2,15 +2,12 @@ import { Link } from "react-router-dom";
 import { currentCart, currentRestaurant } from "../../App";
 import { useAtom } from "jotai";
 import { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-
 import foto from  "./poke.png"
 
 export default function DishCard(props)
 {
     const [cartItems, setCartItems] = useAtom(currentCart);
     const [restaurant,setRestaurant] = useAtom(currentRestaurant);
-
     // function addToCart()
     // {
     //     let clone = [cartItems];

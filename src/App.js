@@ -14,7 +14,7 @@ import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
 import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
 import DeliveryPage from './component/Buy/DeliveryPage';
 import CheckoutOrder from './component/Buy/CheckoutOrder';
-
+import { popper } from "@popperjs/core";
 
 
 export const currentUser = atom();
