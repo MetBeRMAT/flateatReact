@@ -115,7 +115,7 @@ export default function RestaurantDetail()
                         menu.dishes.map((m, index) => (
 
                         <div key={index} className="col">
-                            <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m} />
+                            <DishCard {...m} />
                         </div>
                         ))}
                     </div>
