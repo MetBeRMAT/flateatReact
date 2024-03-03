@@ -15,7 +15,7 @@ export default function CheckoutOrder()
     let notes = queryParameters.get("notes") 
     let orario = queryParameters.get("deliveryTime")
     
-    console.log(notes);
+    console.log(notes); //
     console.log(orario);
 
     const [delivery, setDelivery] = useState({
