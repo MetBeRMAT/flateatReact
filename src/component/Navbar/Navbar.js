@@ -4,6 +4,11 @@ import { currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
 import { Link } from "react-router-dom";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import loginIcon from "./login-icon.png";
+import logoutIcon from "./logout-icon.jpg";
+import carrelloIcon from "./carrello-icon.png";
+import logo from "./logo.jpg"
 
 export default function Navbar() 
 {
@@ -46,24 +51,24 @@ export default function Navbar()
   }
 
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "orange" }}>
+    <nav className="navbar navbar-expand-lg sticky-top" style={{height:"100px",backgroundColor:"white"}}>
       <div className="container-fluid">
         <div className="d-flex align-items-center">
-          <Link className="navbar-brand btn btn-success me-3 " to="/">
-            <img src={homeIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
+          <Link className="navbar-brand me-3 " to="/">
+            <img src={logo} alt="Home" style={{ width: "250px", height: "70px" }} />
           </Link>
           {user ? (
             <>
-              <Link  className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurantlogged" onClick={handleNavigation}>
-                RESTAURANT
+              <Link  className="nav-link active btn me-2 px-3" aria-current="page" to="/restaurantlogged" onClick={handleNavigation}>
+                <button type="button" class="btn btn-outline-dark">Restaurant</button>
               </Link>
-              <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/deliverypage">
-                Delivery 
+              <Link className="nav-link active btn me-2 px-3" aria-current="page" to="/deliverypage">
+                <button type="button" class="btn btn-outline-dark">Delivery</button> 
               </Link>
             </>
           ) : (
-            <Link className="nav-link active btn btn-warning me-2 px-3" aria-current="page" to="/restaurant">
-              RESTAURANT
+            <Link className="nav-link active btn me-2 px-3" aria-current="page" to="/restaurant">
+              <button type="button" class="btn btn-outline-dark">Restaurant</button>
             </Link>
           )}
         </div>
@@ -80,23 +85,26 @@ export default function Navbar()
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav ms-auto">
-            {user ? (
-              <button className="btn btn-warning me-2" onClick={() => setUser(null)}>
-                LOG OUT
-              </button>
-            ) : (
-              <>
-                <Link className="nav-link active btn btn-warning me-2" aria-current="page" to="/login">
-                  LOGIN
-                </Link>
-                <Link className="nav-link active btn btn-warning" aria-current="page" to="/register">
-                  REGISTER
-                </Link>
-              </>
-            )}
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item dropdown pe-3">
+                      <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-target="#navbarDropdown" aria-expanded="false">
+                      <img src={loginIcon} alt="login" style={{ width: "30px", height: "30px" }}/>
+                    </a>
+                      <ul className="dropdown-menu dropdown-menu-end " id="navbarDropdown">
+                        { user ? 
+                          <li><Link className="dropdown-item" to="/" onClick={() => setUser(null)}><img src={logoutIcon} alt="logout" style={{width: "30px", height: "30px" }}/>Logout</Link></li>
+                                :
+                          <>
+                          <li><Link className="dropdown-item" to="/login">Login</Link></li>
+                          <li><Link className="dropdown-item" to="/register">Register</Link></li>
+                          </>
+                        }
+                      </ul>
+                </li>
+              </ul>
             { user ?
-              <button className="btn btn-primary" onClick={handleCartClick}>
-                Carrello
+              <button className="btn" onClick={handleCartClick}>
+                <img src={carrelloIcon} alt="Home" style={{ width: "30px", height: "30px" }} />
               </button> : <></>
             }
           </div>
@@ -106,7 +114,7 @@ export default function Navbar()
         <div
           style={{
             position: "fixed",
-            top: "50px",
+            top: "90px",
             right: "10px", // Mantieni il carrello alla destra dello schermo
             backgroundColor: "#ffffcc", // Cambia lo sfondo del carrello in giallo chiaro
             padding: "40px",
