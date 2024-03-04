@@ -30,6 +30,7 @@ export default function RestaurantCard(props)
             <dt className="col-sm-3 mt-2" > We are {open ? "Open :D" : "Closed :c"}
             {distance != null ? <div className=" bg-warning p-2"> We are {distance}flattometri away </div> : <></>}
             </dt>
+            <button style={{marginLeft:"4%"}} class="btn btn-info position-absolute bottom-0 start-0" type="button"><Link class="nav-link" to={"/recensioni"}>Recensioni</Link></button>
           </dl>
         </div>
         
@@ -37,6 +38,8 @@ export default function RestaurantCard(props)
         <button style={{marginLeft:"4%"}} class="btn btn-info position-absolute bottom-0 start-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id+"/"+user.id}>More details</Link></button> :
         <button style={{marginLeft:"4%"}}class="btn btn-info position-absolute bottom-0 start-0" type="button"><Link class="nav-link" to={"/RestaurantDetail/"+id}>More details</Link></button>
         }
+
+        
       </div>
     );
   }
