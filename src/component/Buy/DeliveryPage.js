@@ -39,12 +39,14 @@ const DeliveryPage = () =>
 {
   const [deliveryTime, setDeliveryTime] = useState('');
   const [notes, setNotes] = useState('');
+  const [paymentMethod, setPayment] = useState('');
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const availableTimes = calculateAvailableTimes();
 
   let jsonParam = {
     notes: notes,
-    shippingTime: deliveryTime
+    shippingTime: deliveryTime,
+    paymentMethod: paymentMethod
   }
 
 
@@ -66,8 +68,10 @@ const DeliveryPage = () =>
         <Form.Group className="mb-3">
           <Form.Label>Note</Form.Label>
           <Form.Control as="textarea" rows={3} onChange={(e) => setNotes(e.target.value)} value={notes} />
+          <Form.Label>Payment Method</Form.Label>
+          <input type="text" class="form-control" value={paymentMethod} onChange={(e) => setPayment(e.target.value)}/>
         </Form.Group>
-        <Link className="btn btn-secondary" to={"/checkout?notes="+notes+"&"+"deliveryTime="+deliveryTime}>
+        <Link className="btn btn-secondary" to={"/checkout?notes="+notes+"&"+"deliveryTime="+deliveryTime+"&"+"paymentMethod="+paymentMethod}>
           Checkout 
         </Link> 
       </Form>

@@ -8,12 +8,7 @@ export default function DishCard(props)
 {
     const [cartItems, setCartItems] = useAtom(currentCart);
     const [restaurant,setRestaurant] = useAtom(currentRestaurant);
-    // function addToCart()
-    // {
-    //     let clone = [cartItems];
-    //     clone.push(refItem.current.value);
-    //     setCartItems(clone);
-    // }
+
     const addToCart = () =>
     {
         const newItem = 
@@ -22,41 +17,22 @@ export default function DishCard(props)
             name: props.name,
             category: props.category,
             price: props.price,
+            quantity: 1
         };
         setCartItems([...cartItems,newItem])
     }
 
     const refItem = useRef(null);
 
-    // const addToCart = (product) => 
-    // {
-    //     setCartItems([...cartItems, product]);
-    // };
-
-
     return (
         <body>
 
           <main role="main">
 
-      {/* <section class="jumbotron text-center">
-          <div class="container">
-          <h1 class="jumbotron-heading">HO RISOLTO LOREEEEEE</h1>
-          <p class="lead text-muted">INTANTO VADO IN BAGNO</p>
-          <p>
-              <a href="#" class="btn btn-primary my-2">diteme voi</a>
-              <a href="#" class="btn btn-secondary my-2">te posso canta na canzone</a>
-          </p>
-          </div>
-      </section> */}
-
 <div className="card card-container">
     <img className="card-img-top" src={foto} alt="Card image cap" />
       <div className="card-body bg-warning">
         <h3 className="card-title">{props.name} 
-          <button type="button" className="btn btn-info" ref={refItem} onClick={addToCart}>
-            DETTAGLI
-          </button>
         </h3>
           <p className="card-text">Restaurant price: &euro;{props.restaurantprice}</p>
           <p className="card-text">Prezzo distanza: </p>

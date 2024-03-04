@@ -16,20 +16,6 @@ const Cart = () => {
     setCartItems(updatedCart);
   };
 
-  const incrementQuantity = (index) => {
-    const updatedCart = [...cartItems];
-    updatedCart[index].quantity += 1;
-    setCartItems(updatedCart);
-  };
-
-  const decrementQuantity = (index) => {
-    const updatedCart = [...cartItems];
-    if (updatedCart[index].quantity > 1) {
-      updatedCart[index].quantity -= 1;
-      setCartItems(updatedCart);
-    }
-  };
-
   return (
     <div className="container mt-4">
       <div className="card">
@@ -44,7 +30,7 @@ const Cart = () => {
                   {item.name} <span className="badge bg-primary">{item.quantity}</span>
                 </div>
                 <div>
-                  <button className="btn btn-success btn-sm me-1" onClick={() => incrementQuantity(index)}>
+                  {/* <button className="btn btn-success btn-sm me-1" onClick={() => incrementQuantity(index)}>
                     +
                   </button>
                   <button className="btn btn-warning btn-sm me-1" onClick={() => decrementQuantity(index)}>
@@ -54,7 +40,7 @@ const Cart = () => {
                   <button className="btn btn-danger btn-sm custom-btn me-1" onClick={() => removeFromCart(index)}>
                
                     Rimuovi
-                  </button>
+                  </button> */}
                 </div>
               </li>
             ))}
