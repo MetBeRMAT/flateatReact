@@ -20,7 +20,7 @@ import { popper } from "@popperjs/core";
 export const currentUser = atom();
 export const currentCart = atom([]);
 export const currentRestaurant = atom();
-
+export const currentPrice = atom();
 
 function App() 
 {

@@ -71,7 +71,7 @@ export default function RestaurantDetail()
             {
                 if(categories[k] == menu.dishes[i].category)
                 {
-                    cat.push(<DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} name={menu.dishes[i].name} price={menu.dishes[i].price}/>)
+                    cat.push(<DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} name={menu.dishes[i].name} price={menu.dishes[i].price} id={menu.dishes[i].id}/>)
                 }
             }
             res.push(cat);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { currentCart, currentRestaurant, currentUser } from "../../App";
+import { currentCart, currentPrice, currentRestaurant, currentUser } from "../../App";
 import { useAtom } from 'jotai';
 import { useState } from "react";
 import { useLocation, useSearchParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ export default function CheckoutOrder()
     const [restaurant, setRestaurant] = useAtom(currentRestaurant);
     const [queryParameters] = useSearchParams();
     const [user, setUser] = useAtom(currentUser);
+    const [deliveryTotal, setTotalPrice] = useAtom(currentPrice)
 
     const [deliverySentBack, setSentBack] = useState([]);
 
@@ -24,64 +25,62 @@ export default function CheckoutOrder()
 
     const [delivery, setDelivery] = useState({
         distance:restaurant.distance,
-        expected_arrival:"",
+        expected_arrival: new Date(),
         notes:notes,
         paymenthMethod:pay,
         restaurant_id:restaurant.id,
         user_id:user.id
     });
 
-    function uniqueCategories(menuPar)
-    {
-        let names = cartItems.map(c => c.name);
-        let nameSet = new Set(names);
-        
-        let uniqNames = [...nameSet]; 
-
-        setNames(uniqNames);
-    }
-
 
     function startTransaction()
     {
+        let deliveryId;
         axios.post("/delivery", delivery).then(
             (response) =>
             {
                 setSentBack(response.data);
+                deliveryId = response.data.id;
+                let list = [...cartItems];
+        let countedItems = {};
+
+        for (let i = 0; i < cartItems.length; i++) 
+        {
+            let quantity = 0;
+            for (let k = 0; k < cartItems.length; k++) 
+            {
+                if (i !== k && cartItems[i].name === cartItems[k].name) 
+                {
+                    quantity++;
+                }
+            }
+            list[i].quantity = quantity + 1;
+            countedItems[cartItems[i].name] = true;
+        }
+
+        list = list.filter((item, index) => {
+            return cartItems.findIndex(d => d.name === item.name) === index;
+        });
+        console.log(list);
+        
+        
+        for(let j = 0; j < list.length; j++)
+        {
+            let dishToDelivery = {
+                dish_id: list[j].id,
+                delivery_id: deliveryId,
+                price: deliveryTotal,
+                quantity: list[j].quantity
+            }
+
+            console.log(dishToDelivery);
+
+            axios.post("/dishToDelivery", dishToDelivery)
+        }
             }
         )
 
-        let deliveryID = deliverySentBack.id
         
-        let mapOfDishes = {}
-
-
-        for(let i = 0; i < cartItems.length; i++)
-        {                                           
-            let quantity = 1;
-            for(let k = 0; k < cartItems.length; k++)
-            {
-                if(cartItems[i].name == cartItems[k].name)
-                quantity++;
-            }
-            mapOfDishes[cartItems[i].id] = quantity;
-        }
-
-        let mapSet = new Set(mapOfDishes);
-        let ordered = Array.from(mapSet).sort();
-        let orderedSet = new Set(ordered);
-
-        for(let counter = 0; orderedSet.length; counter++)
-        {
-            let dishToDelivery = [{
-                dish_id: orderedSet[counter][counter],
-                delivery_id: deliveryID,
-                price: 15,
-                quantity: orderedSet[counter][counter]
-            }] 
-
-            axios.post("/dishtodelivery", dishToDelivery)
-        }
 
     }
 
