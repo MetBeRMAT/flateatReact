@@ -64,13 +64,14 @@ export default function RestaurantDetail()
         let res = [];
         for(let k = 0; k < categories.length; k++)
         {
+
             let cat = [];
-            cat.push(<div>{categories[k]}</div>)
+            cat.push(<div className="">{categories[k]}</div>)
             for(let i = 0; i < menu.dishes.length; i++)
             {
                 if(categories[k] == menu.dishes[i].category)
                 {
-                    cat.push(<div>{menu.dishes[i].name}</div>)
+                    cat.push(            <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} name={menu.dishes[i].name}/>)
                 }
             }
             res.push(cat);
@@ -95,25 +96,19 @@ export default function RestaurantDetail()
                 <h2 className="text-center mb-4">Menù del Ristorante</h2>
                 
                 <div className="row">
-                    <div className="col-sm-3">
-                        <div className="mb-3">
-                            <h5 className="text-uppercase">Categorie:</h5>
-                                {categories && categories.map((c, index) => (
-                                <div key={index} className="cols-2  g-4">{c}</div>
-                                ))}
-                                </div>
-                        </div>
+                
 
 
                 <div className="col-sm-9 " style={{width:"100%"}}>
                     <div className="row row-cols-1 row-cols-md-3 g-4">
-                        {menu.dishes && 
+                    {categories && showColCategories()}
+                        {/* {menu.dishes && 
                         menu.dishes.map((m, index) => (
 
                         <div key={index} className="col">
                             <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m} />
                         </div>
-                        ))}
+                        ))} */}
                     </div>
                     </div>
                 </div>
@@ -129,7 +124,7 @@ export default function RestaurantDetail()
                 </div>
                </div>
 
-               {categories && showColCategories()}
+               
 
         </>
     );
