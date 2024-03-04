@@ -64,7 +64,7 @@ export default function CheckoutOrder()
                 {cartItems.map(i => <ShowCart {...i}/>)}
                 Total price: 
             </div>
-            <button className="btn btn-success" onClick="startTransaction">PAGAH</button>
+            <button className="btn btn-success" onClick={startTransaction}>PAGAH</button>
         </div>
         </>
     );
