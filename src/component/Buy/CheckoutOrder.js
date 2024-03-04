@@ -13,44 +13,78 @@ export default function CheckoutOrder()
 
     const [deliverySentBack, setSentBack] = useState([]);
 
+    const [uniqueNames, setNames] = useState([]);
+
     let notes = queryParameters.get("notes") 
     let orario = queryParameters.get("deliveryTime")
-    
+    let pay = queryParameters.get("paymentMethod")
+
     console.log(notes); //
     console.log(orario);
 
     const [delivery, setDelivery] = useState({
-        distance:"",
+        distance:restaurant.distance,
         expected_arrival:"",
-        notes:"",
-        paymenthMethod:"",
+        notes:notes,
+        paymenthMethod:pay,
         restaurant_id:restaurant.id,
         user_id:user.id
     });
 
-    // @PostMapping("/delivery")        DA AGGIUNGERE IN BACK-END
-    // public Delivery postDelivery(@RequestBody DeliveryDtoR dto)
-    // {
-    //     Delivery delivery = conv.dtoRToDelivery(dto);
-    //     return delivery;
-    // }
+    function uniqueCategories(menuPar)
+    {
+        let names = cartItems.map(c => c.name);
+        let nameSet = new Set(names);
+        
+        let uniqNames = [...nameSet]; 
 
-    // function startTransaction()
-    // {
-    //     axios.post("/delivery", delivery).then(
-    //         (response) =>
-    //         {
-    //             setSentBack(response.data);
-    //         }
-    //     ),
-    //     []
+        setNames(uniqNames);
+    }
 
-    //     for(let i = 0; i < cartItems.length; i++)   //UN DISHTODELIVERY per ogni DISH del carrello 
-    //     {                                           //ID della delivery -> deliverySentBack.id
-    //                                                 //ID Restaurant -> restaurant.id
-    //         axios.post("/dishtodelivery", UNDISHDELCARRELLO)
-    //     }
-    // }
+
+    function startTransaction()
+    {
+        axios.post("/delivery", delivery).then(
+            (response) =>
+            {
+                setSentBack(response.data);
+            }
+        )
+
+        let deliveryID = deliverySentBack.id
+        
+        let mapOfDishes = {}
+
+
+        for(let i = 0; i < cartItems.length; i++)
+        {                                           
+            let quantity = 1;
+            for(let k = 0; k < cartItems.length; k++)
+            {
+                if(cartItems[i].name == cartItems[k].name)
+                quantity++;
+            }
+            mapOfDishes[cartItems[i].id] = quantity;
+        }
+
+        let mapSet = new Set(mapOfDishes);
+        let ordered = Array.from(mapSet).sort();
+        let orderedSet = new Set(ordered);
+
+        for(let counter = 0; orderedSet.length; counter++)
+        {
+            let dishToDelivery = [{
+                dish_id: orderedSet[counter][counter],
+                delivery_id: deliveryID,
+                price: 15,
+                quantity: orderedSet[counter][counter]
+            }] 
+
+            axios.post("/dishtodelivery", dishToDelivery)
+        }
+
+    }
+
 
     return(
         <>
@@ -65,7 +99,7 @@ export default function CheckoutOrder()
                 {cartItems.map(i => <ShowCart {...i}/>)}
                 Total price: 
             </div>
-            <button className="btn btn-success" onClick="startTransaction">PAGAH</button>
+            <button className="btn btn-success" onClick={startTransaction}>PAGAH</button>
         </div>
         </>
     );

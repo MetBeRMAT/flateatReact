@@ -17,6 +17,7 @@ export default function DishCard(props)
             name: props.name,
             category: props.category,
             price: props.price,
+            quantity: 1
         };
         setCartItems([...cartItems,newItem])
     }
@@ -32,9 +33,6 @@ export default function DishCard(props)
     <img className="card-img-top" src={foto} alt="Card image cap" />
       <div className="card-body bg-warning">
         <h3 className="card-title">{props.name} 
-          <button type="button" className="btn btn-info" ref={refItem} onClick={addToCart}>
-            DETTAGLI
-          </button>
         </h3>
           <p className="card-text">Restaurant price: &euro;{props.restaurantprice}</p>
           <p className="card-text">Prezzo distanza: </p>
