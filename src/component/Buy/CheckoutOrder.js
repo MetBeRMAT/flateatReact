@@ -1,3 +1,4 @@
+import axios from "axios";
 import { currentCart, currentRestaurant, currentUser } from "../../App";
 import { useAtom } from 'jotai';
 import { useState } from "react";
@@ -34,22 +35,22 @@ export default function CheckoutOrder()
     //     return delivery;
     // }
 
-    function startTransaction()
-    {
-        axios.post("/delivery", delivery).then(
-            (response) =>
-            {
-                setSentBack(response.data);
-            }
-        ),
-        []
+    // function startTransaction()
+    // {
+    //     axios.post("/delivery", delivery).then(
+    //         (response) =>
+    //         {
+    //             setSentBack(response.data);
+    //         }
+    //     ),
+    //     []
 
-        for(let i = 0; i < cartItems.length; i++)   //UN DISHTODELIVERY per ogni DISH del carrello 
-        {                                           //ID della delivery -> deliverySentBack.id
-                                                    //ID Restaurant -> restaurant.id
-            axios.post("/dishtodelivery", UNDISHDELCARRELLO)
-        }
-    }
+    //     for(let i = 0; i < cartItems.length; i++)   //UN DISHTODELIVERY per ogni DISH del carrello 
+    //     {                                           //ID della delivery -> deliverySentBack.id
+    //                                                 //ID Restaurant -> restaurant.id
+    //         axios.post("/dishtodelivery", UNDISHDELCARRELLO)
+    //     }
+    // }
 
     return(
         <>

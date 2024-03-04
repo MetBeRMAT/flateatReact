@@ -59,28 +59,24 @@ export default function RestaurantDetail()
         setCategories(uniqueCategory);
     }
 
-    // function showColCategories()        //'sta funzione ne grafica uno perchè al return esce, se qualcuno trova un modo per farla graficare dieci volte abbiamo le colonne
-    // {
-    //     for(let i = 0; i < menu.dishes.length; i++)
-    //     {
-    //         for(let k = 0; k < categories.length; k++)
-    //         {
-    //             if(categories[k] == menu.dishes[i].category)
-    //             {
-                    
-    //                 {<div>{menu.dishes[i].name}</div>}
-                
-    //             }
-    //         }
-    //     }
-    // }
-
-    // function showCategoryName(name)       //Questa voleva aiutare la funzione sopra ma non so come
-    // {
-    //     return(
-    //         <div>{name}</div>
-    //     );
-    // }
+    function showColCategories()       
+    {
+        let res = [];
+        for(let k = 0; k < categories.length; k++)
+        {
+            let cat = [];
+            cat.push(<div>{categories[k]}</div>)
+            for(let i = 0; i < menu.dishes.length; i++)
+            {
+                if(categories[k] == menu.dishes[i].category)
+                {
+                    cat.push(<div>{menu.dishes[i].name}</div>)
+                }
+            }
+            res.push(cat);
+        }
+        return res;
+    }
 
     return(
         <>
@@ -133,7 +129,7 @@ export default function RestaurantDetail()
                 </div>
                </div>
 
-               {/* {categories && showColCategories()} */}
+               {categories && showColCategories()}
 
         </>
     );
