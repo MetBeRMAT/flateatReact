@@ -39,17 +39,6 @@ export default function DishCard(props)
 
           <main role="main">
 
-      {/* <section class="jumbotron text-center">
-          <div class="container">
-          <h1 class="jumbotron-heading">HO RISOLTO LOREEEEEE</h1>
-          <p class="lead text-muted">INTANTO VADO IN BAGNO</p>
-          <p>
-              <a href="#" class="btn btn-primary my-2">diteme voi</a>
-              <a href="#" class="btn btn-secondary my-2">te posso canta na canzone</a>
-          </p>
-          </div>
-      </section> */}
-
 <div className="card card-container">
     <img className="card-img-top" src={foto} alt="Card image cap" />
       <div className="card-body bg-warning">
