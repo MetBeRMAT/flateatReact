@@ -68,28 +68,26 @@ export default function RestaurantDetail()
         setSelectedCategory(null);
     }
 
-    // function showColCategories()        //'sta funzione ne grafica uno perchè al return esce, se qualcuno trova un modo per farla graficare dieci volte abbiamo le colonne
-    // {
-    //     for(let i = 0; i < menu.dishes.length; i++)
-    //     {
-    //         for(let k = 0; k < categories.length; k++)
-    //         {
-    //             if(categories[k] == menu.dishes[i].category)
-    //             {
-                    
-    //                 {<div>{menu.dishes[i].name}</div>}
-                
-    //             }
-    //         }
-    //     }
-    // }
+ 
+    function showColCategories()       
+    {
+        let res = [];
+        for(let k = 0; k < categories.length; k++)
+        {
 
-    // function showCategoryName(name)       //Questa voleva aiutare la funzione sopra ma non so come
-    // {
-    //     return(
-    //         <div>{name}</div>
-    //     );
-    // }
+            let cat = [];
+            cat.push(<div className="">{categories[k]}</div>)
+            for(let i = 0; i < menu.dishes.length; i++)
+            {
+                if(categories[k] == menu.dishes[i].category)
+                {
+                    cat.push(<DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} name={menu.dishes[i].name} price={menu.dishes[i].price} id={menu.dishes[i].id}/>)
+                }
+            }
+            res.push(cat);
+        }
+        return res;
+    }
 
     return(
         <>
@@ -108,6 +106,7 @@ export default function RestaurantDetail()
                 <h2 className="text-center mb-4">Menù del Ristorante</h2>
                 
                 <div className="row">
+
                     <div className="col-sm-15">
                         <h5 className="text-uppercase">Categorie:</h5>
                         <div style={{ display: 'flex', flexWrap: 'wrap', width:'106%'}}>
@@ -126,8 +125,6 @@ export default function RestaurantDetail()
                             ))}
                         </div>                            
                     </div>
-
-                    
 
                     <div className="col-sm-9" style={{ width: "100%" }}>
                         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -152,8 +149,6 @@ export default function RestaurantDetail()
                     </button>
                 </div>
                </div>
-            
-               {/* {categories && showColCategories()} */}
 
         </>
     );

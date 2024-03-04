@@ -50,7 +50,7 @@ export default function RestaurantCard(props)
     </div>
   );
 }
-  
+ 
 
     function CardGrid() 
     {

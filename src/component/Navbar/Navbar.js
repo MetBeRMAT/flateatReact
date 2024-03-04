@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAtom } from "jotai";
-import { currentRestaurant, currentUser } from "../../App";
+import { currentPrice, currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function Navbar()
 
   const [cartItems, setCartItems] = useAtom(currentCart);
   const [restaurant,setRestaurant] = useAtom(currentRestaurant);
-
+  const [t, setTotalPrice] = useAtom(currentPrice);
   
   const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
@@ -35,10 +35,26 @@ export default function Navbar()
     setCartItems(updatedCart);
   }; 
 
+  const incrementQuantity = (index) => {
+    const updatedCart = [...cartItems];
+    updatedCart[index].quantity += 1;
+    setCartItems(updatedCart);
+    console.log(updatedCart.quantity)
+  };
+
+  const decrementQuantity = (index) => {
+    const updatedCart = [...cartItems];
+    if (updatedCart[index].quantity > 1) {
+      updatedCart[index].quantity -= 1;
+      setCartItems(updatedCart);
+    }
+  };
+
   function totalPrice(cartItems) {
     let tot = 0;
     for (let i = 0; i < cartItems.length; i++)
       tot += cartItems[i].price;
+    setTotalPrice(tot);
     return tot;
   }
 
@@ -130,7 +146,10 @@ export default function Navbar()
                   <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
                     X
                   </button>
-                  <span style={{ fontSize: "12px" }}>{item.name}</span> {/* Riduci la dimensione del testo dei pasti */}
+                  <button className="btn btn-primary" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => incrementQuantity(index)}>
+                    +
+                  </button>
+                  {console.log(cartItems)}
                 </li>
               ))}
           </ul>

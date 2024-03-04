@@ -1,4 +1,6 @@
-{/*import { currentCart, currentRestaurant, currentUser } from "../../App";
+import axios from "axios";
+import { currentCart, currentPrice, currentRestaurant, currentUser } from "../../App";
+
 import { useAtom } from 'jotai';
 import { useState } from "react";
 import { useLocation, useSearchParams } from 'react-router-dom';
@@ -9,47 +11,80 @@ export default function CheckoutOrder()
     const [restaurant, setRestaurant] = useAtom(currentRestaurant);
     const [queryParameters] = useSearchParams();
     const [user, setUser] = useAtom(currentUser);
+    const [deliveryTotal, setTotalPrice] = useAtom(currentPrice)
 
     const [deliverySentBack, setSentBack] = useState([]);
 
+    const [uniqueNames, setNames] = useState([]);
+
     let notes = queryParameters.get("notes") 
     let orario = queryParameters.get("deliveryTime")
-    
+    let pay = queryParameters.get("paymentMethod")
+
     console.log(notes); //
     console.log(orario);
 
     const [delivery, setDelivery] = useState({
-        distance:"",
-        expected_arrival:"",
-        notes:"",
-        paymenthMethod:"",
+        distance:restaurant.distance,
+        expected_arrival: new Date(),
+        notes:notes,
+        paymenthMethod:pay,
         restaurant_id:restaurant.id,
         user_id:user.id
     });
 
-    // @PostMapping("/delivery")        DA AGGIUNGERE IN BACK-END
-    // public Delivery postDelivery(@RequestBody DeliveryDtoR dto)
-    // {
-    //     Delivery delivery = conv.dtoRToDelivery(dto);
-    //     return delivery;
-    // }
 
     function startTransaction()
     {
+        let deliveryId;
         axios.post("/delivery", delivery).then(
             (response) =>
             {
                 setSentBack(response.data);
-            }
-        ),
-        []
+                deliveryId = response.data.id;
+                let list = [...cartItems];
+        let countedItems = {};
 
-        for(let i = 0; i < cartItems.length; i++)   //UN DISHTODELIVERY per ogni DISH del carrello 
-        {                                           //ID della delivery -> deliverySentBack.id
-                                                    //ID Restaurant -> restaurant.id
-            axios.post("/dishtodelivery", UNDISHDELCARRELLO)
+        for (let i = 0; i < cartItems.length; i++) 
+        {
+            let quantity = 0;
+            for (let k = 0; k < cartItems.length; k++) 
+            {
+                if (i !== k && cartItems[i].name === cartItems[k].name) 
+                {
+                    quantity++;
+                }
+            }
+            list[i].quantity = quantity + 1;
+            countedItems[cartItems[i].name] = true;
         }
+
+        list = list.filter((item, index) => {
+            return cartItems.findIndex(d => d.name === item.name) === index;
+        });
+        console.log(list);
+        
+        
+        for(let j = 0; j < list.length; j++)
+        {
+            let dishToDelivery = {
+                dish_id: list[j].id,
+                delivery_id: deliveryId,
+                price: deliveryTotal,
+                quantity: list[j].quantity
+            }
+
+            console.log(dishToDelivery);
+
+            axios.post("/dishToDelivery", dishToDelivery)
+        }
+            }
+        )
+
+        
+
     }
+
 
     return(
         <>
