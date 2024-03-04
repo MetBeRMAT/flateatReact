@@ -1,5 +1,6 @@
 import axios from "axios";
 import { currentCart, currentPrice, currentRestaurant, currentUser } from "../../App";
+
 import { useAtom } from 'jotai';
 import { useState } from "react";
 import { useLocation, useSearchParams } from 'react-router-dom';
@@ -112,3 +113,4 @@ export default function CheckoutOrder()
         )
     }
 }
+*/}
