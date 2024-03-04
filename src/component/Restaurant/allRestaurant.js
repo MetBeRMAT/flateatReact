@@ -78,7 +78,7 @@ export default function AllRestaurants()
         <button class="btn btn-primary" onClick={startSearch}> Search </button>
         </div>
         <div className="col-9">
-          <div className="row row-cols-2 g-4" style={{marginTop:"0%"}}>
+          <div className="row row-cols-3 g-4" style={{marginTop:"0%"}}>
              {filtered.map(f => <RestaurantCard {...f} />)}
           </div>
         </div>
