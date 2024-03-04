@@ -15,12 +15,14 @@ import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLo
 import DeliveryPage from './component/Buy/DeliveryPage';
 import CheckoutOrder from './component/Buy/CheckoutOrder';
 import { popper } from "@popperjs/core";
+import RestaurantCard from './component/Restaurant/RestaurantCard';
+import Recensioni from './component/Restaurant/Recensioni';
 
 
 export const currentUser = atom();
 export const currentCart = atom([]);
 export const currentRestaurant = atom();
-
+export const currentPrice = atom();
 
 function App() 
 {
@@ -48,6 +50,7 @@ function App()
             <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
             <Route path='cart' element={<Cart />} />
             <Route path='checkout' element={<CheckoutOrder/>}> </Route>
+            <Route path = 'recensioni' element={<Recensioni />}> </Route>
 
           </Routes>
       </BrowserRouter>

@@ -16,6 +16,7 @@ export default function RestaurantDetail()
     const [menu, setMenu] = useState([]);
     const [categories, setCategories] = useState([]);
     const [ristoranteAttuale, setRistoranteAttuale] = useAtom(currentRestaurant);
+    const [selectedCategory, setSelectedCategory] = useState(null);
     
     // const [menuItems, setThisShit] = useState([]);
 
@@ -59,6 +60,15 @@ export default function RestaurantDetail()
         setCategories(uniqueCategory);
     }
 
+    function handleCategoryClick(category) {
+        setSelectedCategory(category);
+    }
+
+    function resetFilters() {
+        setSelectedCategory(null);
+    }
+
+ 
     function showColCategories()       
     {
         let res = [];
@@ -71,7 +81,7 @@ export default function RestaurantDetail()
             {
                 if(categories[k] == menu.dishes[i].category)
                 {
-                    cat.push(            <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} name={menu.dishes[i].name}/>)
+                    cat.push(<DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} name={menu.dishes[i].name} price={menu.dishes[i].price} id={menu.dishes[i].id}/>)
                 }
             }
             res.push(cat);
@@ -96,24 +106,40 @@ export default function RestaurantDetail()
                 <h2 className="text-center mb-4">Menù del Ristorante</h2>
                 
                 <div className="row">
-                
 
-
-                <div className="col-sm-9 " style={{width:"100%"}}>
-                    <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {categories && showColCategories()}
-                        {/* {menu.dishes && 
-                        menu.dishes.map((m, index) => (
-
-                        <div key={index} className="col">
-                            <DishCard {...m} />
-                        </div>
-                        ))} */}
+                    <div className="col-sm-15">
+                        <h5 className="text-uppercase">Categorie:</h5>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', width:'106%'}}>
+                            <button className="btn btn-bg btn-primary" type="button" onClick={resetFilters}>
+                                Reset Filtri
+                            </button>   
+                            {categories && categories.map((c, index) => (
+                                <div
+                                    key={index}
+                                    className={`col-sm-2 ${selectedCategory === c ? 'selected-category' : ''}`}  
+                                    style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '5px', margin: '5px' }}
+                                    onClick={() => handleCategoryClick(c)}
+                                >
+                                    {c}
+                                </div>
+                            ))}
+                        </div>                            
                     </div>
+
+                    <div className="col-sm-9" style={{ width: "100%" }}>
+                        <div className="row row-cols-1 row-cols-md-3 g-4">
+                            {menu.dishes &&
+                                menu.dishes
+                                    .filter((dish) => !selectedCategory || dish.category === selectedCategory) // Filtra i piatti x categoria
+                                    .map((m, index) => (
+                                        <div key={index} className="col">
+                                            <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m} />
+                                        </div>
+                                    ))}
+                        </div>
                     </div>
                 </div>
-
-    
+                
 
                 <div className="mt-4">
                     <button className="btn btn-primary" type="button">
@@ -123,8 +149,6 @@ export default function RestaurantDetail()
                     </button>
                 </div>
                </div>
-
-               
 
         </>
     );
