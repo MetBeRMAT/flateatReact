@@ -7,7 +7,7 @@ export default function RestaurantCard(props)
 {
   const [user] = useAtom(currentUser);
 
-  function Card({ foodTypes, open, name, distance, restaurantprice}) 
+  function Card({ foodTypes, open, name, distance, restaurantprice, average}) 
   {
     return (
       <div className="card mb-4" style={{ width: "100%", height: "100%", backgroundColor: '#fff', boxShadow: '10px 8px 8px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
@@ -43,6 +43,12 @@ export default function RestaurantCard(props)
       </h3>
       </>
     )}
+    <div className="status-info" style={{ position: 'absolute', top: '155px', left: '10px', backgroundColor: 'rgba(255, 255, 255, 1)', padding: '10px', borderRadius: '50px' }}>
+      <h3>
+        {average} ★
+        {console.log(average)}
+      </h3>
+    </div >
       <div className="action-buttons" style={{ position: 'absolute', bottom: '10px', right: '10px', textAlign: 'right' }}>
         <button type="button" className="btn">
           {user ? 
@@ -69,6 +75,7 @@ export default function RestaurantCard(props)
             name={props.name}
             addToCart={props.addToCart}
             restaurantprice={props.restaurantprice}
+            average={props.average}
           />
         </div>
       </div>
