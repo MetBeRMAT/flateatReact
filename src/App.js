@@ -16,12 +16,14 @@ import DeliveryPage from './component/Buy/DeliveryPage';
 import CheckoutOrder from './component/Buy/CheckoutOrder';
 import { popper } from "@popperjs/core";
 import ReviewPage from './component/Review/ReviewPage';
+import RestaurantCard from './component/Restaurant/RestaurantCard';
+
 
 
 export const currentUser = atom();
 export const currentCart = atom([]);
 export const currentRestaurant = atom();
-
+export const currentPrice = atom();
 
 function App() 
 {
@@ -50,6 +52,7 @@ function App()
             <Route path='cart' element={<Cart />} />
             <Route path='checkout' element={<CheckoutOrder/>}> </Route>            
             <Route path='reviewpage' element={<ReviewPage/>}> </Route>
+
 
           </Routes>
       </BrowserRouter>

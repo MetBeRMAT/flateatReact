@@ -18,25 +18,44 @@ export default function RestaurantCard(props) {
           alt="Restaurant Image"
           style={{ height: "200px", objectFit: "cover" }}
         />
-        <div className="card-body bg-warning">
-          <div className="restaurant-info">
-            <h1 className="card-title">{name}'s Restaurant</h1>
-            <h3 className="card-text">{foodTypes}</h3>
-          </div>
-          <div className="status-info">
-            <h3>
-              Status: {open ? "OPEN :D" : "CLOSED :c"}
-            </h3>
-            <h3>
-              {distance != null ? (
-                <h3>
-                  We are {distance} flattometri away
-                </h3>
-              ) : (
-                <></>
-              )}
-            </h3>
-          </div>
+
+      <div className="card-body bg-warning">
+  <div className="restaurant-info">
+    <h1 className="card-title">{name}'s Restaurant</h1>
+    <h3 className="card-text">{foodTypes}</h3>
+  </div>
+  <div className="status-info">
+    <h3>
+      Status: {open ? "OPEN :D" : "CLOSED :c"}
+    </h3>
+    <h3> 
+      {distance != null ? (
+        <h3>
+          We are {distance} flattometri away
+        </h3>
+      ) : (
+        <></>
+      )}
+    </h3>
+  </div>
+  <div className="action-buttons">
+    <button type="button" className="btn btn-danger">
+      <Link className="nav-link" to={`/RestaurantDetail/${props.id}/${user.id}`}>
+        More details
+      </Link>
+    </button>
+  </div>
+</div>
+
+    </div>
+  );
+}
+ 
+
+    function CardGrid() 
+    {
+        return (
+
 
           <div className="action-buttons">
             <div className="row">
