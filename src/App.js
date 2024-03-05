@@ -7,7 +7,7 @@ import Homepage from './component/Homepage/Homepage';
 import Login from './component/User/Login';
 import Navbar from './component/Navbar/Navbar';
 import Register from './component/User/Register';
-import AllRestaurants from './component/Restaurant/allRestaurant';
+import AllRestaurant from './component/Restaurant/allRestaurant';
 import RestaurantDetail from './component/Restaurant/RestaurantDetail';
 import Cart from './component/Cart/Cart';
 import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
@@ -41,7 +41,7 @@ function App()
 
             <Route index element={<Homepage />}></Route>
             <Route path='login' element={<Login />}> </Route>
-            <Route path='restaurant' element={<AllRestaurants />}> </Route>
+            <Route path='restaurant' element={<AllRestaurant />}> </Route>
             {/* <Route index element={<Cart />}></Route> */}
             <Route path='deliverypage' element={<DeliveryPage/>}> </Route>
             
