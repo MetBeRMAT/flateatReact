@@ -109,7 +109,7 @@ export default function RestaurantDetail()
                 
                 <div className="row">
                     <div className="col-sm-15">
-                        <h5 className="text-uppercase">Categorie:</h5>
+                        <h5 className="text-uppercase">Categories:</h5>
                         <div style={{ display: 'flex', flexWrap: 'wrap', width:'106%'}}>
                             <button className="btn btn-bg btn-primary" type="button" onClick={resetFilters}>
                                 Reset Filtri

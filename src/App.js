@@ -15,6 +15,7 @@ import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLo
 import DeliveryPage from './component/Buy/DeliveryPage';
 import CheckoutOrder from './component/Buy/CheckoutOrder';
 import { popper } from "@popperjs/core";
+import ReviewPage from './component/Review/ReviewPage';
 
 
 export const currentUser = atom();
@@ -47,7 +48,8 @@ function App()
             <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
             <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
             <Route path='cart' element={<Cart />} />
-            <Route path='checkout' element={<CheckoutOrder/>}> </Route>
+            <Route path='checkout' element={<CheckoutOrder/>}> </Route>            
+            <Route path='reviewpage' element={<ReviewPage/>}> </Route>
 
           </Routes>
       </BrowserRouter>
