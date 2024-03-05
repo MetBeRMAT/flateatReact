@@ -71,8 +71,6 @@ export default function RestaurantCard(props) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
     );
   }
 
