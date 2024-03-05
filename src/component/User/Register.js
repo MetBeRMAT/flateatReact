@@ -50,7 +50,7 @@ export default function Register()
                     positionY:""
                 })
             }
-        ).then(navigate("/restaurantlogged"))
+        ).then(navigate("/"))
     }
 
     function checkRegister()
