@@ -6,19 +6,19 @@ import { currentUser } from "../../App";
 import RestaurantDetail from "./RestaurantDetail";
 
 
-export default function RestaurantCard(props) 
-{
+export default function RestaurantCard(props) {
   const [user, setUser] = useAtom(currentUser);
 
-  function Card({ foodTypes, open, name, distance, addToCart,id}) {
+  function Card({ foodTypes, open, name, distance, addToCart, id }) {
     return (
       <div className="card mb-4" style={{ width: "100%", height: "100%" }}>
-        <img 
-            className="card-img-top" 
-            src={"https://citynews-romatoday.stgy.ovh/~media/horizontal-mid/52295577773865/unnamed-2020-07-27t134402-606-2.jpg"} 
-            alt="Restaurant Image" 
-            style={{ height: "200px", objectFit: "cover" }}
+        <img
+          className="card-img-top"
+          src={"https://citynews-romatoday.stgy.ovh/~media/horizontal-mid/52295577773865/unnamed-2020-07-27t134402-606-2.jpg"}
+          alt="Restaurant Image"
+          style={{ height: "200px", objectFit: "cover" }}
         />
+
       <div className="card-body bg-warning">
   <div className="restaurant-info">
     <h1 className="card-title">{name}'s Restaurant</h1>
@@ -56,19 +56,41 @@ export default function RestaurantCard(props)
     {
         return (
 
-        <div className="row justify-content-center mt-4">
-          <div className="col">
-              <Card
-                id={props.id} distance={props.distance}
-                foodTypes={props.foodTypes}
-                open={props.open}
-                name={props.name}
-                addToCart={props.addToCart}
-              />
+
+          <div className="action-buttons">
+            <div className="row">
+              <div className="col-6">
+                <Link className="btn btn-danger" to={`/RestaurantDetail/${props.id}/${user.id}`}>
+                  More details
+                </Link>
+              </div>
+              <div className="col-6 d-flex justify-content-end">
+                <Link className="btn btn-success" to="/reviewpage">
+                  Reviews
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-        );
-    }
+      </div>
+    );
+  }
+
+  function CardGrid() {
+    return (
+      <div className="row justify-content-center mt-4">
+        <div className="col">
+          <Card
+            id={props.id} distance={props.distance}
+            foodTypes={props.foodTypes}
+            open={props.open}
+            name={props.name}
+            addToCart={props.addToCart}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
