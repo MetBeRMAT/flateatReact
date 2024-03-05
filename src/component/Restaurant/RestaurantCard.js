@@ -39,25 +39,6 @@ export default function RestaurantCard(props) {
     </h3>
   </div>
   <div className="action-buttons">
-    <button type="button" className="btn btn-danger">
-      <Link className="nav-link" to={`/RestaurantDetail/${props.id}/${user.id}`}>
-        More details
-      </Link>
-    </button>
-  </div>
-</div>
-
-    </div>
-  );
-}
- 
-
-    function CardGrid() 
-    {
-        return (
-
-
-          <div className="action-buttons">
             <div className="row">
               <div className="col-6">
                 <Link className="btn btn-danger" to={`/RestaurantDetail/${props.id}/${user.id}`}>
@@ -71,8 +52,11 @@ export default function RestaurantCard(props) {
               </div>
             </div>
           </div>
-    );
-  }
+  </div>
+</div>
+
+  );
+}
 
   function CardGrid() {
     return (
