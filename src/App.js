@@ -51,7 +51,7 @@ function App()
             <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
             <Route path='cart' element={<Cart />} />
             <Route path='checkout' element={<CheckoutOrder/>}> </Route>            
-            <Route path='reviewpage' element={<ReviewPage/>}> </Route>
+            <Route path='reviewpage/:restaurantId/:userId' element={<ReviewPage/>}> </Route>
 
 
           </Routes>
