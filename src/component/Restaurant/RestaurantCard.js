@@ -46,7 +46,7 @@ export default function RestaurantCard(props) {
                 </Link>
               </div>
               <div className="col-6 d-flex justify-content-end">
-                <Link className="btn btn-success" to="/reviewpage">
+                <Link className="btn btn-success" to={`/reviewpage/${props.id}/${user.id}`}>
                   Reviews
                 </Link>
               </div>

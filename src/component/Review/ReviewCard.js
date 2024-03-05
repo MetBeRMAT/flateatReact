@@ -1,10 +1,23 @@
 import React from 'react';
+import { currentRestaurant, currentUser } from '../../App';
+import { atom, useAtom } from 'jotai';
 
-export default function ReviewCard({ score, comment }) {
+export default function ReviewCard({ score, comment, userName }) {
+  
+const [restaurant, setRestaurant] = useAtom(currentRestaurant);
+const [user, setUser] = useAtom(currentUser);
+
   return (
-    <div className="review-card">
-      <p className="review-score">Score: {score}</p>
-      <p className="review-comment">Comment: {comment}</p>
-    </div>
+      <div className="card">
+        <div className="card-header">
+          <h1 classNameName="review-score">Score: {score}</h1>
+        </div>
+        <div className="card-body">
+          <blockquote className="blockquote mb-0">
+            <p classNameName="review-comment">{comment}</p>
+            <footer className="blockquote-footer">User:  </footer>
+          </blockquote>
+        </div>
+      </div>
   );
 }
