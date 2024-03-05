@@ -30,22 +30,6 @@ export default function LoggedRestaurant() {
     const searchType = useRef(null);
     const searchDistance = useRef(null);
 
-    function calcDistance(restaurant, maxDistance) {
-        if (maxDistance === "") return true;
-
-        let userX = user.positionX;
-        let userY = user.positionY;
-        let ourX = Math.abs(userX - restaurant.positionX);
-        let ourY = Math.abs(userY - restaurant.positionY);
-
-        ourX *= ourX;
-        ourY *= ourY;
-
-        let ourIpotenusa = Math.sqrt(ourX + ourY);
-        if (ourIpotenusa < maxDistance) return true;
-        else return false;
-    }
-
     function startSearch() {
         let keyFood = searchType.current.value;
         let maxDistance = searchDistance.current.value;
@@ -68,14 +52,12 @@ export default function LoggedRestaurant() {
 
     function filterBack() {
         let maxDistance = searchDistance.current.value;
-        setTheFilter(restaurants.filter(r => back(r, maxDistance)))
+        setTheFilter(restaurants.filter(r => back(r)))
     }
 
-    function back(r, maxDistance) {
-        if (maxDistance === "") return true;
-
-        if (r.distance > maxDistance) return false;
-        else return true;
+    function back(r) {
+        if (r === "" || r !== "") return true;
+        return false;
     }
 
     useEffect(() => {
@@ -85,45 +67,84 @@ export default function LoggedRestaurant() {
         setCategories(uniqueCategories);
     }, [restaurants]);
 
+    function handleRangeChange(event) 
+    {
+        const rangeValue = event.target.value;
+        document.getElementById('distanceValue').innerText = rangeValue;
+      }
+
     return (
         <>
-            <div className="container mt-6">
-
-                <div className="row">
-                    <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-                        <h5 className="text">Search Multiple Foods by Spacing Them:</h5>
-                        <input name="type" ref={searchType} type="text" placeholder="Type" />
-                        
-                        <h5 className="text"> Distanza Massima (km): 1414 </h5>
-                        <input type="number" ref={searchDistance} />
-                        <button className="btn btn-primary" onClick={startSearch}> 
-                            Search 
-                        </button>
-                            
-                        <button className="btn btn-bg btn-primary" type="button" onClick={filterBack}>
-                            Reset Filtri
-                        </button>
-                    </div>
-                </div>
-
-                <div className="col-sm-9" style={{ width: "100%", height: "50%" }}>
-                        <div className="row row-cols-1 row-cols-md-3 g-4">
+            <div className="row gy-5 ms-3 mt-1 p-4 me-3" style={{ backgroundColor: '#fff', color: '#000' }}>
+        <div className="col-3 p-4">
+          <hr />
+          <div className="input m-3 align-items-center">
+            <span className="input me-2" id="basic-addon2">
+              <strong>Tipo Cibo:</strong>
+            </span>
+            <input name="type" ref={searchType} type="text" placeholder="Type" className="form-control border-0" />
+          </div>
+          <hr />
+          <div>
+            <h5 className="text"> Distanza Massima (km): <span id="distanceValue">0</span> </h5>
+            <input 
+                type="range" 
+                ref={searchDistance} 
+                className="form-range" 
+                id="customRange1" 
+                min="0" 
+                max="1414" 
+                onChange={handleRangeChange} 
+            />
+            </div>
+            <hr />
+          <div className="input m-3 align-items-center">
+            <span className="input me-2" id="basic-addon2">
+              <strong>Recensioni:</strong>
+            </span>
+            <div>
+              <input
+                type="radio"
+                id="ascending"
+                name="reviewOrder"
+                value="asc"
+              />
+              <label htmlFor="ascending">Crescente</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="descending"
+                name="reviewOrder"
+                value="desc"
+              />
+              <label htmlFor="descending">Decrescente</label>
+            </div>
+          </div>
+          <hr />
+          <button className="btn" onClick={startSearch} style={{ marginTop: '10px'}}> 
+            <strong>Search -&gt;</strong>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/CapShield05.jpg/220px-CapShield05.jpg" alt="Search" style={{ width: '70px', height: '70px' }} />
+            
+          </button>
+          <br></br>
+          <button className="btn" onClick={filterBack} style={{ marginTop: '10px'}}> 
+            <strong style={{fontWeight: 'bold'}}>Reset -&gt;</strong>
+            <img src="https://m.media-amazon.com/images/I/91YvoWlpgYL.jpg" alt="Search" style={{ width: '70px', height: '70px' }} />
+          </button>
+        </div>
+        <div className="col-9">
+          <div className="row row-cols-3 g-4" style={{ marginTop: "0%" }}>
                     {filtered.map((f) => (
                             <div key={f.id} className="col-12 col-md-4 mb-4">
-                                <RestaurantCard {...f} open={f.open} distance={f.distance} />
+                                <RestaurantCard {...f} restaurantprice={f.deliveryPricePerUnit} open={f.open} distance={f.distance} />
                             </div>
                     ))}
                         </div>
-                </div>
-                
-                <div className="mt-4">
-                    <button className="btn btn-primary" type="button">
-                        <Link className="text-white" to="/restaurantlogged">
-                            Torna al Ristorante
-                        </Link>
-                    </button>
                 </div>
             </div>
         </>
     );
 }
+
+                        
