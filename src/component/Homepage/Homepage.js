@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import poke from "./poke.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
 export default function Homepage()
 {
@@ -65,15 +66,15 @@ export default function Homepage()
         textTransform: "uppercase"
       }}>
         {user ?
-        <>
-        <a href="/loggedrestaurant" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</a>
-        <a href="/ticket" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>APRI UN TICKET</a>
-        </>
-        :
-        <>
-        <a href="/restaurant" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</a>
-        <a href="/ticket" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>APRI UN TICKET</a>
-        </>
+            <>
+            <Link to="/restaurantlogged" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
+            <Link to="/ticket" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>APRI UN TICKET</Link>
+            </>
+            :
+            <>
+            <Link to="/restaurant" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
+            <Link to="/ticket" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>APRI UN TICKET</Link>
+            </>
         }
       </div>
 
