@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
@@ -7,37 +7,63 @@ import { currentRestaurant, currentUser } from '../../App';
 
 export default function ReviewPage() {
   const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState({ vote: '', note: '' });
+  const [newReview, setNewReview] = useState(
+      { 
+        vote: 0, 
+        note: "",
+        restaurant_id: restaurant.id,
+        user_id: user.id
+      }
+    );
   const [restaurant, setRestaurant] = useAtom(currentRestaurant);
   const [user, setUser] = useAtom(currentUser);
   const { restaurantId, userId } = useParams();
 
-  useEffect(() => {
-    axios.get('/reviews').then((response) => {
-      setReviews(response.data);
-    });
-  }, []);
+  useEffect(
+    ()=>
+    {
+            axios.get("/restaurant/"+restaurantId+"/"+user.id).then(
+                (response)=>
+                {
+                    setRestaurant(response.data);
+                }
+            );
+            axios.get("/reviews/"+restaurantId).then(
+                (response)=>
+                {
+                    setReviews(response.data);
+                }
+            );
+    },
+    []
+)
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewReview((prevReview) => ({
-      ...prevReview,
-      [name]: value,
-    }));
-  };
+ const inVote = useRef(null);
+ const inNote = useRef(null);
 
-  const handleSubmit = () => {
-    axios.post(`/reviews/${restaurantId}`, newReview).then((response) => {
-      setReviews((prevReviews) => [...prevReviews, response.data]);
-      setNewReview({ vote: '', note: '' });
-    });
-  };
+  function postReview()
+  {
+    newReview.vote = inVote.current.value;
+    newReview.note = inNote.current.value;
+    newReview.restaurant_id = restaurant.id;
+
+    setReviews()
+    axios.post("/reviews", newReview).then(
+      (response)=>
+      setReviews(...reviews, response.data),
+      setNewReview({
+        vote: 0, 
+        note: '',
+        restaurant_id: ""
+      })
+    )
+  }
 
   return (
     <div className="container">
       <h1 className="text-center mb-4">Reviews</h1>
       <div className="row">
-        {reviews.map((review, index) => (
+        {reviews && reviews.map((review, index) => (
           <div key={index} className="col-sm-4 mb-4">
             <ReviewCard score={review.vote} comment={review.note} />
           </div>
@@ -52,8 +78,7 @@ export default function ReviewPage() {
             type="number"
             id="vote"
             name="vote"
-            value={newReview.vote}
-            onChange={handleInputChange}
+            ref={inVote}
           />
         </div>
         <div className="mb-2">
@@ -61,11 +86,10 @@ export default function ReviewPage() {
           <textarea
             id="note"
             name="note"
-            value={newReview.note}
-            onChange={handleInputChange}
+            ref={inNote}
           />
         </div>
-        <button className="btn btn-primary" onClick={handleSubmit}>
+        <button className="btn btn-primary" onClick={postReview}>
           Aggiungi Recensione
         </button>
       </div>
