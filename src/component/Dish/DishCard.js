@@ -7,7 +7,6 @@ import foto from  "./poke.png"
 export default function DishCard(props)
 {
     const [cartItems, setCartItems] = useAtom(currentCart);
-    const [restaurant,setRestaurant] = useAtom(currentRestaurant);
 
     const addToCart = () =>
     {
