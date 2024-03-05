@@ -18,7 +18,6 @@ export default function RestaurantDetail()
     const [ristoranteAttuale, setRistoranteAttuale] = useAtom(currentRestaurant);
     const [selectedCategory, setSelectedCategory] = useState(null);
     
-    // const [menuItems, setThisShit] = useState([]);
 
     useEffect(
         ()=>
