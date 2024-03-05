@@ -24,31 +24,21 @@ export default function DishCard(props)
     const refItem = useRef(null);
 
     return (
-        <body>
-
-          <main role="main">
-
-<div className="card card-container">
-    <img className="card-img-top" src={foto} alt="Card image cap" />
-      <div className="card-body bg-warning">
-        <h3 className="card-title">{props.name} 
-        </h3>
-          <p className="card-text">Restaurant price: &euro;{props.restaurantprice}</p>
-          <p className="card-text">Prezzo distanza: </p>
-      <div className="d-flex justify-content-between align-items-center">
-          <button type="button" className="btn btn-danger" ref={refItem} onClick={addToCart}>
-            ORDINA ORA
-          </button>
-          <button type="button" className="btn btn-sm">
-            CONSEGNA: &euro;{props.distancetot * props.restaurantprice}
-          </button>
-          <button type="button" className="btn btn-success">
-            PREZZO: &euro;{props.price}
-          </button>
-      </div>
-      </div>
-</div>
-            </main>
-        </body>
+        <div className="card card-container" style={{ position: 'relative', height: 'auto' }}>
+          <img className="card-img-top" src={foto} alt="Card image cap" style={{ width: '100%', height: 'auto' }} />
+          <div className="card-body" style={{ backgroundColor: '#fff' }}>
+            <h1 className="card-title" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '30px' }}>{props.name}</h1>
+            <div className="d-flex justify-content-between align-items-center">
+              <button type="button" className="btn btn-danger" ref={refItem} onClick={addToCart} >
+                Ordina ora
+              </button>
+            </div>
+          </div>
+          <div className="status-info" style={{position: 'absolute', bottom: '0px', right: '3px', padding: '1px'}}>
+            <h3 style={{ fontSize: '1.3rem'}}>
+              {props.price}&euro;
+            </h3>
+          </div>
+        </div>
       );
     };

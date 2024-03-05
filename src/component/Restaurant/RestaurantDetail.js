@@ -89,100 +89,49 @@ export default function RestaurantDetail()
 
     return(
         <>
-            <div className="row gy-5 ms-3 mt-1 p-4 me-3" style={{ backgroundColor: '#fff', color: '#000' }}>
+            <div className="row gy-5 ms-4 mt-1 p-4 me-3" style={{ backgroundColor: '#fff', color: '#000' }}>
                 <div className="col-3 p-4">
-                <hr />
-                <h5 className="text-uppercase">Categories:</h5>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', width:'106%'}}>
-                            <button className="btn btn-bg btn-primary" type="button" onClick={resetFilters}>
-                                Reset Filtri
-                            </button>   
-                            {categories && categories.map((c, index) => (
+                    <h5 className="text-uppercase" style={{fontWeight: 'bold' }}>Categories:</h5>
+                    <hr></hr>
+                    <div>  
+                        {categories && categories.map((c, index) => (
+                            <div key={index} style={{ marginBottom: '5px' }}>
                                 <div
-                                    key={index}
-                                    className={`col-sm-2 ${selectedCategory === c ? 'selected-category' : ''}`}  
-                                    style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '5px', margin: '5px' }}
+                                    className={`col ${selectedCategory === c ? 'selected-category' : ''}`}  
+                                    style={{ cursor: 'pointer', padding: '5px', margin: '5px', display: 'block', fontFamily: 'Arial, sans-serif' }} // Rimuovi bordi e aggiungi stile del testo
                                     onClick={() => handleCategoryClick(c)}
                                 >
                                     {c}
                                 </div>
-                            ))}
-                        </div> 
-                <div className="input m-3 align-items-center">
-                    <span className="input me-2" id="basic-addon2">
-                    <strong>Recensioni:</strong>
-                    </span>
-                    <div>
-                    <input
-                        type="radio"
-                        id="ascending"
-                        name="reviewOrder"
-                        value="asc"
-                    />
-                    <label htmlFor="ascending">Crescente</label>
-                    </div>
-                    <div>
-                    <input
-                        type="radio"
-                        id="descending"
-                        name="reviewOrder"
-                        value="desc"
-                    />
-                    <label htmlFor="descending">Decrescente</label>
+                                {index !== categories.length - 1 && <hr />} {/* Aggiungi HR tranne per l'ultimo elemento */}
+                            </div>
+                        ))}
+                    </div> 
+                    <hr />
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <button className="btn" onClick={resetFilters} style={{ marginBottom: '10px'}}> 
+                            <strong style={{fontWeight: 'bold'}}>Reset -&gt;</strong>
+                            <img src="https://m.media-amazon.com/images/I/91YvoWlpgYL.jpg" alt="Search" style={{ width: '70px', height: '70px' }} />
+                        </button>
+                        <button className="btn " style={{ marginBottom: '10px' }}>
+                            <strong style={{fontWeight: 'bold'}}>Go Back -&gt;</strong>
+                            <Link className="text-white" to="/restaurantlogged">
+                                <img src="https://png.pngtree.com/png-clipart/20191120/original/pngtree-restaurant-icon-vector-png-image_5045307.jpg" style={{ width: '70px', height: '70px' }} />
+                            </Link>
+                        </button>
                     </div>
                 </div>
-                <hr />
-                <button className="btn" style={{ marginTop: '10px'}}> 
-                    <strong>Search -&gt;</strong>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/CapShield05.jpg/220px-CapShield05.jpg" alt="Search" style={{ width: '70px', height: '70px' }} />
-                    
-                </button>
-                <br></br>
-                <button className="btn" onClick={resetFilters} style={{ marginTop: '10px'}}> 
-                    <strong style={{fontWeight: 'bold'}}>Reset -&gt;</strong>
-                    <img src="https://m.media-amazon.com/images/I/91YvoWlpgYL.jpg" alt="Search" style={{ width: '70px', height: '70px' }} />
-                </button>
-            </div>
-
-                    <div className="col-sm-15">
-                        <h5 className="text-uppercase">Categories:</h5>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', width:'106%'}}>
-                            <button className="btn btn-bg btn-primary" type="button">
-                                Reset Filtri
-                            </button>   
-                            {categories && categories.map((c, index) => (
-                                <div
-                                    key={index}
-                                    className={`col-sm-2 ${selectedCategory === c ? 'selected-category' : ''}`}  
-                                    style={{ cursor: 'pointer', border: '1px solid #ccc', padding: '5px', margin: '5px' }}
-                                    onClick={() => handleCategoryClick(c)}
-                                >
-                                    {c}
-                                </div>
-                            ))}
-                        </div>                            
+                <div className="col-9">
+                    <div className="row row-cols-4 g-4" style={{ marginTop: "0%" }}>
+                        {menu.dishes &&
+                            menu.dishes
+                                .filter((dish) => !selectedCategory || dish.category === selectedCategory) // Filtra i piatti per categoria
+                                .map((m, index) => (
+                                    <div key={index} className="col-12 col-md-3 mb-4"> {/* Imposta 4 colonne su dispositivi md e 12 colonne su dispositivi più piccoli */}
+                                        <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m} />
+                                    </div>
+                                ))}
                     </div>
-
-                    <div className="col-sm-9" style={{ width: "100%" }}>
-                        <div className="row row-cols-1 row-cols-md-3 g-4">
-                            {menu.dishes &&
-                                menu.dishes
-                                    .filter((dish) => !selectedCategory || dish.category === selectedCategory) // Filtra i piatti x categoria
-                                    .map((m, index) => (
-                                        <div key={index} className="col">
-                                            <DishCard restaurantprice={restaurant.deliveryPricePerUnit} distancetot={restaurant.distance} {...m} />
-                                        </div>
-                                    ))}
-                        </div>
-                    </div>
-                
-
-                <div className="mt-4">
-                    <button className="btn btn-primary" type="button">
-                    <Link className="text-white" to="/restaurantlogged">
-                        Torna al Ristorante
-                    </Link>
-                    </button>
                 </div>
             </div>
         </>

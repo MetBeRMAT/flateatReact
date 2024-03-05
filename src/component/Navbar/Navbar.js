@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useAtom } from "jotai";
 import { currentPrice, currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
@@ -19,6 +19,7 @@ export default function Navbar()
   const [cartItems, setCartItems] = useAtom(currentCart);
   const [restaurant,setRestaurant] = useAtom(currentRestaurant);
   const [t, setTotalPrice] = useAtom(currentPrice);
+  const searchQuantity = useRef(null);
   
   const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
@@ -35,20 +36,37 @@ export default function Navbar()
     setCartItems(updatedCart);
   }; 
 
-  const incrementQuantity = (index) => {
-    const updatedCart = [...cartItems];
-    updatedCart[index].quantity += 1;
-    setCartItems(updatedCart);
-    console.log(updatedCart.quantity)
-  };
 
-  const decrementQuantity = (index) => {
+  
+
+  const updateQuantity = (index) => 
+  {
     const updatedCart = [...cartItems];
-    if (updatedCart[index].quantity > 1) {
-      updatedCart[index].quantity -= 1;
+    const newQuantity = parseInt(searchQuantity.target.value);
+  
+    if (newQuantity > 0) 
+    {
+      updatedCart[index].quantity = newQuantity;
       setCartItems(updatedCart);
     }
   };
+  
+
+  // const incrementQuantity = (index) => 
+  // {
+  //   const updatedCart = [...cartItems];
+  //   updatedCart[index].quantity += 1;
+  //   setCartItems(updatedCart);
+  //   console.log(updatedCart.quantity)
+  // };
+
+  // const decrementQuantity = (index) => {
+  //   const updatedCart = [...cartItems];
+  //   if (updatedCart[index].quantity > 1) {
+  //     updatedCart[index].quantity -= 1;
+  //     setCartItems(updatedCart);
+  //   }
+  // };
 
   function totalPrice(cartItems) {
     let tot = 0;
@@ -110,19 +128,25 @@ export default function Navbar()
           }}
         >
           <ul style={{ listStyleType: "none", padding: 0 }}>
-            {cartItems && cartItems.map(({...item}, index) => 
-              (
-                <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px", padding:"10px" }}>
-                  <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
-                    X
-                  </button>
-                  <button className="btn btn-primary" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => incrementQuantity(index)}>
-                    +
-                  </button>
-                  {console.log(cartItems)}
-                </li>
-              ))}
+            {cartItems && cartItems.map(({ ...item }, index) => (
+              <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px", padding: "10px" }}>
+                <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
+                  X
+                </button>
+                <input
+                  type="number"
+                  ref={searchQuantity}
+                  min="0"
+                  step="1"
+                  onClick={updateQuantity}
+                  style={{ width: "30px", marginRight: "5px" }}
+                />
+                <p style={{ margin: "0 10px" }}>{item.name}</p>
+              </li>
+            ))}
           </ul>
+
+
           <div style={{ textAlign: "right", marginTop: "10px" }}>
             <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>TOT: &euro;{totalPrice(cartItems).toFixed(2)}</p>
             <p style={{ fontSize: "12px", fontWeight: "bold", marginBottom: "5px" }}>CONSEGNA: &euro;{totalDelivery(cartItems).toFixed(2)}</p>
