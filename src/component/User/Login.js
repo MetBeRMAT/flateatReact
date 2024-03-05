@@ -38,23 +38,21 @@ export default function Login()
     const inEmail = useRef(null);
     const inPw = useRef(null); 
 
-    function log()
-    {
-        let keyEmail = inEmail.current.value;
-        let keyPw = inPw.current.value;
-
-        for(let i = 0; i < users.length; i++)
-        {
-            if(users[i].mail == keyEmail && users[i].password == keyPw)
-            {
-                setUser(users[i]);
-                setLog(true);
-                return;
-            }
+    function log() {
+      let keyEmail = inEmail.current.value;
+      let keyPw = inPw.current.value;
+  
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].mail === keyEmail && users[i].password === keyPw) {
+          setUser(users[i]);
+          setLog(true);
+          navigate("/");
+          return;
         }
-        
-        alert("Login errata"); 
-    }   
+      }
+  
+      alert("Login errata");
+    }
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -62,46 +60,49 @@ export default function Login()
     
       return (
         <div style={{ backgroundColor: "#333333", minHeight: "calc(100vh - 50px)", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "-20px" }}>
-          <div class="container" style={{ width: "400px", backgroundColor: "#f0f0f0", padding: "20px", borderRadius: "8px" }}>
-            <div class="row justify-content-center">
-              <div class="col-md-12">
-                <h2 class="text-center mb-4">Javeat</h2>
-                <div class="form-group">
-                  <label for="guildName">Email</label>
-                  <input type="text" ref={inEmail} class="form-control" required />
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <div className="input-group">
-                    <input 
-                      type={showPassword ? "text" : "password"} 
-                      ref={inPw} 
-                      onChange={handlePasswordChange} 
-                      class="form-control" 
-                      required 
-                    />
-                    <button 
-                      className="btn btn-outline-secondary" 
-                      type="button" 
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? "Hide" : "Show"}
-                    </button>
-                  </div>
-                </div>
-                <div class="form-group mt-3 text-center">
-                    <Link className="nav-link active" aria-current="page" to="/">
-                        <button class="btn btn-primary rounded-pill px-3" onClick={log}> Login </button>
-                    </Link>
-                </div>
-                <br></br>
+      <div className="container" style={{ width: "400px", backgroundColor: "#f0f0f0", padding: "50px", borderRadius: "8px" }}>
+        <div className="row justify-content-center">
+          <div className="col-md-12">
+            <h2 className="text-center mb-4">Login to your Account</h2>
+            <div className="form-group">
+              <input type="text" ref={inEmail} className="form-control" placeholder="Email" required />
+            </div>
+            <div style={{ marginBottom: "10px" }}></div>
+            <div className="form-group">
+              <div className="input-group">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  ref={inPw}
+                  onChange={handlePasswordChange}
+                  className="form-control"
+                  placeholder="Password"
+                  required
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
               </div>
+            </div>
+            <div className="form-group mt-3 text-center">
+              <Link to="/">
+              <button 
+                className="btn btn-primary px-3" 
+                onClick={log} 
+                style={{ height: '38px', width: '100%', maxWidth: '100%', borderRadius: '8px',marginTop: "10px" }}>
+                Log in
+              </button>
+              </Link>
+            </div>
+            <div className="form-group text-center" style={{ marginTop: "20px" }}>
+              Don't have an account? <Link to="/register">Create an account</Link>
             </div>
           </div>
         </div>
-      );
-      
-      
-      
-      
+      </div>
+    </div>
+      );  
 }
