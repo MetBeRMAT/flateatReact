@@ -22,7 +22,7 @@ export default function AllRestaurants()
 
   const UnloggedView = () => 
   {
-    axios.get("/restaurants")
+    axios.get("/restaurant/nouser")
       .then((response) => {
         setRestaurants(response.data);
         setTheFilter(response.data);
@@ -69,8 +69,23 @@ export default function AllRestaurants()
   function back(r) {
     if (r === "" || r !== "")
       return true;
-
   }
+
+  function asc()
+    {
+      let toSort = [];
+      toSort = [...filtered];
+      toSort.sort((a, b) => a.average - b.average);
+      setTheFilter(toSort);
+    }
+
+    function desc()
+    {
+      let toSort = [];
+      toSort = [...filtered];
+      toSort.sort((a, b) => b.average - a.average);
+      setTheFilter(toSort);
+    }
 
   return (
     <>
@@ -93,7 +108,7 @@ export default function AllRestaurants()
                 type="radio"
                 id="ascending"
                 name="reviewOrder"
-                value="asc"
+                onClick={asc}
               />
               <label htmlFor="ascending">Crescente</label>
             </div>
@@ -102,7 +117,7 @@ export default function AllRestaurants()
                 type="radio"
                 id="descending"
                 name="reviewOrder"
-                value="desc"
+                onClick={desc}
               />
               <label htmlFor="descending">Decrescente</label>
             </div>

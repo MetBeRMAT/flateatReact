@@ -86,7 +86,7 @@ export default function Homepage()
     <div style={{ backgroundColor: "#fff", padding: "20px" }}>
     <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={{ width: "35%", marginRight: "30px" }}>
-            <div style={{ backgroundImage: `url('https://img.freepik.com/premium-photo/portrait-shot-chef-adorning-dishes-while-making-meals-generate-ai_905417-1835.jpg')`, backgroundSize: "cover", height: "400px", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", opacity: 1, position: "relative" }}>
+            <div style={{ backgroundImage: `url('https://media.tenor.com/Eh4Gt4BAY_EAAAAM/shrek-somebody.gif')`, backgroundSize: "cover", height: "400px", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", opacity: 1, position: "relative" }}>
                 <div style={{ position: "absolute", bottom: "20px", left: "20px" }}>
                     <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "10px", color: "#fff" }}>Diventa nostro Partner</h2>
                     <p style={{ fontSize: "18px", marginBottom: "20px", color: "#fff" }}>Raggiungi più clienti con Javeat. Gestiamo noi la consegna, così tu puoi dedicarti a offrire i migliori piatti e prodotti.</p>
@@ -95,7 +95,7 @@ export default function Homepage()
             </div>
         </div>
         <div style={{ width: "35%", marginRight: "10px" }}>
-            <div style={{ backgroundImage: `url('https://aws.imagelinenetwork.com/agronotizie/materiali/ArticoliImg/fattorino-fattorini-consegne-delivery-by-motortion-adobe-stock-750x422.jpeg')`, backgroundSize: "cover", height: "400px", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", opacity: 1, position: "relative" }}>
+            <div style={{ backgroundImage: `url('https://i.pinimg.com/originals/1e/84/67/1e8467512c470c0d326d16717812df21.gif')`, backgroundSize: "cover", height: "400px", borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", opacity: 1, position: "relative" }}>
                 <div style={{ position: "absolute", bottom: "20px", left: "20px" }}>
                     <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "10px", color: "#000" }}>Consegna con noi</h2>
                     <p style={{ fontSize: "18px", marginBottom: "20px", color: "#000" }}>La libertà di consegnare dove e quando vuoi, con ottimi guadagni, convenzioni e sconti riservati a te.</p>
@@ -105,8 +105,8 @@ export default function Homepage()
         </div>
     </div>
 </div>
-
-
+{/* https://img.freepik.com/premium-photo/portrait-shot-chef-adorning-dishes-while-making-meals-generate-ai_905417-1835.jpg */}
+{/* https://aws.imagelinenetwork.com/agronotizie/materiali/ArticoliImg/fattorino-fattorini-consegne-delivery-by-motortion-adobe-stock-750x422.jpeg */}
 
   
             {/* <html lang="en">

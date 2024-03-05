@@ -41,6 +41,7 @@ export default function Register()
         axios.post("/users/register",newUser).then(
             (response)=>
             {
+                console.log(response.data);
                 setUser(response.data);
                 setNewUser({
                     mail:"",
