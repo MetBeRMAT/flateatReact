@@ -21,8 +21,8 @@ export default function CheckoutOrder()
     let orario = queryParameters.get("deliveryTime")
     let pay = queryParameters.get("paymentMethod")
 
-    console.log(notes); //
-    console.log(orario);
+    let splittato = orario.split(":");
+    let minuti = splittato[1];
 
     const [delivery, setDelivery] = useState({
         distance:restaurant.distance,
@@ -32,7 +32,6 @@ export default function CheckoutOrder()
         restaurant_id:restaurant.id,
         user_id:user.id
     });
-
 
     function startTransaction()
     {
@@ -91,7 +90,7 @@ export default function CheckoutOrder()
         <div className="d-flex justify-content-center">
             <div className="col-2">
                 Shipped at - {orario}
-                Expected arrival - {orario + (restaurant.distance)}
+                Expected arrival - {orario + (restaurant.distance*2)}
 
                 Your notes - {notes}
             </div>
@@ -113,4 +112,3 @@ export default function CheckoutOrder()
         )
     }
 }
-*/}
