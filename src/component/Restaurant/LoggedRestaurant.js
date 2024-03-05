@@ -21,6 +21,7 @@ export default function LoggedRestaurant() {
             .then((response) => {
                 setRestaurants(response.data);
                 setTheFilter(response.data);
+
             })
             .catch((error) => {
                 console.error("Errore durante il recupero dei dati dei ristoranti:", error);
@@ -30,11 +31,12 @@ export default function LoggedRestaurant() {
     const searchType = useRef(null);
     const searchDistance = useRef(null);
 
-    function startSearch() {
+    function startSearch() 
+    {
         let keyFood = searchType.current.value;
         let maxDistance = searchDistance.current.value;
 
-        setTheFilter(restaurants.filter(r => searchFood(r, keyFood) && back(r, maxDistance)))
+        setTheFilter(restaurants.filter(r => searchFood(r, keyFood) && goTheDistance(r, maxDistance)))
     }
 
     function searchFood(r, f) {
@@ -50,13 +52,26 @@ export default function LoggedRestaurant() {
         return false;
     }
 
+    function goTheDistance(r, max)
+    {
+      if(max === '' || max == 0)
+        return true;
+    
+      if(max > r.distance)
+        return true;
+      
+        return false;
+    }
+
     function filterBack() {
         let maxDistance = searchDistance.current.value;
         setTheFilter(restaurants.filter(r => back(r)))
     }
 
-    function back(r) {
-        if (r === "" || r !== "") return true;
+    function back(r) 
+    {
+        if (r === "" || r !== "") 
+        return true;
         return false;
     }
 
@@ -71,7 +86,23 @@ export default function LoggedRestaurant() {
     {
         const rangeValue = event.target.value;
         document.getElementById('distanceValue').innerText = rangeValue;
-      }
+    }
+
+    function asc()
+    {
+      let toSort = [];
+      toSort = [...filtered];
+      toSort.sort((a, b) => a.average - b.average);
+      setTheFilter(toSort);
+    }
+
+    function desc()
+    {
+      let toSort = [];
+      toSort = [...filtered];
+      toSort.sort((a, b) => b.average - a.average);
+      setTheFilter(toSort);
+    }
 
     return (
         <>
@@ -107,7 +138,7 @@ export default function LoggedRestaurant() {
                 type="radio"
                 id="ascending"
                 name="reviewOrder"
-                value="asc"
+                onClick={asc}
               />
               <label htmlFor="ascending">Crescente</label>
             </div>
@@ -117,6 +148,7 @@ export default function LoggedRestaurant() {
                 id="descending"
                 name="reviewOrder"
                 value="desc"
+                onClick={desc}
               />
               <label htmlFor="descending">Decrescente</label>
             </div>
@@ -136,8 +168,8 @@ export default function LoggedRestaurant() {
         <div className="col-9">
           <div className="row row-cols-3 g-4" style={{ marginTop: "0%" }}>
                     {filtered.map((f) => (
-                            <div key={f.id} className="col-12 col-md-4 mb-4">
-                                <RestaurantCard {...f} restaurantprice={f.deliveryPricePerUnit} open={f.open} distance={f.distance} />
+                            <div  className="col-12 col-md-4 mb-4">
+                                <RestaurantCard key={f.id} {...f} average={f.average} restaurantprice={f.deliveryPricePerUnit} open={f.open} distance={f.distance} />
                             </div>
                     ))}
                         </div>
