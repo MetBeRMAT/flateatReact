@@ -11,8 +11,10 @@ export default function LoggedRestaurant() {
     const [restaurants, setRestaurants] = useState([]);
     const [filtered, setTheFilter] = useState([]);    
     const [categories, setCategories] = useState([]);
+    const [order, setOrder] = useState('desc');
 
-    useEffect(() => {
+    useEffect(() => 
+    {
         LoggedView();
     }, []);
 
@@ -21,7 +23,6 @@ export default function LoggedRestaurant() {
             .then((response) => {
                 setRestaurants(response.data);
                 setTheFilter(response.data);
-
             })
             .catch((error) => {
                 console.error("Errore durante il recupero dei dati dei ristoranti:", error);
@@ -36,7 +37,14 @@ export default function LoggedRestaurant() {
         let keyFood = searchType.current.value;
         let maxDistance = searchDistance.current.value;
 
-        setTheFilter(restaurants.filter(r => searchFood(r, keyFood) && goTheDistance(r, maxDistance)))
+        let filterRestaurant = restaurants.filter(r => searchFood(r, keyFood) && goTheDistance(r, maxDistance));
+
+        if(descending())
+          filterRestaurant.sort((a, b) => b.average - a.average);
+        else if(ascending())
+          filterRestaurant.sort((a, b) => a.average - b.average);
+
+          setTheFilter(filterRestaurant);
     }
 
     function searchFood(r, f) {
@@ -80,6 +88,7 @@ export default function LoggedRestaurant() {
         const allCategories = restaurants.flatMap(restaurant => restaurant.foodTypes);
         const uniqueCategories = [...new Set(allCategories)];
         setCategories(uniqueCategories);
+        desc();
     }, [restaurants]);
 
     function handleRangeChange(event) 
@@ -94,6 +103,7 @@ export default function LoggedRestaurant() {
       toSort = [...filtered];
       toSort.sort((a, b) => a.average - b.average);
       setTheFilter(toSort);
+      setOrder('asc');
     }
 
     function desc()
@@ -102,6 +112,17 @@ export default function LoggedRestaurant() {
       toSort = [...filtered];
       toSort.sort((a, b) => b.average - a.average);
       setTheFilter(toSort);
+      setOrder('desc');
+    }
+
+    function descending()
+    {
+      return order === 'desc';
+    }
+
+    function ascending()
+    {
+      return order === 'asc';
     }
 
     return (
@@ -138,7 +159,9 @@ export default function LoggedRestaurant() {
                 type="radio"
                 id="ascending"
                 name="reviewOrder"
-                onClick={asc}
+                value="asc"
+                checked={ascending()}
+                onChange={asc}
               />
               <label htmlFor="ascending">Crescente</label>
             </div>
@@ -148,7 +171,8 @@ export default function LoggedRestaurant() {
                 id="descending"
                 name="reviewOrder"
                 value="desc"
-                onClick={desc}
+                checked={descending()}
+                onChange={desc}
               />
               <label htmlFor="descending">Decrescente</label>
             </div>

@@ -16,14 +16,12 @@ import DeliveryPage from './component/Buy/DeliveryPage';
 import CheckoutOrder from './component/Buy/CheckoutOrder';
 import { popper } from "@popperjs/core";
 import ReviewPage from './component/Review/ReviewPage';
-import RestaurantCard from './component/Restaurant/RestaurantCard';
-
-
 
 export const currentUser = atom();
 export const currentCart = atom([]);
 export const currentRestaurant = atom();
 export const currentPrice = atom();
+export const currentOpenCart = atom();
 
 function App() 
 {

@@ -18,7 +18,8 @@ export default function Homepage()
         slidesToScroll: 1,
         autoplay: true, // Abilita lo scorrimento automatico
         autoplaySpeed: 2000, // Imposta la velocità di scorrimento automatico in millisecondi
-      };
+    };
+    
     return(
         <>  
             <div style={{ position: "relative", overflow: "hidden", backgroundColor: "black", minHeight: "500px" }}>
