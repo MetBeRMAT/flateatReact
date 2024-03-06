@@ -1,10 +1,11 @@
 import { useAtom } from "jotai";
 import { currentUser } from "../../App";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function TicketCard(props)
 {
+
     function closeTicket()
     {
         axios.delete("/tickets/"+props.id).then();
@@ -20,11 +21,12 @@ export default function TicketCard(props)
                         <h5 class="card-title">Ticket #{props.id}</h5>
                         <p class="card-text">{props.text}</p>
                     </div>
-                    <Link className="nav-link" to={`/ShowReplies/${props.id}`}>
+                    <Link className="btn btn-dark" to={`/ShowReplies/${props.id}`}>
                         My Replies 
                     </Link>
                     <div className="btn btn-danger" onClick={closeTicket}> Close Ticket </div>
                 </div>
+
             </>
         );
     else
@@ -37,7 +39,7 @@ export default function TicketCard(props)
                         <p class="card-text">{props.text}</p>
                     </div>
                     <Link className="btn btn-dark" to={`/ShowReplies/${props.id}`}>
-                        My Replies 
+                        Reply
                     </Link>
                     <div className="btn btn-danger" onClick={closeTicket}> Close Ticket </div>
                 </div>

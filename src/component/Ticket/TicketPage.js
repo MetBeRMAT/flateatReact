@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import TicketCard from "./TicketCard";
 import { useEffect, useState } from "react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function TicketPage()
 {
@@ -59,6 +60,7 @@ export default function TicketPage()
                         {tickets.map(t => <TicketCard {...t}/>)}
                     </div>
                 </div>
+                <Link to="/replyform" className="btn btn-warning"> Wanna Complain More? Leave us another Ticket</Link>
             </>
         );
     }

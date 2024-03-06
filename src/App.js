@@ -18,6 +18,7 @@ import ReviewPage from './component/Review/ReviewPage';
 import RestaurantCard from './component/Restaurant/RestaurantCard';
 import TicketPage from './component/Ticket/TicketPage';
 import ShowReply from './component/Reply/ShowReply';
+import TicketForm from './component/Ticket/TicketForm';
 
 
 
@@ -54,6 +55,7 @@ function App()
             <Route path='reviewpage/:restaurantId/:userId' element={<ReviewPage/>}> </Route>
             <Route path='ticket' element={<TicketPage />} />
             <Route path='ShowReplies/:id' element={<ShowReply/>}></Route>
+            <Route path='replyform' element={<TicketForm/>}></Route>
           </Routes>
       </BrowserRouter>
     </>
