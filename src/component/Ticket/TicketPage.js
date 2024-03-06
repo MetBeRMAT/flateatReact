@@ -1,9 +1,9 @@
-import { response } from "express";
+import axios from "axios";
 import { currentUser } from "../../App";
 import { useAtom } from 'jotai';
 import TicketCard from "./TicketCard";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import React from "react";
 
 export default function TicketPage()
 {
@@ -39,9 +39,9 @@ export default function TicketPage()
     {
         return(
             <>
-            <h1>CIAO JAVA JAVA</h1>
+            <h1 className="text-center"> Whose has awakened the ultimate admin from his slumber?</h1>
                 <div class="container">
-                    <div class="row">
+                    <div class="row pt-2">
                         {tickets.map(t => <TicketCard {...t}/>)}
                     </div>
                 </div>
@@ -53,9 +53,9 @@ export default function TicketPage()
 
         return(
             <>
-            <h1> CIAO UTENTE BRUTTO CHE NON SEI JAVA JAVA</h1>
+            <h1 className="text-center"> Your tickets </h1>
                 <div class="container">
-                    <div class="row">
+                    <div class="row justify-content-center p-4 m-4">
                         {tickets.map(t => <TicketCard {...t}/>)}
                     </div>
                 </div>
