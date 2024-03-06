@@ -68,17 +68,17 @@ export default function Homepage()
       }}>
         {!user ?
             <>
-            <Link to="/restaurantlogged" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
+            <Link to="/restaurant" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
             <Link to="/login" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>ACCEDI PER I TICKET</Link>
             </>
             : user.id == 6 ?
             <>
-            <Link to="/restaurant" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
+            <Link to="/restaurantlogged" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
             <Link to="/ticket" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RISPONDI AI TICKET</Link>
             </> 
             :
             <>
-            <Link to="/restaurant" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
+            <Link to="/restaurantlogged" style={{ marginRight: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>RESTAURANT</Link>
             <Link to="/ticket" style={{ marginLeft: "80px", fontSize: "24px", textDecoration: 'none', color: 'white' }}>APRI UN TICKET</Link>
             </>
         }
