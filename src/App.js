@@ -14,9 +14,10 @@ import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
 import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
 import DeliveryPage from './component/Buy/DeliveryPage';
 import CheckoutOrder from './component/Buy/CheckoutOrder';
-import { popper } from "@popperjs/core";
 import ReviewPage from './component/Review/ReviewPage';
 import RestaurantCard from './component/Restaurant/RestaurantCard';
+import TicketPage from './component/Ticket/TicketPage';
+import ShowReply from './component/Reply/ShowReply';
 
 
 
@@ -28,7 +29,6 @@ export const currentPrice = atom();
 function App() 
 {
 
-  //const [user,setUser] = useAtom(currentUser);
 
   return (
     <>
@@ -52,8 +52,8 @@ function App()
             <Route path='cart' element={<Cart />} />
             <Route path='checkout' element={<CheckoutOrder/>}> </Route>            
             <Route path='reviewpage/:restaurantId/:userId' element={<ReviewPage/>}> </Route>
-
-
+            <Route path='ticket' element={<TicketPage />} />
+            <Route path='ShowReplies/:id' element={<ShowReply/>}></Route>
           </Routes>
       </BrowserRouter>
     </>
