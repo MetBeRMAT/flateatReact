@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAtom } from "jotai";
-import { currentPrice, currentRestaurant, currentUser } from "../../App";
+import { currentOpenCart, currentPrice, currentRestaurant, currentUser } from "../../App";
 import homeIcon from "./home-icon.png";
 import { currentCart } from "../../App";
 import { Link } from "react-router-dom";
@@ -14,12 +14,11 @@ export default function Navbar()
 {
   
   const [user, setUser] = useAtom(currentUser);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useAtom(currentOpenCart);
 
   const [cartItems, setCartItems] = useAtom(currentCart);
   const [restaurant,setRestaurant] = useAtom(currentRestaurant);
   const [t, setTotalPrice] = useAtom(currentPrice);
-  const searchQuantity = useRef(null);
   
   const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
@@ -37,41 +36,23 @@ export default function Navbar()
   }; 
 
 
-  
-
-  const updateQuantity = (index) => 
+  const updateQuantity = (index, event) => 
   {
     const updatedCart = [...cartItems];
-    const newQuantity = parseInt(searchQuantity.target.value);
-  
-    if (newQuantity > 0) 
+    const newQuantity = parseInt(event.target.value);
+    
+    if(newQuantity > 0) 
     {
       updatedCart[index].quantity = newQuantity;
       setCartItems(updatedCart);
     }
   };
-  
 
-  // const incrementQuantity = (index) => 
-  // {
-  //   const updatedCart = [...cartItems];
-  //   updatedCart[index].quantity += 1;
-  //   setCartItems(updatedCart);
-  //   console.log(updatedCart.quantity)
-  // };
-
-  // const decrementQuantity = (index) => {
-  //   const updatedCart = [...cartItems];
-  //   if (updatedCart[index].quantity > 1) {
-  //     updatedCart[index].quantity -= 1;
-  //     setCartItems(updatedCart);
-  //   }
-  // };
-
-  function totalPrice(cartItems) {
+  function totalPrice(cartItems) 
+  {
     let tot = 0;
     for (let i = 0; i < cartItems.length; i++)
-      tot += cartItems[i].price;
+      tot += cartItems[i].price * cartItems[i].quantity;
     setTotalPrice(tot);
     return tot;
   }
@@ -128,21 +109,22 @@ export default function Navbar()
           }}
         >
           <ul style={{ listStyleType: "none", padding: 0 }}>
-            {cartItems && cartItems.map(({ ...item }, index) => (
-              <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px", padding: "10px" }}>
-                <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
-                  X
-                </button>
-                <input
-                  type="number"
-                  ref={searchQuantity}
-                  min="0"
-                  step="1"
-                  onClick={updateQuantity}
-                  style={{ width: "30px", marginRight: "5px" }}
-                />
-                <p style={{ margin: "0 10px" }}>{item.name}</p>
-              </li>
+          {cartItems && cartItems.map(({ ...item }, index) => 
+          (
+            <li key={index} style={{ display: "flex", alignItems: "center", marginBottom: "5px", padding: "10px" }}>
+              <button className="btn btn-danger" style={{ fontSize: "8px", marginRight: "5px" }} onClick={() => removeFromCart(index)}>
+                X
+              </button>
+              <input
+                type="number"
+                value={item.quantity}
+                min="0"
+                step="1"
+                onChange={(event) => updateQuantity(index, event)}
+                style={{ width: "30px", marginRight: "5px" }}
+              />
+              <p style={{ margin: "0 10px" }}>{item.name}</p>
+            </li>
             ))}
           </ul>
 

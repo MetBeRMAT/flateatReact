@@ -26,6 +26,7 @@ export const currentUser = atom();
 export const currentCart = atom([]);
 export const currentRestaurant = atom();
 export const currentPrice = atom();
+export const currentOpenCart = atom();
 
 function App() 
 {

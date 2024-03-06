@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { currentCart, currentRestaurant } from "../../App";
+import { currentCart, currentOpenCart, currentRestaurant } from "../../App";
 import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import foto from  "./poke.png"
@@ -7,18 +7,33 @@ import foto from  "./poke.png"
 export default function DishCard(props)
 {
     const [cartItems, setCartItems] = useAtom(currentCart);
+    const [isCartOpen, setIsCartOpen] = useAtom(currentOpenCart);
 
     const addToCart = () =>
     {
-        const newItem = 
+      const newItem = 
+      {
+        id : props.id,
+        name: props.name,
+        category: props.category,
+        price: props.price,
+        quantity: 1
+      };
+      
+
+        const existingItem = cartItems.findIndex((item) => item.name == props.name)
+
+        if(existingItem !== -1)
         {
-            id : props.id,
-            name: props.name,
-            category: props.category,
-            price: props.price,
-            quantity: 1
-        };
-        setCartItems([...cartItems,newItem])
+          const updatedCartItems = [...cartItems];
+          updatedCartItems[existingItem].quantity++;
+          setCartItems(updatedCartItems);
+        }
+        else
+        {
+          setCartItems([...cartItems, newItem]);
+        }
+        setIsCartOpen(true);
     }
 
     const refItem = useRef(null);
