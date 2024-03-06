@@ -43,7 +43,7 @@ export default function CheckoutOrder() {
 
     function startTransaction() {
         let deliveryId;
-        axios.post("/delivery", delivery).then(
+        axios.post("/delivery/"+restaurant.id+"/"+user.id, delivery).then(
             (response) => {
                 setSentBack(response.data);
                 deliveryId = response.data.id;
@@ -75,9 +75,8 @@ export default function CheckoutOrder() {
                         quantity: list[j].quantity
                     }
 
-                    console.log(dishToDelivery);
 
-                    axios.post("/dishToDelivery", dishToDelivery)
+                    axios.post("/dishToDelivery/"+dishToDelivery.dish_id+"/"+deliveryId, dishToDelivery)
                 }
             }
         )
@@ -101,7 +100,8 @@ export default function CheckoutOrder() {
                         { cartItems.map(i => <ShowCart {...i} />) }
                     </div>
                     <p><strong>Total price:</strong> </p>
-                    <button class="btn btn-success" onclick="startTransaction()">Checkout Order</button>
+                     {/* QUALCOSA DAL CARRELLO */}
+                    <button class="btn btn-success" onClick={startTransaction}>Checkout Order</button>
                 </div>
             </div>
         </>
