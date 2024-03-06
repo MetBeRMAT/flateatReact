@@ -48,7 +48,7 @@ export default function ReviewPage() {
     newReview.restaurant_id = restaurant.id;
 
     setReviews()
-    axios.post("/reviews", newReview).then(
+    axios.post("/reviews/"+restaurant.id+"/"+user.id, newReview).then(
       (response)=>
       setReviews(...reviews, response.data),
       setNewReview({
