@@ -6,53 +6,51 @@ import { useAtom } from 'jotai';
 import { currentRestaurant, currentUser } from '../../App';
 
 export default function ReviewPage() {
-  const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState(
-      { 
-        vote: 0, 
-        note: "",
-        restaurant_id: restaurant.id,
-        user_id: user.id
-      }
-    );
   const [restaurant, setRestaurant] = useAtom(currentRestaurant);
   const [user, setUser] = useAtom(currentUser);
   const { restaurantId, userId } = useParams();
+  const [reviews, setReviews] = useState([]);
+
 
   useEffect(
-    ()=>
-    {
-            axios.get("/restaurant/"+restaurantId+"/"+user.id).then(
-                (response)=>
-                {
-                    setRestaurant(response.data);
-                }
-            );
-            axios.get("/reviews/"+restaurantId).then(
-                (response)=>
-                {
-                    setReviews(response.data);
-                }
-            );
+    () => {
+      axios.get("/restaurant/" + restaurantId + "/" + user.id).then(
+        (response) => {
+          setRestaurant(response.data);
+        }
+      );
+      axios.get("/reviews/" + restaurantId).then(
+        (response) => {
+          setReviews(response.data);
+        }
+      );
     },
     []
-)
+  )
 
- const inVote = useRef(null);
- const inNote = useRef(null);
+  const [newReview, setNewReview] = useState(
+    {
+      vote: 0,
+      note: "",
+      restaurant_id: '',
+      user_id: user.id
+    }
+  );
 
-  function postReview()
-  {
+  const inVote = useRef(null);
+  const inNote = useRef(null);
+
+  function postReview() {
     newReview.vote = inVote.current.value;
     newReview.note = inNote.current.value;
     newReview.restaurant_id = restaurant.id;
 
     setReviews()
-    axios.post("/reviews/"+restaurant.id+"/"+user.id, newReview).then(
-      (response)=>
-      setReviews(...reviews, response.data),
+    axios.post("/reviews/" + restaurant.id + "/" + user.id, newReview).then(
+      (response) =>
+        setReviews(...reviews, response.data),
       setNewReview({
-        vote: 0, 
+        vote: 0,
         note: '',
         restaurant_id: ""
       })
