@@ -68,7 +68,7 @@ export default function Navbar() {
       <nav style={{ zIndex: 9999, position: 'sticky', top: 0, backgroundColor: '#071c2c', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 40px' }}> {/* Dimensioni raddoppiate */}
         <div style={{ marginRight: '20px' }}> {/* Spostato il logo più a sinistra */}
           <Link to="/">
-            <img src={logo} alt="Logo" style={{ width: '120px', height: 'auto' }} /> {/* Triplicato le dimensioni del logo */}
+            <img src={logo} alt="Logo" style={{ width: '120px', height: 'auto', marginLeft:"150px" }} /> {/* Triplicato le dimensioni del logo */}
           </Link>
         </div>
         <div style={{ marginLeft: '10px', marginRight: '10px' }}> {/* Spostato i link più a sinistra */}
@@ -78,7 +78,7 @@ export default function Navbar() {
                 Logout
               </button>
               <button className="btn" onClick={handleCartClick} >
-                <img src={carrello} alt="Logo" style={{ width: '40px', height: '40px', marginLeft: '10px' }} />
+                <img src={carrello} alt="Logo" style={{ width: '40px', height: '40px',marginRight:"150px" }} />
               </button>
               {isCartOpen && (
                 <div

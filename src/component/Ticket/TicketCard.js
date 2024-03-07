@@ -8,7 +8,9 @@ export default function TicketCard(props)
     
     function closeTicket() 
     {
-        axios.delete("/tickets/" + props.id).then();
+        axios.delete("/tickets/" + props.id).then( () =>
+            props.deleteTicket(props.id)
+        );
     }
 
     const [user, setUser] = useAtom(currentUser);
@@ -38,7 +40,7 @@ export default function TicketCard(props)
                     <Link className="btn" style={{ backgroundColor: '#071c2c', color: "white" }} to={`/ShowReplies/${props.id}`}>
                         Reply
                     </Link>
-                    <div className="btn btn-danger" onClick={closeTicket}>Close Ticket</div>
+                    <div className="btn btn-danger" onClick={closeTicket}>Close Ticket</div> 
                 </div>
             </div>
         );

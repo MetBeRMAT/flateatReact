@@ -10,6 +10,14 @@ export default function TicketPage() {
     const [user, setUser] = useAtom(currentUser);
     const [tickets, setTickets] = useState([]);
 
+    function deleteTicket(id)
+    {
+        let clone = [...tickets];
+        let pos = clone.findIndex(t => t.id ==id);
+        clone.splice(pos,1);
+        setTickets(clone);
+    }
+
     useEffect(
         () => {
             if (user.id == 6) {
@@ -50,8 +58,8 @@ export default function TicketPage() {
                             <div className="row">
                                 {tickets.map((ticket, index) => (
                                     <div key={index} className="col-md-4 mb-2">
-                                        <TicketCard {...ticket} />
-                                    </div>
+                                        <TicketCard deleteTicket={deleteTicket} id={ticket.id} text={ticket.text} userOfTicket={ticket.userOfTicket}/>
+                                    </div> 
                                 ))}
                             </div>
                         }
@@ -75,7 +83,7 @@ export default function TicketPage() {
                     <div className="container">
                         <h1 className="text-center" style={{ fontSize: '6rem', fontWeight: 'bold', marginTop: '20px' }}> Your tickets </h1>
                         <div className="row justify-content-center p-4 m-4">
-                            {tickets.map(t => <TicketCard {...t} />)}
+                            {tickets.map(ticket => <TicketCard deleteTicket={deleteTicket} id={ticket.id} text={ticket.text} userOfTicket={ticket.userOfTicket}/>)}
                         </div>
                         <Link to="/replyform" className="btn btn-warning" style={{ position: 'absolute', bottom: '570px', left: '20px' }}> Wanna Complain More? Leave us another Ticket</Link>
                     </div>
