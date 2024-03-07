@@ -5,13 +5,15 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { useAtom } from 'jotai';
 import { useState } from "react";
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { redirect, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 
-export default function CheckoutOrder(props) {
+export default function CheckoutOrder(props)
+{
     dayjs.extend(utc);
     dayjs.extend(timezone);
+    let navigate = useNavigate();
 
     const [cartItems, setCartItems] = useAtom(currentCart);
     const [restaurant, setRestaurant] = useAtom(currentRestaurant);
@@ -35,7 +37,7 @@ export default function CheckoutOrder(props) {
 
     const [delivery, setDelivery] = useState({
         distance: restaurant.distance,
-        expected_arrival: orario,
+        expected_arrival: "00:00",
         notes: notes,
         paymenthMethod: pay,
         restaurant_id: restaurant.id,
@@ -44,8 +46,15 @@ export default function CheckoutOrder(props) {
 
     function startTransaction() {
         let deliveryId;
+        setDelivery({distance: restaurant.distance,
+            expected_arrival: orario,
+            notes: notes,
+            paymenthMethod: pay,
+            restaurant_id: restaurant.id,
+            user_id: user.id});
         axios.post("/delivery/" + restaurant.id + "/" + user.id, delivery).then(
-            (response) => {
+            (response) => 
+            {
                 setSentBack(response.data);
                 deliveryId = response.data.id;
                 let list = [...cartItems];
@@ -81,6 +90,7 @@ export default function CheckoutOrder(props) {
                     axios.post("/dishToDelivery/" + dishToDelivery.dish_id + "/" + deliveryId, dishToDelivery)
                 }
                 alert("Ordine completato con successo");
+                redirect("/");
             }
         )
     }

@@ -2,7 +2,8 @@ import React from 'react';
 import { currentRestaurant, currentUser } from '../../App';
 import { atom, useAtom } from 'jotai';
 
-export default function ReviewCard({ score, comment, userName }) {
+export default function ReviewCard({ score, comment, userName }) 
+{
 
   const [restaurant, setRestaurant] = useAtom(currentRestaurant);
   const [user, setUser] = useAtom(currentUser);
@@ -16,7 +17,7 @@ export default function ReviewCard({ score, comment, userName }) {
         <blockquote className="blockquote mb-0">
           <p classNameName="review-comment">{comment}</p>
           {user ?
-          <footer className="blockquote-footer">User:  </footer>
+          <footer className="blockquote-footer">User:  {user.mail}</footer>
           : <></>}
         </blockquote>
       </div>

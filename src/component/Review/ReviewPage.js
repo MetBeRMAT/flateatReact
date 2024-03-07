@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
 import { useAtom } from 'jotai';
 import { currentRestaurant, currentUser } from '../../App';
 
 export default function ReviewPage() {
+  let navigate = useNavigate();
   const [restaurant, setRestaurant] = useAtom(currentRestaurant);
   const [user, setUser] = useAtom(currentUser);
   const { restaurantId, userId } = useParams();
@@ -53,7 +54,8 @@ export default function ReviewPage() {
         vote: 0,
         note: '',
         restaurant_id: ""
-      })
+      }),
+      navigate("/restaurantlogged")
     )
   }
 
@@ -94,7 +96,7 @@ export default function ReviewPage() {
 
       <div className="mt-4">
         <button className="btn btn-primary" type="button">
-          <Link className="text-white" to={`/restaurantdetail/${restaurantId}/${userId}`}>
+          <Link className="text-white" to={`/restaurantlogged`}>
             Torna al Ristorante
           </Link>
         </button>
