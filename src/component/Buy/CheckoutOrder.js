@@ -21,6 +21,7 @@ export default function CheckoutOrder(props) {
 
     const [deliverySentBack, setSentBack] = useState([]);
 
+    
     const [uniqueNames, setNames] = useState([]);
 
     let notes = queryParameters.get("notes")
