@@ -17,7 +17,7 @@ export default function ReviewCard({ score, comment, userName })
         <blockquote className="blockquote mb-0">
           <p classNameName="review-comment">{comment}</p>
           {user ?
-          <footer className="blockquote-footer">User:  {user.mail}</footer>
+          <footer className="blockquote-footer">User:  {userName}</footer>
           : <></>}
         </blockquote>
       </div>

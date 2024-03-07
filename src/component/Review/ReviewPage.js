@@ -44,19 +44,21 @@ export default function ReviewPage() {
   function postReview() {
     newReview.vote = inVote.current.value;
     newReview.note = inNote.current.value;
-    newReview.restaurant_id = restaurant.id;
 
     setReviews()
-    axios.post("/reviews/" + restaurant.id + "/" + user.id, newReview).then(
-      (response) =>
-        setReviews(...reviews, response.data),
-      setNewReview({
+    axios.post("/reviews/" + restaurantId + "/" + user.id, newReview)
+    .then(response => {
+      setReviews([...reviews, response.data]); // Aggiungi la nuova recensione allo stato delle recensioni
+      setNewReview({ // Resetta il form
         vote: 0,
         note: '',
-        restaurant_id: ""
-      }),
-      navigate("/restaurantlogged")
-    )
+      });
+      navigate("/restaurantlogged"); // Reindirizza dopo l'aggiunta della recensione
+    })
+    .catch(error => {
+      console.error("Errore durante il post della recensione:", error);
+      // Gestione degli errori, se necessario
+    });
   }
 
   return (
@@ -65,7 +67,7 @@ export default function ReviewPage() {
       <div className="row">
         {reviews && reviews.map((review, index) => (
           <div key={index} className="col-sm-4 mb-4">
-            <ReviewCard score={review.vote} comment={review.note} />
+            <ReviewCard score={review.vote} comment={review.note} userName={user.mail}/>
           </div>
         ))}
       </div>
