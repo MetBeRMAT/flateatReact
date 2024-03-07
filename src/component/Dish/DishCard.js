@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { currentCart, currentOpenCart, currentRestaurant } from "../../App";
+import { currentCart, currentOpenCart, currentRestaurant, currentUser } from "../../App";
 import { useAtom } from "jotai";
 import { useRef, useState } from "react";
 import foto from "./poke.png"
@@ -7,6 +7,7 @@ import foto from "./poke.png"
 export default function DishCard(props) {
   const [cartItems, setCartItems] = useAtom(currentCart);
   const [isCartOpen, setIsCartOpen] = useAtom(currentOpenCart);
+  const [user, setUser] = useAtom(currentUser);
 
   const addToCart = () => {
     const newItem =
@@ -40,9 +41,13 @@ export default function DishCard(props) {
       <div className="card-body" style={{ backgroundColor: '#fff' }}>
         <h1 className="card-title" style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '30px' }}>{props.name}</h1>
         <div className="d-flex justify-content-between align-items-center">
+          {user ?
           <button type="button" className="btn btn-danger" ref={refItem} onClick={addToCart} >
             Ordina ora
           </button>
+          : <button type="button" className="btn btn-danger disabled" ref={refItem} onClick={addToCart} >
+          Ordina ora
+        </button>}
         </div>
       </div>
       <div className="status-info" style={{ position: 'absolute', bottom: '0px', right: '3px', padding: '1px' }}>

@@ -57,7 +57,7 @@ export default function Login() {
   return (
 
     <>
-      <div style={{ backgroundColor: '#154360', minHeight: 'calc(88.7vh)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+      <div style={{background: '#154360', minHeight: 'calc(88.7vh)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
         <div className="container" style={{ width: "400px", backgroundColor: "#f0f0f0", padding: "50px", borderRadius: "8px" }}>
           <div className="row justify-content-center">
             <div className="col-md-12">

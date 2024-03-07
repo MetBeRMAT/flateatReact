@@ -9,7 +9,6 @@ import Navbar from './component/Navbar/Navbar';
 import Register from './component/User/Register';
 import AllRestaurant from './component/Restaurant/allRestaurant';
 import RestaurantDetail from './component/Restaurant/RestaurantDetail';
-import Cart from './component/Cart/Cart';
 import LoggedRestaurant from './component/Restaurant/LoggedRestaurant';
 import RestaurantDetailNoLogin from './component/Restaurant/RestaurantDetailNoLogin';
 import DeliveryPage from './component/Buy/DeliveryPage';
@@ -19,6 +18,7 @@ import RestaurantCard from './component/Restaurant/RestaurantCard';
 import TicketPage from './component/Ticket/TicketPage';
 import ShowReply from './component/Reply/ShowReply';
 import TicketForm from './component/Ticket/TicketForm';
+import ReviewPageNoLogin from './component/Review/ReviewPageNoLogin';
 
 
 
@@ -51,9 +51,9 @@ function App()
             <Route path='register' element={<Register />}> </Route>
             <Route path='restaurantdetail/:restaurantId/:userId' element={<RestaurantDetail />}> </Route>
             <Route path='restaurantdetail/:id' element={<RestaurantDetailNoLogin />}> </Route>
-            <Route path='cart' element={<Cart />} />
             <Route path='checkout' element={<CheckoutOrder/>}> </Route>            
             <Route path='reviewpage/:restaurantId/:userId' element={<ReviewPage/>}> </Route>
+            <Route path='reviewpage/:restaurantId' element={<ReviewPageNoLogin/>}> </Route>
             <Route path='ticket' element={<TicketPage />} />
             <Route path='ShowReplies/:id' element={<ShowReply/>}></Route>
             <Route path='replyform' element={<TicketForm/>}></Route>

@@ -34,28 +34,33 @@ export default function TicketPage() {
         return (
             <>
 
-                <div>
-                    <div className="row">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-12">
-                                    <Link to="/" className="btn rounded-pill m-3" style={{ backgroundColor: '#154360', color: '#fff', padding: '10px 20px', textDecoration: 'none' }}>Back</Link>
-                                </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                <div className="col-12">
-                                    <h1 className="text-center"> Whose has awakened the ultimate admin from his slumber?</h1>
-                                </div>
-                            </div>
-                            <div className="row justify-content-center">
-                                {tickets.map(t => <TicketCard {...t} />)}
+                <div style={{ background: 'linear-gradient(to right, #ffffff, #154360)', minHeight: '100vh', color: '#fff' }}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 text-start"> {/* Aggiungi la classe text-start qui */}
+                                <Link to="/" className="btn rounded-pill m-3" style={{ backgroundColor: '#154360', color: '#fff', padding: '10px 20px', textDecoration: 'none'}}>Back</Link>
                             </div>
                         </div>
-                    </div>
-                    <div className="navbar">
-                        {/* Contenuto della navbar */}
+                        <div className="row justify-content-center">
+                            <div className="col-12">
+                                <h1 className="text-center" style={{ color: '#000', marginBottom: "100px", marginTop: "50px" }}> Whose has awakened the ultimate admin from his slumber?</h1>
+                            </div>
+                        </div>
+                        {tickets.length > 0 &&
+                            <div className="row">
+                                {tickets.map((ticket, index) => (
+                                    <div key={index} className="col-md-4 mb-2">
+                                        <TicketCard {...ticket} />
+                                    </div>
+                                ))}
+                            </div>
+                        }
                     </div>
                 </div>
+
+
+
+
 
 
 

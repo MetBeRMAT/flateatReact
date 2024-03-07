@@ -6,12 +6,12 @@ import timezone from "dayjs/plugin/timezone";
 import { useAtom } from 'jotai';
 import { useState } from "react";
 import { useLocation, useSearchParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
-export default function CheckoutOrder() {
+export default function CheckoutOrder(props) {
     dayjs.extend(utc);
     dayjs.extend(timezone);
-
 
     const [cartItems, setCartItems] = useAtom(currentCart);
     const [restaurant, setRestaurant] = useAtom(currentRestaurant);
@@ -43,7 +43,7 @@ export default function CheckoutOrder() {
 
     function startTransaction() {
         let deliveryId;
-        axios.post("/delivery/"+restaurant.id+"/"+user.id, delivery).then(
+        axios.post("/delivery/" + restaurant.id + "/" + user.id, delivery).then(
             (response) => {
                 setSentBack(response.data);
                 deliveryId = response.data.id;
@@ -68,7 +68,8 @@ export default function CheckoutOrder() {
 
 
                 for (let j = 0; j < list.length; j++) {
-                    let dishToDelivery = {
+                    let dishToDelivery =
+                    {
                         dish_id: list[j].id,
                         delivery_id: deliveryId,
                         price: deliveryTotal,
@@ -76,43 +77,68 @@ export default function CheckoutOrder() {
                     }
 
 
-                    axios.post("/dishToDelivery/"+dishToDelivery.dish_id+"/"+deliveryId, dishToDelivery)
+                    axios.post("/dishToDelivery/" + dishToDelivery.dish_id + "/" + deliveryId, dishToDelivery)
                 }
+                alert("Ordine completato con successo");
             }
         )
     }
 
+    const [orderCompleted, setOrderCompleted] = useState(false);
+
+    const handleCheckout = () => {
+        startTransaction();
+        setOrderCompleted(true);
+    };
 
     return (
-        <>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Shipped at:</strong> {shippingTime}</p>
-                            <p><strong>Expected arrival:</strong> {orario.toString()}</p>
+        <div className="card" style={{ background: 'linear-gradient(to right, #ffffff, #154360)', color: '#000', minHeight: '100vh', marginLeft: '20px' }}>
+            <div className="card-body" style={{ paddingRight: '20px', display: orderCompleted ? 'none' : 'block' }}>
+                <h3 style={{ fontWeight: 'bold', color: 'black', marginBottom: '60px' }}>Riepilogo dell'ordine</h3>
+                <h5 style={{ fontWeight: 'bold' }}>Prodotti</h5>
+                <div className="row row-cols-3 g-4" style={{ marginTop: "0%" }}>
+                    <div style={{ padding: '5px', marginBottom: '10px', marginLeft: '-5px' }}>
+                        {cartItems.map((item, index) => (
+                            <div key={index} style={{ marginBottom: '10px', backgroundColor: 'white', borderRadius: '10px', padding: '5px 10px', maxWidth: '70%' }}>
+                                <div><strong style={{ marginRight: "20px" }}>{item.quantity}</strong> Menù: <span style={{ marginLeft: '10px' }}>{item.name}</span></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <hr style={{ maxWidth: "40%", color: "red" }} />
+                <div className="row">
+                    <div className="col-md-6 d-flex flex-column">
+                        <div>
+                            <h5 style={{ fontWeight: 'bold', marginTop: '60px' }}>Dettagli di Consegna</h5>
+                            <p style={{ marginBottom: '10px', backgroundColor: 'white', borderRadius: '10px', padding: '5px 10px', maxWidth: '30%' }}><strong>Shipped at:</strong> {shippingTime}</p>
+                            <p style={{ marginBottom: '60px', backgroundColor: 'white', borderRadius: '10px', padding: '5px 10px', maxWidth: '30%' }}><strong>Expected arrival:</strong> {orario.toString()}</p>
                         </div>
-                        <div class="col-md-6">
-                            <p><strong>Your notes:</strong> {notes}</p>
+                        <div>
+                            <h5 style={{ fontWeight: 'bold' }}>Note</h5>
+                            <p style={{ marginBottom: '60px', backgroundColor: 'white', borderRadius: '10px', padding: '5px 10px', maxWidth: '60%' }}> {notes}</p>
                         </div>
                     </div>
-                    <div class="row row-cols-3 g-4" style={{marginTop: "0%"}}>
-                        { cartItems.map(i => <ShowCart {...i} />) }
-                    </div>
-                    <p><strong>Total price:</strong> </p>
-                     {/* QUALCOSA DAL CARRELLO */}
-                    <button class="btn btn-success" onClick={startTransaction}>Checkout Order</button>
+                </div>
+
+                <hr style={{ maxWidth: "40%", color: "red" }} />
+                <p style={{ marginBottom: '20px', backgroundColor: 'white', borderRadius: '10px', padding: '5px 10px', maxWidth: '15%', marginTop: "60px" }}><strong style={{ marginRight: "20px" }}>Total price: {(deliveryTotal + restaurant.deliveryPricePerUnit).toFixed(2)}&euro;</strong></p>
+
+                <div className="d-flex">
+                    <form style={{ marginRight: '10px' }}>
+                        <Link to="/deliverypage">
+                            <button className="btn btn-link" type="submit" onClick={startTransaction} style={{ color: '#fff', backgroundColor: '#154360', marginTop: "50px" }}>Back</button>
+                        </Link>
+                    </form>
+                    <form>
+                        <button className="btn btn-success" type="submit" onClick={handleCheckout} style={{ backgroundColor: 'red', marginTop: "50px" }}>Checkout Order</button>
+                    </form>
                 </div>
             </div>
-        </>
+            {orderCompleted && (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'rgba(0, 0, 0, 0.5)', color: '#fff', padding: '20px', borderRadius: '10px', zIndex: '999' }}>
+                    <h4>Ordine completato con successo</h4>
+                </div>
+            )}
+        </div>
     );
-
-    function ShowCart(props) {
-        return (
-            <>
-                <div> {props.name} </div>
-            </>
-        )
-    }
 }
-

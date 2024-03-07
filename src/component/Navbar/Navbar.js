@@ -24,7 +24,8 @@ export default function Navbar() {
     setIsCartOpen(false);
   };
 
-  const removeFromCart = (index) => {
+  const removeFromCart = (index) => 
+  {
     const updatedCart = [...cartItems];
     updatedCart.splice(index, 1);
     setCartItems(updatedCart);
@@ -54,7 +55,8 @@ export default function Navbar() {
     return tot;
   }
 
-  function totalDelivery(cartItems) {
+  function totalDelivery(cartItems) 
+  {
     if (totalPrice(cartItems) == 0)
       return 0
 
@@ -137,8 +139,6 @@ export default function Navbar() {
                   >
                     Buy now
                   </Link>
-
-
                 </div>
               )}
             </div>

@@ -75,6 +75,7 @@ export default function Register() {
 
     }
     else
+      alert("Credeziali invalide")
       setShow(false);
   }
 
@@ -151,7 +152,7 @@ export default function Register() {
             <div className="form-group mt-3 text-center">
               <button
                 className="btn btn-primary px-3"
-                onClick={registerUser}
+                onClick={checkRegister}
                 style={{ width: "100%", marginTop: "10px" }}
               >
                 Register

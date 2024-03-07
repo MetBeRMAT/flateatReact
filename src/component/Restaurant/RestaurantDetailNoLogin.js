@@ -9,7 +9,7 @@ import DishCard from "../Dish/DishCard";
 import { currentRestaurant } from "../../App";
 
 export default function RestaurantDetailNoLogin() {
-    let { restaurantId } = useParams();
+    let { id } = useParams();
 
     const [user, setUser] = useAtom(currentUser);
     const [restaurant, setRestaurant] = useState([]);
@@ -20,7 +20,7 @@ export default function RestaurantDetailNoLogin() {
 
     useEffect(
         () => {
-            axios.get("/restaurants/" + restaurantId).then(
+            axios.get("/restaurants/" + id).then(
                 (response) => {
                     setRestaurant(response.data);
                     setRistoranteAttuale(response.data)
@@ -33,7 +33,7 @@ export default function RestaurantDetailNoLogin() {
     useEffect(
         () => {
 
-            axios.get("/menu/" + restaurantId).then(
+            axios.get("/menu/" + id).then(
                 (response) => {
                     setMenu(response.data);
                     uniqueCategories(response.data);
