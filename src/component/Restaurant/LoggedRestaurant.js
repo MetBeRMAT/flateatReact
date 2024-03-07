@@ -79,7 +79,8 @@ export default function LoggedRestaurant() {
     return false;
   }
 
-  useEffect(() => {
+  useEffect(() => 
+  {
     // Ricalcola le categorie ogni volta che i ristoranti cambiano
     const allCategories = restaurants.flatMap(restaurant => restaurant.foodTypes);
     const uniqueCategories = [...new Set(allCategories)];
@@ -87,7 +88,8 @@ export default function LoggedRestaurant() {
     desc();
   }, [restaurants]);
 
-  function handleRangeChange(event) {
+  function handleRangeChange(event) 
+  {
     const rangeValue = event.target.value;
     document.getElementById('distanceValue').innerText = rangeValue;
   }
@@ -119,8 +121,8 @@ export default function LoggedRestaurant() {
   return (
     <>
       <div className="row" style={{ minHeight: 'calc(100vh)', display: 'flex', background: 'linear-gradient(to right, #ffffff, #154360)', color: '#000' }}>
-  <h1 className="text-center mb-4 mt-4" style={{fontWeight: 'bold', fontSize: '48px', color: '#000', marginLeft: 'auto', marginRight: 'auto' }}>Our Restaurants</h1>
-  <div className="col-2 p-4" style={{ backgroundColor: 'red', borderRadius: '10px', marginLeft: '100px', marginRight:'100px', alignSelf: 'flex-start', background: 'red' }}> {/* Aggiunto il colore rosso direttamente qui */}
+        <h1 className="text-center mb-4 mt-4" style={{ fontWeight: 'bold', fontSize: '48px', color: '#000', marginLeft: 'auto', marginRight: 'auto' }}>Our Restaurants</h1>
+        <div className="col-2 p-4" style={{ backgroundColor: 'red', borderRadius: '10px', marginLeft: '100px', marginRight: '100px', alignSelf: 'flex-start', background: 'red' }}> {/* Aggiunto il colore rosso direttamente qui */}
           <div className="input align-items-center" style={{ marginTop: '30px', marginBottom: '30px', textAlign: 'left' }}>
             <span className="input" id="basic-addon2">
               <strong style={{ color: '#154360' }}>Tipo Cibo:</strong>

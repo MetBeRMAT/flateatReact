@@ -7,7 +7,8 @@ import { currentRestaurant, currentUser } from "../../App";
 import DishCard from "../Dish/DishCard";
 
 
-export default function RestaurantDetail() {
+export default function RestaurantDetail() 
+{
     let { restaurantId } = useParams();
 
     const [user, setUser] = useAtom(currentUser);

@@ -13,7 +13,7 @@ export default function TicketCard(props)
 
     const [user, setUser] = useAtom(currentUser);
 
-    if(user.id != 6)
+    if(user.id !== 6)
         return(
             <>
                 <div class="card shadow-sm col-md-4 mb-2" style={{width: "15rem;"}}>
@@ -26,7 +26,6 @@ export default function TicketCard(props)
                     </Link>
                     <div className="btn btn-danger" onClick={closeTicket}> Close Ticket </div>
                 </div>
-
             </>
         );
     else
