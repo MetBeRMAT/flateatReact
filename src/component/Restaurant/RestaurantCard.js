@@ -6,14 +6,14 @@ export default function RestaurantCard(props) {
   const [user] = useAtom(currentUser);
   const [restaurant, setRestaurant] = useAtom(currentRestaurant)
 
-  function Card({ foodTypes, open, name, distance, restaurantprice, average }) {
+  function Card({ foodTypes, open, name, distance, restaurantprice, average, img }) {
 
     if (user) {
       return (
         <div className="card mb-4" style={{ width: "100%", height: "100%", backgroundColor: '#fff', boxShadow: '10px 8px 8px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
           <img
             className="card-img-top"
-            src={"https://citynews-romatoday.stgy.ovh/~media/horizontal-mid/52295577773865/unnamed-2020-07-27t134402-606-2.jpg"}
+            src={img}
             alt="Restaurant Image"
             style={{ height: "200px", objectFit: "cover" }}
           />
@@ -65,7 +65,7 @@ export default function RestaurantCard(props) {
         <div className="card mb-4" style={{ width: "100%", height: "100%", backgroundColor: '#fff', boxShadow: '10px 8px 8px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
           <img
             className="card-img-top"
-            src={"https://citynews-romatoday.stgy.ovh/~media/horizontal-mid/52295577773865/unnamed-2020-07-27t134402-606-2.jpg"}
+            src={img}
             alt="Restaurant Image"
             style={{ height: "200px", objectFit: "cover" }}
           />
@@ -116,6 +116,7 @@ export default function RestaurantCard(props) {
               addToCart={props.addToCart}
               restaurantprice={props.restaurantprice}
               average={props.average}
+              img={props.imgUrl}
             />
           </div>
         </div>
@@ -134,6 +135,7 @@ export default function RestaurantCard(props) {
               name={props.name}
               restaurantprice={props.restaurantprice}
               average={props.average}
+              img={props.imgUrl}
             />
           </div>
         </div>
@@ -142,3 +144,5 @@ export default function RestaurantCard(props) {
   }
 
 }
+
+

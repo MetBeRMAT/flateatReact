@@ -144,8 +144,8 @@ export default function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login" style={{ color: 'white', textDecoration: 'none', marginRight: '20px', fontWeight: 'bold' }}>Login</Link>
-              <Link to="/register" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>Register</Link>
+              <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold', marginRight: '30px', }}>Login</Link>
+              <Link to="/register" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold', marginRight: '150px', }}>Register</Link>
             </>
           )}
         </div>

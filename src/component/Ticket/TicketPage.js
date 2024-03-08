@@ -81,11 +81,11 @@ export default function TicketPage() {
             <>
                 <div className="row" style={{ minHeight: 'calc(100vh)', display: 'flex', background: 'linear-gradient(to right, #ffffff, #154360)', color: '#000' }}>
                     <div className="container">
-                        <h1 className="text-center" style={{ fontSize: '6rem', fontWeight: 'bold', marginTop: '20px' }}> Your tickets </h1>
+                        <h1 className="text-center" style={{ fontSize: '4rem', fontWeight: 'bold', marginTop: '20px' }}> Your tickets </h1>
                         <div className="row justify-content-center p-4 m-4">
                             {tickets.map(ticket => <TicketCard deleteTicket={deleteTicket} id={ticket.id} text={ticket.text} userOfTicket={ticket.userOfTicket}/>)}
                         </div>
-                        <Link to="/replyform" className="btn btn-warning" style={{ position: 'absolute', bottom: '570px', left: '20px' }}> Wanna Complain More? Leave us another Ticket</Link>
+                        <Link to="/replyform" className="btn btn-warning" style={{ position: 'absolute', bottom: '610px', left: '20px' }}> Wanna Complain More? Leave us another Ticket</Link>
                     </div>
                 </div>
             </>

@@ -56,23 +56,31 @@ export default function ReviewPageNoLogin() {
   }
 
   return (
-    <div className="container">
-      <h1 className="text-center mb-4">Reviews</h1>
-      <div className="row">
-        {reviews && reviews.map((review, index) => (
-          <div key={index} className="col-sm-4 mb-4">
-            <ReviewCard score={review.vote} comment={review.note} />
-          </div>
-        ))}
-      </div>
+    <div style={{ background: 'linear-gradient(to right, #ffffff, #154360)', minHeight: 'calc(100vh)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', textAlign: 'center', position: 'relative' }}>
+  <Link to={`/restaurant`} style={{ position: 'absolute', top: '20px', left: '20px', textDecoration: 'none', color: 'white' }}>
+    <button className="btn btn-primary rounded-pill" style={{ backgroundColor: '#ff6347', border: 'none' }}>
+      Torna al Ristorante
+    </button>
+  </Link>
 
-      <div className="mt-4">
-        <button className="btn btn-primary" type="button">
-          <Link className="text-white" to={`/restaurant`}>
-            Torna al Ristorante
-          </Link>
-        </button>
-      </div>
+  <div style={{ marginTop: '5vh', width: '50%' }}> {/* Imposta la larghezza del contenitore delle recensioni al 50% della larghezza della pagina */}
+    <h1 className="text-center mb-5" style={{ fontSize: '3rem', marginLeft: '600px' }}>Reviews</h1>
+    <h1 style={{ marginRight: '100px', textAlign: 'left' }}>{restaurant.name}'s Restaurant</h1> {/* Aggiunto textAlign: 'left' per allineare il testo a sinistra */}
+    <div className="row" style={{ justifyContent: 'center' }}> {/* Centra le recensioni nella pagina */}
+      {reviews && reviews.map((review, index) => (
+        <div key={index} className="col-12 mb-4" style={{ marginRight: '350px' }}> {/* Aggiunto margine sinistro per spostare la ReviewCard a sinistra */}
+          <ReviewCard score={review.vote} comment={review.note} style={{ width: '100%' }} /> {/* Imposta la larghezza di ogni recensione al 100% della larghezza del contenitore */}
+        </div>
+      ))}
     </div>
+  </div>
+</div>
+
+
+
+
+
+
+
   );
 }
